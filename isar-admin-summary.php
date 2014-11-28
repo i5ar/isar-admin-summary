@@ -40,8 +40,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;	// Exit if accessed directly
  */
 class IAS_Plugin {
 	// For easier overriding we declared the iSummary keys here as well as our tabs array which is populated when registering settings
-	private $general_settings_key = 'ias_general_settings';		// Create a field in database option table
-	private $advanced_settings_key = 'ias_advanced_settings';	// Create a field in database option table
+	private $general_settings_key = 'ias_general_settings';					// Create a field in database option table
+	private $general_img_settings_key = 'ias_general_img_settings';	// Create a field in database option table
+	private $advanced_settings_key = 'ias_advanced_settings';				// Create a field in database option table
 	private $plugin_options_key = 'ias_plugin_options';
 	private $plugin_settings_tabs = array();
 	
@@ -59,6 +60,7 @@ class IAS_Plugin {
 		//add_action( 'init', array( &$this, 'load_settings' ) ); 					// Load iSummary tabs settings in his own class with in the class instance at the bottom
 		add_action( 'admin_init', array( &$this, 'load_settings' ) );				// Load iSummary tabs settings 
 		add_action( 'admin_init', array( &$this, 'register_general_settings' ) );	// Register general iSummary tabs settings
+		add_action( 'admin_init', array( &$this, 'register_general_img_settings' ) );	// Register advanced iSummary tabs settings
 		add_action( 'admin_init', array( &$this, 'register_advanced_settings' ) );	// Register advanced iSummary tabs settings
 		add_action( 'admin_menu', array( &$this, 'add_admin_menus' ) );				// Add iSummary menus
 	}
@@ -121,6 +123,16 @@ class IAS_Plugin {
 		);
 		add_settings_section( 'section_general', 'iSummary Flow', array( &$this, 'section_general_desc'), $this->general_settings_key );
 	}
+	// Registers the general settings via the Settings API, appends the setting to the tabs array of the object.
+	function register_general_img_settings() {
+		$this->plugin_settings_tabs[$this->general_img_settings_key] = 'Images';
+		// http://codex.wordpress.org/Function_Reference/register_setting
+		register_setting(
+			$this->general_img_settings_key,	//	$option_group
+			$this->general_img_settings_key		//	$option_name
+		);
+		add_settings_section( 'section_general_img', 'iSummary images', array( &$this, 'section_general_img_desc'), $this->general_img_settings_key );
+	}
 	// Registers the advanced settings and appends the key to the plugin settings tabs array.
 	function register_advanced_settings() {
 		$this->plugin_settings_tabs[$this->advanced_settings_key] = 'Clipboard ';
@@ -152,7 +164,6 @@ class IAS_Plugin {
 	 */
 	 // First tab (General)
 	function section_general_desc() { ?>
-	
 		<div id="col-container" class="ias-container">
 			<div id="col-right">
 				<div class="col-wrap">
@@ -162,13 +173,18 @@ class IAS_Plugin {
 							<span><?php _e( 'All Feeds', 'isar-admin-summary' ); ?></span>
 							<span alt="f303" class="dashicons dashicons-rss"></span>
 						</h3>
-					<?php // All the feeds titles			
-						echo ias_widget_function_col();
-						echo '<blockquote><i>';
-						echo __('Found something inspiring?') .'<br />';
-						echo __('Raise your voice!') .'</i></blockquote><br />';
-						echo '</i></blockquote>';
-					?>
+						<?php // All the feeds titles			
+							$options = get_option( 'ias_options' ); 
+							$feed = array($options['feed_url'],$options['feed_url_1'],$options['feed_url_2']);
+							$date = True;
+							$content = False;
+							$images = False;
+							echo ias_widget_function_bis( $feed, $date, $content, $images, $item );
+							echo '<blockquote><i>';
+							echo __('Found something inspiring?') .'<br />';
+							echo __('Raise your voice!') .'</i></blockquote><br />';
+							echo '</i></blockquote>';
+						?>
 						<a href="<?php bloginfo( 'wpurl' ); ?>/wp-admin/post-new.php" class="ias-button add-new-h2"><?php echo __( 'New Post', 'isar-admin-summary' ); ?></a>
 					</div>
 				</div>
@@ -179,14 +195,76 @@ class IAS_Plugin {
 						<h3 class="mytest">
 							<span><?php _e( 'Main Feed Contents', 'isar-admin-summary' ); ?></span>
 						</h3>
-						<?php echo ias_widget_function_content(); ?>				
+						<?php
+							$options = get_option( 'ias_options' ); 
+							$feed = $options['feed_url'];
+							$date = True;
+							$content = True;
+							$images = False;
+							echo ias_widget_function_bis( $feed, $date, $content, $images, $item );
+						?>
 					</div>
 				</div>
 			</div>
 		</div>
 		<?php
 	}
-	// Second tab (Advanced)
+	 // Images tab
+	function section_general_img_desc() { ?>
+		<div id="dashboard-widgets" class="metabox-holder ias-container">
+ 			<div id="postbox-container-1" class="postbox-container">
+				<div id="normal-sortables" class="meta-box-sortables ui-sortable">
+				<?php
+						$options = get_option( 'ias_options' ); 
+						$feed = $options['feed_url_1'];
+						$date = True;
+						$images = True;
+						$content = True;
+						$column = 'first';
+						echo ias_widget_function_bis( $feed, $date, $content, $images, $column ); ?>
+				</div>		
+			</div>		
+			<div id="postbox-container-1" class="postbox-container">
+				<div id="normal-sortables" class="meta-box-sortables ui-sortable">
+				<?php
+						$options = get_option( 'ias_options' ); 
+						$feed = $options['feed_url_1'];
+						$date = True;
+						$images = True;
+						$content = True;
+						$column = 'second';
+						echo ias_widget_function_bis( $feed, $date, $content, $images, $column ); ?>
+				</div>
+			</div>
+			<div id="postbox-container-1" class="postbox-container">
+				<div id="normal-sortables" class="meta-box-sortables ui-sortable">
+					<?php
+						$options = get_option( 'ias_options' ); 
+						$feed = $options['feed_url_1'];
+						$date = True;
+						$images = True;
+						$content = True;
+						$column = 'third';
+						echo ias_widget_function_bis( $feed, $date, $content, $images, $column );
+						
+						/*
+						libxml_use_internal_errors(true);
+						$doc = new DOMDocument;
+						$html = $doc->loadHTML('vregv');
+						$path = new DOMXPath($doc);
+						$nodelist = $path->query('//img');
+						$node = $nodelistb->item(0);
+						$value = $node->attributes->getNamedItem('src')->nodeValue;
+						echo "<img src=$value\n />";
+						*/
+					?>
+				</div>		
+			</div>		
+		</div>		
+								
+		<?php
+	}
+	// Clipboard tab (Advanced)
 	function section_advanced_desc() {
 		echo $this->advanced_settings['advanced_option'];
 		echo '<hr />';
@@ -267,8 +345,8 @@ function ias_add_defaults() {
 	if ( ( $tmp['chk_def_options'] == '1' ) || ( ! is_array( $tmp ) ) ) {
 		$defaults = array(
 			'feed_url'			=> 'http://www.edilportale.com/',
-			'feed_url_1'		=> 'http://www.architetto.info/',
-			'feed_url_2'		=> 'http://europaconcorsi.com/',
+			'feed_url_1'		=> 'http://europaconcorsi.com/',
+			'feed_url_2'		=> 'http://www.architetto.info/',
 			'feed_contents'		=> 'yes',
 			'feed_images'		=> 'no',
 			'drp_select_box'	=> '3',		// Number of posts per feed

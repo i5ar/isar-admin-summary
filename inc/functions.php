@@ -79,87 +79,66 @@ function ias_widget_function() {
 				<?php } ?>
 			</ul>	
 	<?php }
-}	
-function ias_widget_function_content() {
-	$options = get_option( 'ias_options' ); 
-	$feedurl = $options['feed_url'];
-	$images = $options['feed_images'];
-	$select = $options['drp_select_box'];
-	// http://codex.wordpress.org/Function_Reference/fetch_feed
-	$rss = fetch_feed( $feedurl );
-	if ( ! is_wp_error( $rss ) ) { // Checks that the object is created correctly
-		// Figure out how many total items there are.
-		$maxitems = $rss->get_item_quantity( $select );
-		// Build an array of all the items, starting with element 0 (first element).
-		$rss_items = $rss->get_items( 0, $maxitems );
-	}
-	if ( ! empty( $maxitems ) ) { ?>
-	<p><?php echo __( 'Please, press', 'isar-admin-summary' ); ?> <code>Ctrl +</code> <?php echo __( 'one or more time to not go blind.', 'isar-admin-summary' ); ?></p>
-			<ul>
-				<?php
-				// Loop through each feed item and display each item as a hyperlink.
-				foreach ( $rss_items as $item ) { 
-				?>
-					<li class="ias-item">
-						<a class="" href="<?php echo esc_url( $item->get_permalink() ); ?>" target="_blank">
-							<?php echo esc_attr( $item->get_title() ); ?></a>
-						<span class=""><?php echo date_i18n('F j, Y', $item->get_date('U')); ?></span>
-						<?php if ( $images == 'yes' ) { ?>
-						<div><?php echo $item->get_content(); ?></div>
-						<?php } else { ?>
-						<div class="ias-hide"><?php echo $item->get_content(); ?></div>
-						<?php }?>
-					</li>
-				<?php } ?>
-			</ul>	
-	<?php
-	}
 }
-function ias_widget_function_col() {
-	$options = get_option( 'ias_options' ); 
-	$feedurl = $options['feed_url'];
-	$feedurl_1 = $options['feed_url_1'];
-	$feedurl_2 = $options['feed_url_2'];
-	$arr = array($feedurl, $feedurl_1, $feedurl_2);
-	foreach ($arr as $value) {
-		if( empty($value) ){
-			continue;
+
+function ias_widget_function_bis( $feed, $date, $content, $images, $column ) {
+	foreach ( (array) $feed as $value ) {	
+		if( empty( $value ) ){
+			return;
 		}
+		$options = get_option( 'ias_options' ); 
 		$select = $options['drp_select_box'];
 		// http://codex.wordpress.org/Function_Reference/fetch_feed
 		$rss = fetch_feed( $value );
-		if ( ! is_wp_error( $rss ) ) { // Checks that the object is created correctly
-			// Figure out how many total items there are.
+		// Checks that the object is created correctly
+		if ( ! is_wp_error( $rss ) ) {
+			// Figure out how many total items there are
 			$maxitems = $rss->get_item_quantity( $select );
-			// Build an array of all the items, starting with element 0 (first element).
-			$rss_items = $rss->get_items( 0, $maxitems*2 );
-		}
-		if ( ! empty( $maxitems ) ) { ?>
-			<h3>
-				<span>
-				<?php
-					$array = parse_url($value);
-					echo $array['host'];
-				?>
-				</span>
-			</h3>
+			// Calculating the start and the extreme utmost value for each column
+			if ( $column == 'second' ) {
+				//$maxitems = 3;
+				$startitems = $maxitems+1;		// 4
+			} elseif ( $column == 'third' ) {
+				//$maxitems = 3;
+				$startitems = $maxitems*2+1;	// 7
+			} elseif ($column == 'first') { 
+				//$startitems = 0;
+				//$maxitems = 3;
+			}
+			// Build an array of all the items, starting with element 0
+			$rss_items = $rss->get_items( $startitems, $maxitems );
+			}
+			if ( ! empty( $maxitems ) ) { ?>
+				<h3>
+					<span>
+					<?php
+						$array = parse_url($value);
+						echo $array['host']; ?>
+					</span>
+				</h3>
 				<ul>
 					<?php
 					// Loop through each feed item and display each item as a hyperlink.
 					foreach ( $rss_items as $item ) {
 					?>
-						<li>
-							<a class="" href="<?php echo esc_url( $item->get_permalink() ); ?>" target="_blank">
-								<?php echo esc_attr( $item->get_title() ); ?></a>
-							<span class=""><?php echo date_i18n('F j, Y', $item->get_date('U')); ?></span>
-						</li>
+					<li class="ias-item">
+						<a class="ias-title" href="<?php echo esc_url( $item->get_permalink() ); ?>" target="_blank"><?php echo esc_attr( $item->get_title() ); ?></a>
+						<?php if ( $date == True ) { ?>
+						<span class="ias-date"><?php echo date_i18n('F j, Y', $item->get_date('U')); ?></span>
+						<?php } ?>
+						<?php if ( $content == True && $images == True ) { ?>
+						<div><?php echo $item->get_content(); ?></div>
+						<?php } elseif ( $content == True && $images !== True ) { ?>
+						<div class="ias-hide"><?php echo $item->get_content(); ?></div>
+						<?php }
+						?>
+					</li>
 					<?php } ?>
-				</ul>	
-		<?php
+				</ul>
+		<?php	
 		}
 	}
 }
-
 /**
  * Add right-to-left languages style
  */ 
