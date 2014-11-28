@@ -1,0 +1,14 @@
+/**
+ * iSummary Settings Page
+ */
+ 
+#post-body-content .postbox {
+	border: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	background: transparent;
+}
+#postbox-container-1 .postbox li a {
+	text-decoration: initial;
+	display: block;
+}
