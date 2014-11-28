@@ -4,3 +4,9 @@
 
 # Folders
 images/
+
+#Images
+*.jpg
+*.png
+*.xcf
+
