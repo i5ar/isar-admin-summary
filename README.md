@@ -3,4 +3,6 @@ isar-admin-summary
 
 Just another WordPress RSS plugin
 
-# Rich Site Summary for the WordPress admin panel
+# iSar Admin Summary or just iSummary
+
+This plugin allow to manage Feeds inside the WordPress admin panel
