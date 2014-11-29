@@ -169,9 +169,7 @@ class IAS_Plugin {
 				<div class="col-wrap">
 					<div class="form-wrap">
 						<h3>
-							<span alt="f303" class="dashicons dashicons-rss ias-mirror"></span>
 							<span><?php _e( 'All Feeds', 'isar-admin-summary' ); ?></span>
-							<span alt="f303" class="dashicons dashicons-rss"></span>
 						</h3>
 						<?php // All the feeds titles			
 							$options = get_option( 'ias_options' ); 
@@ -200,7 +198,7 @@ class IAS_Plugin {
 							$feed = $options['feed_url'];
 							$date = True;
 							$content = True;
-							$images = False;
+							$images = $options['feed_images'];
 							echo ias_widget_function_bis( $feed, $date, $content, $images, $item );
 						?>
 					</div>
@@ -218,8 +216,8 @@ class IAS_Plugin {
 						$options = get_option( 'ias_options' ); 
 						$feed = $options['feed_url_1'];
 						$date = True;
-						$images = True;
 						$content = True;
+						$images = True;
 						$column = 'first';
 						echo ias_widget_function_bis( $feed, $date, $content, $images, $column ); ?>
 				</div>		
@@ -230,8 +228,8 @@ class IAS_Plugin {
 						$options = get_option( 'ias_options' ); 
 						$feed = $options['feed_url_1'];
 						$date = True;
-						$images = True;
 						$content = True;
+						$images = True;
 						$column = 'second';
 						echo ias_widget_function_bis( $feed, $date, $content, $images, $column ); ?>
 				</div>
@@ -242,8 +240,8 @@ class IAS_Plugin {
 						$options = get_option( 'ias_options' ); 
 						$feed = $options['feed_url_1'];
 						$date = True;
-						$images = True;
 						$content = True;
+						$images = True;
 						$column = 'third';
 						echo ias_widget_function_bis( $feed, $date, $content, $images, $column );
 						
@@ -348,7 +346,7 @@ function ias_add_defaults() {
 			'feed_url_1'		=> 'http://europaconcorsi.com/',
 			'feed_url_2'		=> 'http://www.architetto.info/',
 			'feed_contents'		=> 'yes',
-			'feed_images'		=> 'no',
+			'feed_images'		=> False,
 			'drp_select_box'	=> '3',		// Number of posts per feed
 			'chk_def_options'	=> ''		// Check default option database
 		);

@@ -41,7 +41,7 @@ function ias_render_form() { ?>
 												</th>
 												<td>
 													<input name="ias_options[feed_url]" type="text" id="ias-feed-url" class="regular-text code" value="<?php echo $options['feed_url']; ?>" />
-													<p class="description"><?php _e( 'Change the feed-URL to a site of your choice', 'isar-admin-summary' ); ?></p>
+													<p class="description"><?php _e( 'The Main URL: The iSummary Page will show title, date and contents of this feed in the General tab. The Dashboard will also show the title and the date.', 'isar-admin-summary' ); ?></p>
 													<input type="hidden" name="action" value="update" />
 													<input type="hidden" name="page_options" value="<?php echo $options['feed_url']; ?>" />								
 												</td>
@@ -63,7 +63,7 @@ function ias_render_form() { ?>
 														<option value='8' <?php selected( '8', $options['drp_select_box'] ); ?>>8</option>
 														<option value='9' <?php selected( '9', $options['drp_select_box'] ); ?>>9</option>
 													</select>
-													<p class="description"><?php _e( 'How many feed items to show in the widget?', 'isar-admin-summary' ); ?></p>
+													<p class="description"><?php _e( 'How many feed items to show in the widget', 'isar-admin-summary' ); ?></p>
 													<input type="hidden" name="action" value="update" />
 													<input type="hidden" name="page_options" value="<?php echo $options['drp_select_box']; ?>" />								
 												</td>
@@ -75,8 +75,8 @@ function ias_render_form() { ?>
 												</th>
 												<td>
 													<select name='ias_options[feed_images]'>
-														<option value='yes' <?php selected( 'yes', $options['feed_images'] ); ?>>yes</option>
-														<option value='no' <?php selected( 'no', $options['feed_images'] ); ?>>no</option>
+														<option value='1' <?php selected( 1, $options['feed_images'] ); ?>>yes</option>
+														<option value='0' <?php selected( 0, $options['feed_images'] ); ?>>no</option>
 													</select>
 													<p class="description"><?php _e( 'How many feed items to show in the widget?', 'isar-admin-summary' ); ?></p>
 													<input type="hidden" name="action" value="update" />

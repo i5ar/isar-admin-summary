@@ -6,10 +6,3 @@
 .ias-container .ias-hide img { display: none; }
 .wrap .ias-button.add-new-h2,
 .wrap .ias-button.add-new-h2:active { top: -6px; }
-.ias-container .dashicons-rss.ias-mirror {
-	-webkit-transform: scale(-1, 1);
-	   -moz-transform: scale(-1, 1);
-		-ms-transform: scale(-1, 1);
-		 -o-transform: scale(-1, 1);
-			transform: scale(-1, 1);
-}
