@@ -56,7 +56,7 @@ function ias_setup_function() {
 function ias_widget_function() {
 	$options = get_option( 'ias_options' ); 
 	$feedurl = $options['feed_url'];
-	$select = $options['drp_select_box'];
+	$select = $options['num_content_items'];
 	// http://codex.wordpress.org/Function_Reference/fetch_feed
 	$rss = fetch_feed( $feedurl );
 	if ( ! is_wp_error( $rss ) ) { // Checks that the object is created correctly
@@ -81,13 +81,13 @@ function ias_widget_function() {
 	<?php }
 }
 
-function ias_widget_function_bis( $feed, $date, $content, $images, $column ) {
+function ias_widget_function_bis( $feed, $host, $content, $images, $column ) {
 	foreach ( (array) $feed as $value ) {	
 		if( empty( $value ) ){
 			return;
 		}
 		$options = get_option( 'ias_options' ); 
-		$select = $options['drp_select_box'];
+		$select = $options['num_content_items'];
 		// http://codex.wordpress.org/Function_Reference/fetch_feed
 		$rss = fetch_feed( $value );
 		// Checks that the object is created correctly
@@ -101,7 +101,15 @@ function ias_widget_function_bis( $feed, $date, $content, $images, $column ) {
 			} elseif ( $column == 'third' ) {
 				//$maxitems = 3;
 				$startitems = $maxitems*2+1;	// 7
-			} elseif ($column == 'first') { 
+			} elseif ($column == 'first') { ?>
+			<h3 class="mytest">
+				<span><?php _e( 'Images Feed Contents', 'isar-admin-summary' );
+					echo ' - ';
+					echo parse_url($value)['host']; ?>
+				</span>
+			</h3>
+			<?php			
+			
 				//$startitems = 0;
 				//$maxitems = 3;
 			}
@@ -109,6 +117,7 @@ function ias_widget_function_bis( $feed, $date, $content, $images, $column ) {
 			$rss_items = $rss->get_items( $startitems, $maxitems );
 			}
 			if ( ! empty( $maxitems ) ) { ?>
+			<?php if ( $host == True ) { ?>
 				<h3>
 					<span>
 					<?php
@@ -116,6 +125,7 @@ function ias_widget_function_bis( $feed, $date, $content, $images, $column ) {
 						echo $array['host']; ?>
 					</span>
 				</h3>
+			<?php } ?>
 				<ul>
 					<?php
 					// Loop through each feed item and display each item as a hyperlink.
@@ -123,9 +133,7 @@ function ias_widget_function_bis( $feed, $date, $content, $images, $column ) {
 					?>
 					<li class="ias-item">
 						<a class="ias-title" href="<?php echo esc_url( $item->get_permalink() ); ?>" target="_blank"><?php echo esc_attr( $item->get_title() ); ?></a>
-						<?php if ( $date == True ) { ?>
 						<span class="ias-date"><?php echo date_i18n('F j, Y', $item->get_date('U')); ?></span>
-						<?php } ?>
 						<?php if ( $content == True && $images == True ) { ?>
 						<div><?php echo $item->get_content(); ?></div>
 						<?php } elseif ( $content == True && $images !== True ) { ?>

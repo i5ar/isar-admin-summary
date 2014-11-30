@@ -28,7 +28,6 @@
 	
 	Contributions:
 	Piet Bos		http://senlinonline.com/
-	Ruslan Khakimov http://theme.fm/
 */
 /**
  * Prevent direct access to files
@@ -171,13 +170,14 @@ class IAS_Plugin {
 						<h3>
 							<span><?php _e( 'All Feeds', 'isar-admin-summary' ); ?></span>
 						</h3>
+							<p><i><?php _e( 'If the feeds not work properly it means they are not avaible', 'isar-admin-summary' ); ?></i></p>
 						<?php // All the feeds titles			
 							$options = get_option( 'ias_options' ); 
 							$feed = array($options['feed_url'],$options['feed_url_1'],$options['feed_url_2']);
-							$date = True;
+							$host = True;
 							$content = False;
 							$images = False;
-							echo ias_widget_function_bis( $feed, $date, $content, $images, $item );
+							echo ias_widget_function_bis( $feed, $host, $content, $images, $item );
 							echo '<blockquote><i>';
 							echo __('Found something inspiring?') .'<br />';
 							echo __('Raise your voice!') .'</i></blockquote><br />';
@@ -196,10 +196,10 @@ class IAS_Plugin {
 						<?php
 							$options = get_option( 'ias_options' ); 
 							$feed = $options['feed_url'];
-							$date = True;
+							$host = True;
 							$content = True;
 							$images = $options['feed_images'];
-							echo ias_widget_function_bis( $feed, $date, $content, $images, $item );
+							echo ias_widget_function_bis( $feed, $host, $content, $images, $item );
 						?>
 					</div>
 				</div>
@@ -214,36 +214,36 @@ class IAS_Plugin {
 				<div id="normal-sortables" class="meta-box-sortables ui-sortable">
 				<?php
 						$options = get_option( 'ias_options' ); 
-						$feed = $options['feed_url_1'];
-						$date = True;
+						$feed = $options['feed_url_3'];
+						$host = False;
 						$content = True;
 						$images = True;
 						$column = 'first';
-						echo ias_widget_function_bis( $feed, $date, $content, $images, $column ); ?>
+						echo ias_widget_function_bis( $feed, $host, $content, $images, $column ); ?>
 				</div>		
 			</div>		
 			<div id="postbox-container-1" class="postbox-container">
 				<div id="normal-sortables" class="meta-box-sortables ui-sortable">
 				<?php
 						$options = get_option( 'ias_options' ); 
-						$feed = $options['feed_url_1'];
-						$date = True;
+						$feed = $options['feed_url_3'];
+						$host = False;
 						$content = True;
 						$images = True;
 						$column = 'second';
-						echo ias_widget_function_bis( $feed, $date, $content, $images, $column ); ?>
+						echo ias_widget_function_bis( $feed, $host, $content, $images, $column ); ?>
 				</div>
 			</div>
 			<div id="postbox-container-1" class="postbox-container">
 				<div id="normal-sortables" class="meta-box-sortables ui-sortable">
 					<?php
 						$options = get_option( 'ias_options' ); 
-						$feed = $options['feed_url_1'];
-						$date = True;
+						$feed = $options['feed_url_3'];
+						$host = False;
 						$content = True;
 						$images = True;
 						$column = 'third';
-						echo ias_widget_function_bis( $feed, $date, $content, $images, $column );
+						echo ias_widget_function_bis( $feed, $host, $content, $images, $column );
 						
 						/*
 						libxml_use_internal_errors(true);
@@ -343,11 +343,12 @@ function ias_add_defaults() {
 	if ( ( $tmp['chk_def_options'] == '1' ) || ( ! is_array( $tmp ) ) ) {
 		$defaults = array(
 			'feed_url'			=> 'http://www.edilportale.com/',
-			'feed_url_1'		=> 'http://europaconcorsi.com/',
+			'feed_url_1'		=> 'http://www.professionearchitetto.it/',
 			'feed_url_2'		=> 'http://www.architetto.info/',
+			'feed_url_3'		=> 'http://europaconcorsi.com/',
 			'feed_contents'		=> 'yes',
 			'feed_images'		=> False,
-			'drp_select_box'	=> '3',		// Number of posts per feed
+			'num_content_items'	=> '3',		// Number of posts per feed
 			'chk_def_options'	=> ''		// Check default option database
 		);
 		// http://codex.wordpress.org/Function_Reference/update_option

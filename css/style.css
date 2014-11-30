@@ -6,3 +6,4 @@
 .ias-container .ias-hide img { display: none; }
 .wrap .ias-button.add-new-h2,
 .wrap .ias-button.add-new-h2:active { top: -6px; }
+.metabox-holder.ias-container h3 { padding: 0; }
