@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: iSar Admin Summary
- * Plugin URI: http://
- * Description: The iSar Admin Summary shows the latest posts from one or more sites of your interest in the Feeds page of your admin panel.
- * Version: 3.0.0
+ * Plugin URI: https://github.com/i5ar/isar-admin-summary/
+ * Description: The iSar Admin Summary shows the latest posts from one or more sites of your interest in the iSummary page of your admin panel.
+ * Version: 1.0.0
  * Author: Pierpaolo Rasicci
  * Author URI: http://
  * Text Domain: isar-admin-summary
@@ -11,7 +11,7 @@
  * License: GPL2
  */
  
-/*  Copyright 2014 iSar (email : i5ar at live.it)
+/*  Copyright 2014 iSar (email: i5ar at live.it)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -27,7 +27,7 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 	
 	Contributions:
-	Piet Bos		http://senlinonline.com/
+	Piet Bos	http://senlinonline.com/
 */
 /**
  * Prevent direct access to files
