@@ -66,18 +66,20 @@ function ias_widget_function() {
 		$rss_items = $rss->get_items( 0, $maxitems );
 	}
 	if ( ! empty( $maxitems ) ) { ?>
+	<div class="rss-widget">
 			<ul>
 				<?php
 				// Loop through each feed item and display each item as a hyperlink.
 				foreach ( $rss_items as $item ) { 
 				?>
 					<li>
-						<a class="" href="<?php echo esc_url( $item->get_permalink() ); ?>" target="_blank">
+						<a class="rsswidget" href="<?php echo esc_url( $item->get_permalink() ); ?>" target="_blank">
 							<?php echo esc_attr( $item->get_title() ); ?></a>
-						<span class=""><?php echo date_i18n('F j, Y', $item->get_date('U')); ?></span>
+						<span class="rss-date"><?php echo date_i18n('F j, Y', $item->get_date('U')); ?></span>
 					</li>
 				<?php } ?>
-			</ul>	
+			</ul>
+</div>			
 	<?php }
 }
 
@@ -143,16 +145,21 @@ function ias_widget_function_bis( $feed, $host, $content, $images, $column ) {
 					</li>
 					<?php } ?>
 				</ul>
-		<?php	
+		<?php
 		}
 	}
 }
 /**
- * Add right-to-left languages style
+ * Add Dashboard styles
  */ 
 function ias_style_function() {
 	// http://codex.wordpress.org/Function_Reference/is_rtl
 	$x = is_rtl() ? 'right' : 'left';
-	echo '<style type="text/css"> #ias_widget.postbox h3, #ias_widget.postbox .rss-widget { text-align: ' . $x . '; } </style>';
+	echo '
+	<style type="text/css">
+		#ias_widget .rss-widget span.rss-date{margin-left:12px}
+		#ias_widget a.rsswidget{font-weight: 400;}
+		#ias_widget.postbox h3,#ias_widget.postbox .rss-widget{text-align:'.$x.';}
+	</style>';
 }
 add_action( 'admin_head', 'ias_style_function' );

@@ -177,7 +177,7 @@ class IAS_Plugin {
 							$host = True;
 							$content = False;
 							$images = False;
-							echo ias_widget_function_bis( $feed, $host, $content, $images, $item );
+							echo ias_widget_function_bis( $feed, $host, $content, $images, $column );
 							echo '<blockquote><i>';
 							echo __('Found something inspiring?') .'<br />';
 							echo __('Raise your voice!') .'</i></blockquote><br />';
@@ -199,7 +199,7 @@ class IAS_Plugin {
 							$host = True;
 							$content = True;
 							$images = $options['feed_images'];
-							echo ias_widget_function_bis( $feed, $host, $content, $images, $item );
+							echo ias_widget_function_bis( $feed, $host, $content, $images, $column );
 						?>
 					</div>
 				</div>

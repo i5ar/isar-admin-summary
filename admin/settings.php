@@ -28,7 +28,7 @@ function ias_render_form() { ?>
 							<?php settings_fields( 'ias_plugin_options' ); ?>
 							<?php // http://codex.wordpress.org/Function_Reference/get_option ?>
 							<?php $options = get_option( 'ias_options' ); ?>
-					
+							
 								<div class="form-wrap">
 									<p><?php _e( 'Below you can adjust the output of the Feeds. You can change the feed URLs and the amount of feed items to show.', 'isar-admin-summary' ); ?></p>
 								
