@@ -19,6 +19,8 @@ To install a WordPress Plugin manually:
 - Go to Plugins screen and find the newly uploaded Plugin in the list.
 - Click Activate Plugin to activate it.
 
+![alt text](http://codex.wordpress.org/images/3/3a/plugins.png)
+
 ### Todo
 
 - Right to Left
@@ -33,4 +35,22 @@ Then please read README.development for further instructions.
 
 *The development version may be unstable. Unless you are actively working with us, please use the latest stable tarball instead.*
 
+### Compatibility
+
+WordPress v4.0.0
+
+### License
+
+[GNU General Public License]
+
+### Freedoms
+
+- You have the freedom to run the program, for any purpose.
+- You have access to the source code, the freedom to study how the program works, and the freedom to change it to make it do what you wish.
+- You have the freedom to redistribute copies of the original program so you can help your neighbor.
+- You have the freedom to distribute copies of your modified versions to others. By doing this you can give the whole community a chance to benefit from your changes.
+
+**Enjoy**
+
 [GitHub]:https://github.com/i5ar/isar-admin-summary
+[GNU General Public License]:https://wordpress.org/about/license/
