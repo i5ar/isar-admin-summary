@@ -23,7 +23,8 @@ To install a WordPress Plugin manually:
 
 ### Todo
 
-- Right to Left
+- Test Right to Left
+- Color Picker API
 
 ### Development
 
