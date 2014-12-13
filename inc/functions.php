@@ -74,20 +74,20 @@ function ias_widget_function() {
 	}
 	if ( ! empty( $maxitems ) ) { ?>
 	<div class="rss-widget">
-			<ul>
-				<?php
-				// Loop through each feed item and display each item as a hyperlink.
-				foreach ( $rss_items as $item ) { 
-				?>
-					<li>
-						<a class="rsswidget" href="<?php echo esc_url( $item->get_permalink() ); ?>" target="_blank">
-							<?php echo esc_attr( $item->get_title() ); ?></a>
-						<span class="rss-date"><?php echo date_i18n('F j, Y', $item->get_date('U')); ?></span>
-					</li>
-				<?php } ?>
-			</ul>
-</div>			
-	<?php }
+		<ul>
+			<?php
+			// Loop through each feed item and display each item as a hyperlink.
+			foreach ( $rss_items as $item ) { 
+			?>
+				<li>
+					<a class="rsswidget" href="<?php echo esc_url( $item->get_permalink() ); ?>" target="_blank">
+						<?php echo esc_attr( $item->get_title() ); ?></a>
+					<span class="rss-date"><?php echo date_i18n('F j, Y', $item->get_date('U')); ?></span>
+				</li>
+			<?php } ?>
+		</ul>
+	</div>			
+<?php }
 }
 function ias_panel_function( $feed, $host, $content, $images, $column ) {
 	foreach ( (array) $feed as $value ) {	
@@ -156,14 +156,20 @@ function ias_panel_function( $feed, $host, $content, $images, $column ) {
 }
 /**
  * Add Dashboard styles
- * @source	http://codex.wordpress.org/Function_Reference/is_rtl
  */ 
 function ias_style_function() {
+	$options = get_option( 'ias_options' );
+	$colour = isset( $options['feed_menu_colour'] ) ? $options['feed_menu_colour'] : '#0074a2';
+	// @source	http://codex.wordpress.org/Function_Reference/is_rtl
 	$x = is_rtl() ? 'right' : 'left';
 	echo '
 	<style type="text/css">
+	
+	
 		#ias_widget .rss-widget span.rss-date{margin-left:12px}
-		#ias_widget a.rsswidget{font-weight: 400;}
+		#ias_widget a.rsswidget{font-weight:400;}
+		#wp-admin-bar-feeds-item{cursor:pointer;}
+		#wp-admin-bar-feeds-item .ab-item.ab-empty-item{background:' . $colour . ';}
 		#ias_widget.postbox h3,#ias_widget.postbox .rss-widget{text-align:'.$x.';}
 		#col-container.ias-container .form-wrap{text-align:'.$x.';}
 		#dashboard-widgets.ias-container .meta-box-sortables.ui-sortable{text-align:'.$x.';}

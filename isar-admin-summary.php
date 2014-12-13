@@ -46,13 +46,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;	// Exit if accessed directly
 class IAS_Plugin {
 	// For easier overriding we declared the iSummary keys here as well as our tabs array which is populated when registering settings
 	private $general_settings_key = 'ias_general_settings';					// Create a field in database option table
-	private $general_img_settings_key = 'ias_general_img_settings';	// Create a field in database option table
+	private $general_img_settings_key = 'ias_general_img_settings';			// Create a field in database option table
 	private $advanced_settings_key = 'ias_advanced_settings';				// Create a field in database option table
 	private $plugin_options_key = 'ias_plugin_options';
 	private $plugin_settings_tabs = array();
 	
 	function __construct() {
-		// @source http://krisjordan.com/dynamic-properties-in-php-with-stdclass
+		// @source	http://krisjordan.com/dynamic-properties-in-php-with-stdclass
 		global $isar_as;
 		// Set up an empty class for the global $isar_as object.
 		$isar_as = new stdClass;
@@ -68,7 +68,11 @@ class IAS_Plugin {
 		add_action( 'admin_init', array( &$this, 'register_general_img_settings' ) );	// Register advanced iSummary tabs settings
 		add_action( 'admin_init', array( &$this, 'register_advanced_settings' ) );	// Register advanced iSummary tabs settings
 		add_action( 'admin_menu', array( &$this, 'add_admin_menus' ) );				// Add iSummary menus
+		add_action( 'admin_init', array( &$this, 'my_plugin_admin_init' ) );		// Iris Color Picker
+	
 	}
+	
+	
 	
 	/**
 	 * Init plugin options to white list our options
@@ -80,9 +84,9 @@ class IAS_Plugin {
 			'ias_plugin_options',	//	$option_group
 			'ias_options', 			//	$option_name
 			'ias_validate_options'	//	$sanitize_callback (optional)
-		);
+		);	
 	}
-	
+
 	/**
 	 * Defines constants used by the plugin.
 	 */
@@ -115,7 +119,7 @@ class IAS_Plugin {
 	function load_settings() {
 		$this->advanced_settings = (array) get_option( $this->advanced_settings_key );
 		$this->advanced_settings = array_merge( array(
-			'advanced_option' => 'Advanced value'
+			'advanced_option' => ''
 		), $this->advanced_settings );
 	}
 	// Registers the general settings via the Settings API, appends the setting to the tabs array of the object.
@@ -146,7 +150,7 @@ class IAS_Plugin {
 		
 		add_settings_section( 'section_advanced', 'Very Simple Clipboard', array( &$this, 'section_advanced_desc' ), $this->advanced_settings_key );
 		
-		add_settings_field( 'advanced_option', 'Some big ideas:', array( &$this, 'field_advanced_option' ), $this->advanced_settings_key, 'section_advanced', array( 'label_for' => 'big_ideas' ) );
+		add_settings_field( 'advanced_option', 'Big ideas:', array( &$this, 'field_advanced_option' ), $this->advanced_settings_key, 'section_advanced', array( 'label_for' => 'big_ideas' ) );
 		
 		add_settings_section( 'section_advanced_submit', '', array( &$this, 'section_advanced_submit' ), $this->advanced_settings_key );
 	}
@@ -160,6 +164,10 @@ class IAS_Plugin {
 			'dashicons-rss'							// $icon_url
 		);
 		add_action( 'admin_print_styles-' . $page , 'ias_plugin_settings_bis_style' );
+	}
+	// Iris Color Picker
+	function my_plugin_admin_init() {
+		wp_register_script( 'my-plugin-script', plugins_url( 'js/iris.min.js', __FILE__ ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), false, 1 );
 	}
 	
 	/**
@@ -276,13 +284,13 @@ class IAS_Plugin {
 	// Advanced Option field callback, same as above.
 	function field_advanced_option() { ?>
 		<!-- <input type="text" name="<?php //echo $this->advanced_settings_key; ?>[advanced_option]" value="<?php //echo esc_attr( $this->advanced_settings['advanced_option'] ); ?>" /> -->
-		<textarea rows="8" cols="80" placeholder="Ideas for a better world..." name="<?php echo $this->advanced_settings_key; ?>[advanced_option]"><?php echo esc_attr( $this->advanced_settings['advanced_option'] ); ?></textarea>
+		<textarea rows="8" cols="80" placeholder="Ideas that will change the world..." name="<?php echo $this->advanced_settings_key; ?>[advanced_option]"><?php echo esc_attr( $this->advanced_settings['advanced_option'] ); ?></textarea>
 	<br/><p>You can always use <code>&lt;ol&gt;&lt;li&gt;&lt;/li&gt;&lt;/ol&gt;</code></p>
 	<?php
 	}
 	// Advanced Option section callback.
 	function section_advanced_submit() {
-		echo '<i>'.__( 'I do not mean to destroy your big dreams but the text area above is just a placeholder and may not be available in next releases', 'isar-admin-summary' ).'.</i><br />';
+		echo '<i>'.__( 'I do not mean to destroy your big dreams but the text area above is just a placeholder and may not be available in future releases', 'isar-admin-summary' ).'.</i><br />';
 		echo '<i>'.__('I reserved this tab for handy tools and future improvements. Reversing your <span title="Rich Site Summary">RSS</span> reading into a ready post publishing with social features will be done in a minute. Plaese, keep this plugin updated, I will definitly do something cool here' ).'!</i>';
 		submit_button();
 	}
@@ -293,16 +301,9 @@ class IAS_Plugin {
 			<?php // Display Plugin Header, and Description
 				$this->plugin_options_tabs(); ?>
 			<form method="post" action="options.php">
-			
-			
-			
-			
 				<?php wp_nonce_field( 'update-options' ); ?>
 				<?php settings_fields( $tab ); ?>
 				<?php do_settings_sections( $tab );	// This will output the section titles wrapped in h3 tags and the settings fields wrapped in tables. ?>
-				
-				
-				
 			</form>
 		</div>
 	<?php }
@@ -336,9 +337,10 @@ $isar_ias_plugin = new IAS_Plugin();
 // Register activation/deactivation hooks
 register_activation_hook( __FILE__, 'ias_add_defaults' ); 
 register_uninstall_hook( __FILE__, 'ias_delete_plugin_options' );
-// Option page
-add_action( 'admin_menu', 'ias_add_options_page' );
+
+
 // @source	http://codex.wordpress.org/Function_Reference/wp_enqueue_style
+add_action( 'admin_menu', 'ias_add_options_page' );
 function ias_add_options_page() {
 	// @source	http://codex.wordpress.org/Function_Reference/add_options_page
 	$page = add_options_page(
@@ -351,6 +353,7 @@ function ias_add_options_page() {
 	// Use the page suffix to compose the page and register an action executed when plugin's options page is loaded
 	add_action( 'admin_print_styles-' . $page , 'ias_plugin_settings_style' );
 }
+
 
 /**
  * Define default option settings
@@ -367,6 +370,7 @@ function ias_add_defaults() {
 			//'feed_contents'		=> 'yes',
 			'feed_images'		=> False,
 			'feed_menu'			=> True,	// Feed menu in admin bar
+			'feed_menu_colour'	=> '0074a2',// Feed menu in admin bar colour
 			'num_content_items'	=> '3',		// Number of posts per feed
 			'chk_def_options'	=> ''		// Check default option database
 		);
@@ -374,6 +378,8 @@ function ias_add_defaults() {
 		update_option( 'ias_options', $defaults );
 	}
 }
+
+
 /**
  * Delete options table entries ONLY when plugin deactivated AND deleted 
  */
@@ -393,6 +399,8 @@ function ias_plugin_settings_style() {
 		ISAR_IAS_VERSION					//	$ver
 	);
 	wp_enqueue_style( 'custom_ias_settings_css' );
+	wp_enqueue_script( 'my-plugin-script' );// Iris Color Picker
+	//wp_enqueue_style( 'wp-color-picker' );	
 }
 
 /**
@@ -422,6 +430,7 @@ function ias_validate_options( $input ) {
 	$input['feed_url'] =  wp_filter_nohtml_kses( $input['feed_url'] );
 	$input['feed_url_1'] =  wp_filter_nohtml_kses( $input['feed_url_1'] );
 	$input['feed_url_2'] =  wp_filter_nohtml_kses( $input['feed_url_2'] );
+	$input['feed_menu_colour'] =  wp_filter_nohtml_kses( $input['feed_menu_colour'] );
 	return $input;
 }
 
@@ -435,7 +444,6 @@ function ias_plugin_action_links( $links, $file ) {
 	}
 	return $links;
 }
-
 
 // Initialize the plugin
 //add_action( 'plugins_loaded', create_function( '', '$settings_ias_tabs_plugin = new Settings_IAS_Tabs_Plugin;' ) );
