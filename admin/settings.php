@@ -1,20 +1,17 @@
 <?php
 /**
  * Render the Plugin options form
- * @since 2.0.0
- * @modified 2014.02.10 to fit 3.8 layout and styling
+ * @modified 2014.12.13 to fit 4.0.1 layout and styling
  */
  
 function ias_render_form() { ?>
 
 <div class="wrap">
 		
-	<!-- Display Plugin Header, and Description -->
 	<h2><?php _e( 'iSar Admin Summary Settings', 'isar-admin-summary' ); ?></h2>
 	
 	<div id="poststuff">
 		<div id="post-body" class="metabox-holder columns-2">
-			<!-- main content -->
 			<div id="post-body-content">
 				<div class="meta-box-sortables ui-sortable">
 					<div class="postbox">
@@ -22,26 +19,24 @@ function ias_render_form() { ?>
 							<span><?php _e( 'Main Content Header', 'isar-admin-summary' ); ?></span>
 						</h3>
 						<div class="inside">
-							<!-- Beginning of the Plugin Options Form -->
 							<form method="post" action="options.php">
-							<?php // http://codex.wordpress.org/Function_Reference/settings_fields ?>
+							<?php // @source	http://codex.wordpress.org/Function_Reference/settings_fields ?>
 							<?php settings_fields( 'ias_plugin_options' ); ?>
-							<?php // http://codex.wordpress.org/Function_Reference/get_option ?>
+							<?php // @source	http://codex.wordpress.org/Function_Reference/get_option ?>
 							<?php $options = get_option( 'ias_options' ); ?>
 							
 								<div class="form-wrap">
 									<p><?php _e( 'Below you can adjust the output of the Feeds. You can change the feed URLs and the amount of feed items to show.', 'isar-admin-summary' ); ?></p>
-								
 									<table class="form-table">
 										<tbody>
 																				
 											<tr>
 												<th scope="row">
-													<label for="ias-feed-url"><?php _e( 'Main Feed URL', 'isar-admin-summary' ); ?>:</label>
+													<label for="ias-feed-url"><?php _e( 'Main Feed URL General tab', 'isar-admin-summary' ); ?>:</label>
 												</th>
 												<td>
 													<input name="ias_options[feed_url]" type="text" id="ias-feed-url" class="regular-text code" value="<?php echo $options['feed_url']; ?>" />
-													<p class="description"><?php _e( 'The Main URL: The iSummary Page will show title, date and contents of this feed in the General tab. The Dashboard will also show the title and the date.', 'isar-admin-summary' ); ?></p>
+													<p class="description"><?php _e( 'Choose your favorite summary site: The iSummary Page will show title, date and contents of this feed in the General tab. The Dashboard will also show the title and the date.', 'isar-admin-summary' ); ?></p>
 													<input type="hidden" name="action" value="update" />
 													<input type="hidden" name="page_options" value="<?php echo $options['feed_url']; ?>" />								
 												</td>
@@ -49,14 +44,13 @@ function ias_render_form() { ?>
 
 											<tr>
 												<th scope="row">
-													<label for="ias-select"><?php _e( 'Show images', 'isar-admin-summary' ); ?>:</label>
+													<label for="ias-select"><?php _e( 'Show images in General tab', 'isar-admin-summary' ); ?>?</label>
 												</th>
 												<td>
 													<select name='ias_options[feed_images]'>
 														<option value='1' <?php selected( 1, $options['feed_images'] ); ?>>yes</option>
 														<option value='0' <?php selected( 0, $options['feed_images'] ); ?>>no</option>
 													</select>
-													<p class="description"><?php _e( 'How many feed items to show in the widget?', 'isar-admin-summary' ); ?></p>
 													<input type="hidden" name="action" value="update" />
 													<input type="hidden" name="page_options" value="<?php echo $options['feed_images']; ?>" />								
 												</td>
@@ -68,7 +62,7 @@ function ias_render_form() { ?>
 												</th>
 												<td>
 													<input name="ias_options[feed_url_1]" type="text" id="ias-feed-url-1" class="regular-text code" value="<?php echo $options['feed_url_1']; ?>" />
-													<p class="description"><?php _e( 'Change the Feed-URL 1 to a site of your choice', 'isar-admin-summary' ); ?></p>
+													<p class="description"><?php _e( 'Change to a site of your choice', 'isar-admin-summary' ); ?></p>
 													<input type="hidden" name="action" value="update" />
 													<input type="hidden" name="page_options" value="<?php echo $options['feed_url_1']; ?>" />								
 												</td>
@@ -80,7 +74,7 @@ function ias_render_form() { ?>
 												</th>
 												<td>
 													<input name="ias_options[feed_url_2]" type="text" id="ias-feed-url-2" class="regular-text code" value="<?php echo $options['feed_url_2']; ?>" />
-													<p class="description"><?php _e( 'Change the feed-URL to a site of your choice', 'isar-admin-summary' ); ?></p>
+													<p class="description"><?php _e( 'Change to a site of your choice', 'isar-admin-summary' ); ?></p>
 													<input type="hidden" name="action" value="update" />
 													<input type="hidden" name="page_options" value="<?php echo $options['feed_url_2']; ?>" />								
 												</td>
@@ -88,7 +82,7 @@ function ias_render_form() { ?>
 											
 											<tr>
 												<th scope="row">
-													<label for="ias-select"><?php _e( 'How many Feed Items to show in the Dashboard Feed Widget', 'isar-admin-summary' ); ?>:</label>
+													<label for="ias-select"><?php _e( 'How many Feed Items to show in the Dashboard Feed Widget', 'isar-admin-summary' ); ?>?</label>
 												</th>
 												<td>
 													<select name='ias_options[num_content_items]'>
@@ -102,21 +96,18 @@ function ias_render_form() { ?>
 														<option value='8' <?php selected( '8', $options['num_content_items'] ); ?>>8</option>
 														<option value='9' <?php selected( '9', $options['num_content_items'] ); ?>>9</option>
 													</select>
-													<p class="description"><?php _e( 'How many feed items to show in the widget', 'isar-admin-summary' ); ?></p>
 													<input type="hidden" name="action" value="update" />
 													<input type="hidden" name="page_options" value="<?php echo $options['num_content_items']; ?>" />								
 												</td>
 											</tr>
 											
-
-											
 											<tr>
 												<th scope="row">
-													<label for="ias-feed-url-3"><?php _e( 'Images Tab Feed Feed URL', 'isar-admin-summary' ); ?>:</label>
+													<label for="ias-feed-url-3"><?php _e( 'Images tab Feed URL', 'isar-admin-summary' ); ?>:</label>
 												</th>
 												<td>
 													<input name="ias_options[feed_url_3]" type="text" id="ias-feed-url-3" class="regular-text code" value="<?php echo $options['feed_url_3']; ?>" />
-													<p class="description"><?php _e( 'Change the feed-URL to a site of your choice', 'isar-admin-summary' ); ?></p>
+													<p class="description"><?php _e( 'Change to a site of your choice', 'isar-admin-summary' ); ?></p>
 													<input type="hidden" name="action" value="update" />
 													<input type="hidden" name="page_options" value="<?php echo $options['feed_url_3']; ?>" />								
 												</td>
@@ -124,17 +115,34 @@ function ias_render_form() { ?>
 											
 											<tr>
 												<th scope="row">
-													<label for="ias-select"><?php _e( 'The number of feed items in the Images tab is supposed to be three times the General tab choice.' ); ?></label>
+													<label for="ias-select"><?php _e( 'The number of feed items in the Images tab is set to be three times the General tab choice.' ); ?></label>
 												</th>
 												<td>
 												<?php
 													$options = get_option( 'ias_options' ); 
 													$select = $options['num_content_items'];
-													echo $select*3;
-												?>			
+												?>
+													<select disabled>
+														<option value='<?php echo $select*3; ?>'><?php echo $select*3; ?></option>
+													</select>
 												</td>
 											</tr>
 
+											<tr>
+												<th scope="row">
+													<label for="ias-select"><?php _e( 'Enable Feeds menu', 'isar-admin-summary' ); ?>?</label>
+												</th>
+												<td>
+													<select name='ias_options[feed_menu]'>
+														<option value='1' <?php selected( 1, $options['feed_menu'] ); ?>>yes</option>
+														<option value='0' <?php selected( 0, $options['feed_menu'] ); ?>>no</option>
+													</select>
+													<p class="description"><?php _e( 'Enable the Feed menu in the admin bar', 'isar-admin-summary' ); ?></p>
+													<input type="hidden" name="action" value="update" />
+													<input type="hidden" name="page_options" value="<?php echo $options['feed_menu']; ?>" />								
+												</td>
+											</tr>											
+											
 											<tr>
 												<th scope="row">
 													<label for="ias-db-chk"><?php _e( 'Database Options', 'isar-admin-summary' ); ?></label>
@@ -147,19 +155,18 @@ function ias_render_form() { ?>
 											</tr>
 										
 										</tbody>
-									</table> <!-- end .tbody end table -->
+									</table>
 									
 									<p class="submit">
 										<input type="submit" class="button button-primary" value="<?php _e( 'Save Settings', 'isar-admin-summary' ) ?>" />
 									</p>
 								</div>
+								
 							</form>
-							
-						</div> <!-- .inside -->
-					</div> <!-- .postbox -->
-				</div> <!-- .meta-box-sortables .ui-sortable -->
-			</div> <!-- post-body-content -->
-			<!-- sidebar -->
+						</div><!-- .inside -->
+					</div><!-- .postbox -->
+				</div><!-- .meta-box-sortables.ui-sortable -->
+			</div><!-- post-body-content -->
 			<div id="postbox-container-1" class="postbox-container">
 				<div class="meta-box-sortables ui-sortable">
 					<div class="postbox">
@@ -171,13 +178,12 @@ function ias_render_form() { ?>
 						</h3>
 						<div class="inside">
 							<p><strong>Arch. Pierpaolo Rasicci aka "iSar"</strong></p>
-							
 							<img class="author-image" src="http://www.gravatar.com/avatar/<?php echo md5( 'just@do.it' ); ?>" />
 							<p>
 								<?php echo __( 'I like running my blog and keeping it alive. I\'m not a constant publisher but having RSS, just a button from my post page, really helps as far as I\'ve got something to say. It also helps me to stay up-to-date since I spend more time around my website than reading newspaper.<br /> I hope you like it!<br /> I\'ll do what I can to keep it stable.' ); ?>
 							</p>
 							<hr />
-								<?php echo __( 'Thanks to Piet Bos for his contribuition and all the supporters.' ); ?>
+								<?php echo __( 'Thanks to Piet Bos for his huge contribuition and all the supporters.' ); ?>
 							</p>
 							<hr />
 							<ul>
@@ -187,16 +193,13 @@ function ias_render_form() { ?>
 							</ul>
 						</div>
 					</div>
-				</div> <!-- .meta-box-sortables -->
-			</div> <!-- #postbox-container-1 .postbox-container -->
-		</div> <!-- #post-body .metabox-holder .columns-2 -->
+				</div><!-- .meta-box-sortables.ui-sortable -->
+			</div><!-- #postbox-container-1.postbox-container -->
+		</div><!-- .metabox-holder.columns-2 -->
 		<br class="clear">
-	</div> <!-- #poststuff -->
-	
-	
+	</div><!-- #poststuff -->
 	
 </div>
-<!-- Toggle widget -->
 <script type="text/javascript">
 jQuery(document).ready(function() {
 	//jQuery(".inside").hide();
@@ -206,9 +209,4 @@ jQuery(document).ready(function() {
 	});
 });
 </script>
-
 <?php }
-
-
-
-

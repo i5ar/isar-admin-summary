@@ -8,7 +8,7 @@
  * Author URI: http://
  * Text Domain: isar-admin-summary
  * Domain Path: /languages/
- * License: GPL2
+ * License: GPL
  */
  
 /*  Copyright 2014 iSar (email: i5ar at live.it)
@@ -25,6 +25,12 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+	
+	Freedoms:
+	You have the freedom to run the program, for any purpose.
+	You have access to the source code, the freedom to study how the program works, and the freedom to change it to make it do what you wish.
+	You have the freedom to redistribute copies of the original program so you can help your neighbor.
+	You have the freedom to distribute copies of your modified versions to others. By doing this you can give the whole community a chance to benefit from your changes.
 	
 	Contributions:
 	Piet Bos	http://senlinonline.com/
@@ -46,11 +52,11 @@ class IAS_Plugin {
 	private $plugin_settings_tabs = array();
 	
 	function __construct() {
-		// http://krisjordan.com/dynamic-properties-in-php-with-stdclass
+		// @source http://krisjordan.com/dynamic-properties-in-php-with-stdclass
 		global $isar_as;
 		// Set up an empty class for the global $isar_as object.
 		$isar_as = new stdClass;
-
+		
 		add_action( 'admin_init', array( &$this, 'init' ), 1 );						// Set the init
 		add_action( 'plugins_loaded', array( &$this, 'constants' ), 2 );			// Set the constants needed by the plugin
 		add_action( 'plugins_loaded', array( &$this, 'languages' ), 3 );			// Internationalize the text strings used
@@ -66,8 +72,8 @@ class IAS_Plugin {
 	
 	/**
 	 * Init plugin options to white list our options
+	 * @source	http://codex.wordpress.org/Function_Reference/register_setting
 	 */
-	// http://codex.wordpress.org/Function_Reference/register_setting
 	// The option name ias_options is registred inside the class and is hooked by many functions out of this class
 	function init() {
 		register_setting(
@@ -115,7 +121,7 @@ class IAS_Plugin {
 	// Registers the general settings via the Settings API, appends the setting to the tabs array of the object.
 	function register_general_settings() {
 		$this->plugin_settings_tabs[$this->general_settings_key] = 'General';
-		// http://codex.wordpress.org/Function_Reference/register_setting
+		// @source	http://codex.wordpress.org/Function_Reference/register_setting
 		register_setting(
 			$this->general_settings_key,	//	$option_group
 			$this->general_settings_key		//	$option_name
@@ -125,7 +131,7 @@ class IAS_Plugin {
 	// Registers the general settings via the Settings API, appends the setting to the tabs array of the object.
 	function register_general_img_settings() {
 		$this->plugin_settings_tabs[$this->general_img_settings_key] = 'Images';
-		// http://codex.wordpress.org/Function_Reference/register_setting
+		// @source	http://codex.wordpress.org/Function_Reference/register_setting
 		register_setting(
 			$this->general_img_settings_key,	//	$option_group
 			$this->general_img_settings_key		//	$option_name
@@ -140,7 +146,7 @@ class IAS_Plugin {
 		
 		add_settings_section( 'section_advanced', 'Very Simple Clipboard', array( &$this, 'section_advanced_desc' ), $this->advanced_settings_key );
 		
-		add_settings_field( 'advanced_option', 'Some Notes', array( &$this, 'field_advanced_option' ), $this->advanced_settings_key, 'section_advanced' );
+		add_settings_field( 'advanced_option', 'Some big ideas:', array( &$this, 'field_advanced_option' ), $this->advanced_settings_key, 'section_advanced', array( 'label_for' => 'big_ideas' ) );
 		
 		add_settings_section( 'section_advanced_submit', '', array( &$this, 'section_advanced_submit' ), $this->advanced_settings_key );
 	}
@@ -177,7 +183,7 @@ class IAS_Plugin {
 							$host = True;
 							$content = False;
 							$images = False;
-							echo ias_widget_function_bis( $feed, $host, $content, $images, $column );
+							echo ias_panel_function( $feed, $host, $content, $images, $column );
 							echo '<blockquote><i>';
 							echo __('Found something inspiring?') .'<br />';
 							echo __('Raise your voice!') .'</i></blockquote><br />';
@@ -199,7 +205,7 @@ class IAS_Plugin {
 							$host = True;
 							$content = True;
 							$images = $options['feed_images'];
-							echo ias_widget_function_bis( $feed, $host, $content, $images, $column );
+							echo ias_panel_function( $feed, $host, $content, $images, $column );
 						?>
 					</div>
 				</div>
@@ -207,7 +213,7 @@ class IAS_Plugin {
 		</div>
 		<?php
 	}
-	 // Images tab
+	// Images tab
 	function section_general_img_desc() { ?>
 		<div id="dashboard-widgets" class="metabox-holder ias-container">
  			<div id="postbox-container-1" class="postbox-container">
@@ -219,7 +225,7 @@ class IAS_Plugin {
 						$content = True;
 						$images = True;
 						$column = 'first';
-						echo ias_widget_function_bis( $feed, $host, $content, $images, $column ); ?>
+						echo ias_panel_function( $feed, $host, $content, $images, $column ); ?>
 				</div>		
 			</div>		
 			<div id="postbox-container-1" class="postbox-container">
@@ -231,7 +237,7 @@ class IAS_Plugin {
 						$content = True;
 						$images = True;
 						$column = 'second';
-						echo ias_widget_function_bis( $feed, $host, $content, $images, $column ); ?>
+						echo ias_panel_function( $feed, $host, $content, $images, $column ); ?>
 				</div>
 			</div>
 			<div id="postbox-container-1" class="postbox-container">
@@ -243,7 +249,7 @@ class IAS_Plugin {
 						$content = True;
 						$images = True;
 						$column = 'third';
-						echo ias_widget_function_bis( $feed, $host, $content, $images, $column );
+						echo ias_panel_function( $feed, $host, $content, $images, $column );
 						
 						/*
 						libxml_use_internal_errors(true);
@@ -265,30 +271,40 @@ class IAS_Plugin {
 	// Clipboard tab (Advanced)
 	function section_advanced_desc() {
 		echo $this->advanced_settings['advanced_option'];
-		echo '<hr />';
-		echo '<i>'.__('I reserved this tab for handy tools and future improvements. Reversing your <span title="Rich Site Summary">RSS</span> reading into a ready post publishing with social features will be done in a minute. Plaese, keep this plugin updated, <strong>I will definitly do something cool here</strong>!' ).'</i>';
+		echo '<div class="clearfix"><br /></div><hr />';
 	}
 	// Advanced Option field callback, same as above.
 	function field_advanced_option() { ?>
-		<input type="text" name="<?php echo $this->advanced_settings_key; ?>[advanced_option]" value="<?php echo esc_attr( $this->advanced_settings['advanced_option'] ); ?>" />
+		<!-- <input type="text" name="<?php //echo $this->advanced_settings_key; ?>[advanced_option]" value="<?php //echo esc_attr( $this->advanced_settings['advanced_option'] ); ?>" /> -->
+		<textarea rows="8" cols="80" placeholder="Ideas for a better world..." name="<?php echo $this->advanced_settings_key; ?>[advanced_option]"><?php echo esc_attr( $this->advanced_settings['advanced_option'] ); ?></textarea>
+	<br/><p>You can always use <code>&lt;ol&gt;&lt;li&gt;&lt;/li&gt;&lt;/ol&gt;</code></p>
 	<?php
 	}
 	// Advanced Option section callback.
 	function section_advanced_submit() {
+		echo '<i>'.__( 'I do not mean to destroy your big dreams but the text area above is just a placeholder and may not be available in next releases', 'isar-admin-summary' ).'.</i><br />';
+		echo '<i>'.__('I reserved this tab for handy tools and future improvements. Reversing your <span title="Rich Site Summary">RSS</span> reading into a ready post publishing with social features will be done in a minute. Plaese, keep this plugin updated, I will definitly do something cool here' ).'!</i>';
 		submit_button();
 	}
 	// Plugin Options page rendering goes here, checks for active tab and replaces key with the related settings key. Uses the plugin_options_tabs method to render the tabs.
 	function plugin_options_page() {
 		$tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $this->general_settings_key;?>
 		<div class="wrap">
-			<!-- Display Plugin Header, and Description -->
-			<?php $this->plugin_options_tabs(); ?>
+			<?php // Display Plugin Header, and Description
+				$this->plugin_options_tabs(); ?>
 			<form method="post" action="options.php">
+			
+			
+			
+			
 				<?php wp_nonce_field( 'update-options' ); ?>
 				<?php settings_fields( $tab ); ?>
-				<?php do_settings_sections( $tab ); // This will output the section titles wrapped in h3 tags and the settings fields wrapped in tables. ?>
+				<?php do_settings_sections( $tab );	// This will output the section titles wrapped in h3 tags and the settings fields wrapped in tables. ?>
+				
+				
+				
 			</form>
-		</div> <!-- end .wrap -->
+		</div>
 	<?php }
 	
 	/**
@@ -311,7 +327,9 @@ class IAS_Plugin {
 		echo '
 		</h2>';
 	}
-	/* End iSummary functions */
+	/**
+	 * End iSummary functions
+	 */
 }
 $isar_ias_plugin = new IAS_Plugin();
 
@@ -320,9 +338,9 @@ register_activation_hook( __FILE__, 'ias_add_defaults' );
 register_uninstall_hook( __FILE__, 'ias_delete_plugin_options' );
 // Option page
 add_action( 'admin_menu', 'ias_add_options_page' );
-// http://codex.wordpress.org/Function_Reference/wp_enqueue_style
+// @source	http://codex.wordpress.org/Function_Reference/wp_enqueue_style
 function ias_add_options_page() {
-	// http://codex.wordpress.org/Function_Reference/add_options_page
+	// @source	http://codex.wordpress.org/Function_Reference/add_options_page
 	$page = add_options_page(
 		__( 'iSar Admin Summary Settings' ),	//	$page_title
 		__( 'iSummary Settings' ),				//	$menu_title
@@ -338,7 +356,7 @@ function ias_add_options_page() {
  * Define default option settings
  */
 function ias_add_defaults() {
-	// http://codex.wordpress.org/Function_Reference/get_option
+	// @source http://codex.wordpress.org/Function_Reference/get_option
 	$tmp = get_option( 'ias_options' );
 	if ( ( $tmp['chk_def_options'] == '1' ) || ( ! is_array( $tmp ) ) ) {
 		$defaults = array(
@@ -346,12 +364,13 @@ function ias_add_defaults() {
 			'feed_url_1'		=> 'http://www.professionearchitetto.it/',
 			'feed_url_2'		=> 'http://www.architetto.info/',
 			'feed_url_3'		=> 'http://europaconcorsi.com/',
-			'feed_contents'		=> 'yes',
+			//'feed_contents'		=> 'yes',
 			'feed_images'		=> False,
+			'feed_menu'			=> True,	// Feed menu in admin bar
 			'num_content_items'	=> '3',		// Number of posts per feed
 			'chk_def_options'	=> ''		// Check default option database
 		);
-		// http://codex.wordpress.org/Function_Reference/update_option
+		// @source	http://codex.wordpress.org/Function_Reference/update_option
 		update_option( 'ias_options', $defaults );
 	}
 }
@@ -366,7 +385,7 @@ function ias_delete_plugin_options() {
  * Register and enqueue the settings stylesheet
  */
 function ias_plugin_settings_style() {
-	// http://codex.wordpress.org/Function_Reference/wp_register_style
+	// @source	http://codex.wordpress.org/Function_Reference/wp_register_style
 	wp_register_style(
 		'custom_ias_settings_css',			//	$handle
 		ISAR_IAS_URI . 'css/settings.css',	//	$src
@@ -380,7 +399,7 @@ function ias_plugin_settings_style() {
  * Register and enqueue the settings stylesheet
  */
 function ias_plugin_settings_bis_style() {
-	// http://codex.wordpress.org/Function_Reference/wp_register_style
+	// @source	http://codex.wordpress.org/Function_Reference/wp_register_style
 	wp_register_style(
 		'custom_ias_css',					//	$handle
 		ISAR_IAS_URI . 'css/style.css',		//	$src
@@ -397,8 +416,8 @@ add_filter( 'plugin_action_links', 'ias_plugin_action_links', 10, 2 );
 add_action( 'wp_dashboard_setup', 'ias_setup_function' );				// Register the new dashboard widget
 /**
  * Sanitize and validate input. Accepts an array, return a sanitized array.
+ * @source	http://codex.wordpress.org/Function_Reference/wp_filter_nohtml_kses
  */
-// http://codex.wordpress.org/Function_Reference/wp_filter_nohtml_kses
 function ias_validate_options( $input ) {
 	$input['feed_url'] =  wp_filter_nohtml_kses( $input['feed_url'] );
 	$input['feed_url_1'] =  wp_filter_nohtml_kses( $input['feed_url_1'] );
@@ -412,13 +431,12 @@ function ias_validate_options( $input ) {
 function ias_plugin_action_links( $links, $file ) {
 	if ( $file == plugin_basename( __FILE__ ) ) {
 		$ias_links = '<a href="' . get_admin_url() . 'options-general.php?page=isar-admin-summary/isar-admin-summary.php">' . __( 'Settings', 'isar-admin-summary' ) . '</a>';
-		array_unshift( $links, $ias_links ); // make the 'Settings' link appear first
+		array_unshift( $links, $ias_links );	// make the 'Settings' link appear first
 	}
 	return $links;
 }
 
+
 // Initialize the plugin
 //add_action( 'plugins_loaded', create_function( '', '$settings_ias_tabs_plugin = new Settings_IAS_Tabs_Plugin;' ) );
-
-
 ?>

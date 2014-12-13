@@ -4,6 +4,12 @@
  */
 add_action( 'admin_bar_menu', 'rss_toolbar_items', 15);												
 function rss_toolbar_items($admin_bar){
+
+	$options = get_option( 'ias_options' );
+	$feed_menu = $options['feed_menu'];
+	if ($feed_menu == True):
+
+
 	$options = get_option( 'ias_options' ); 
 	$feedurl = $options['feed_url'];
 	$feedurl_1 = $options['feed_url_1'];
@@ -37,13 +43,14 @@ function rss_toolbar_items($admin_bar){
 			)
 		);
 	}
+	endif;
 }
 
 /**
  * Add Feed loops
  */ 
-// http://codex.wordpress.org/Function_Reference/add_meta_box
 function ias_setup_function() {
+	// @source	http://codex.wordpress.org/Function_Reference/add_meta_box
 	add_meta_box(
 		'ias_widget',			// $id
 		'iSummary Main Feeds',	// $title
@@ -57,7 +64,7 @@ function ias_widget_function() {
 	$options = get_option( 'ias_options' ); 
 	$feedurl = $options['feed_url'];
 	$select = $options['num_content_items'];
-	// http://codex.wordpress.org/Function_Reference/fetch_feed
+	// @source	http://codex.wordpress.org/Function_Reference/fetch_feed
 	$rss = fetch_feed( $feedurl );
 	if ( ! is_wp_error( $rss ) ) { // Checks that the object is created correctly
 		// Figure out how many total items there are.
@@ -82,15 +89,14 @@ function ias_widget_function() {
 </div>			
 	<?php }
 }
-
-function ias_widget_function_bis( $feed, $host, $content, $images, $column ) {
+function ias_panel_function( $feed, $host, $content, $images, $column ) {
 	foreach ( (array) $feed as $value ) {	
 		if( empty( $value ) ){
 			return;
 		}
-		$options = get_option( 'ias_options' ); 
+		$options = get_option( 'ias_options' );
 		$select = $options['num_content_items'];
-		// http://codex.wordpress.org/Function_Reference/fetch_feed
+		// @source	http://codex.wordpress.org/Function_Reference/fetch_feed
 		$rss = fetch_feed( $value );
 		// Checks that the object is created correctly
 		if ( ! is_wp_error( $rss ) ) {
@@ -111,7 +117,6 @@ function ias_widget_function_bis( $feed, $host, $content, $images, $column ) {
 				</span>
 			</h3>
 			<?php			
-			
 				//$startitems = 0;
 				//$maxitems = 3;
 			}
@@ -151,15 +156,17 @@ function ias_widget_function_bis( $feed, $host, $content, $images, $column ) {
 }
 /**
  * Add Dashboard styles
+ * @source	http://codex.wordpress.org/Function_Reference/is_rtl
  */ 
 function ias_style_function() {
-	// http://codex.wordpress.org/Function_Reference/is_rtl
 	$x = is_rtl() ? 'right' : 'left';
 	echo '
 	<style type="text/css">
 		#ias_widget .rss-widget span.rss-date{margin-left:12px}
 		#ias_widget a.rsswidget{font-weight: 400;}
 		#ias_widget.postbox h3,#ias_widget.postbox .rss-widget{text-align:'.$x.';}
+		#col-container.ias-container .form-wrap{text-align:'.$x.';}
+		#dashboard-widgets.ias-container .meta-box-sortables.ui-sortable{text-align:'.$x.';}
 	</style>';
 }
 add_action( 'admin_head', 'ias_style_function' );
