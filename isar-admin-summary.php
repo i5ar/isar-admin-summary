@@ -3,7 +3,7 @@
  * Plugin Name: iSar Admin Summary
  * Plugin URI: https://github.com/i5ar/isar-admin-summary/
  * Description: The iSar Admin Summary shows the latest posts from one or more sites of your interest in the iSummary page of your admin panel.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Pierpaolo Rasicci
  * Author URI: http://
  * Text Domain: isar-admin-summary
@@ -62,7 +62,6 @@ class IAS_Plugin {
 		add_action( 'plugins_loaded', array( &$this, 'languages' ), 3 );			// Internationalize the text strings used
 		add_action( 'plugins_loaded', array( &$this, 'includes' ), 4 );				// Load the functions files
 		add_action( 'plugins_loaded', array( &$this, 'admin' ), 5 );				// Load the admin files
-		//add_action( 'init', array( &$this, 'load_settings' ) ); 					// Load iSummary tabs settings in his own class with in the class instance at the bottom
 		add_action( 'admin_init', array( &$this, 'load_settings' ) );				// Load iSummary tabs settings 
 		add_action( 'admin_init', array( &$this, 'register_general_settings' ) );	// Register general iSummary tabs settings
 		add_action( 'admin_init', array( &$this, 'register_general_img_settings' ) );	// Register advanced iSummary tabs settings
@@ -142,13 +141,9 @@ class IAS_Plugin {
 	// Registers the advanced settings and appends the key to the plugin settings tabs array.
 	function register_advanced_settings() {
 		$this->plugin_settings_tabs[$this->advanced_settings_key] = 'Clipboard ';
-		
 		register_setting( $this->advanced_settings_key, $this->advanced_settings_key );
-		
 		add_settings_section( 'section_advanced', 'Very Simple Clipboard', array( &$this, 'section_advanced_desc' ), $this->advanced_settings_key );
-		
 		add_settings_field( 'advanced_option', 'Big ideas:', array( &$this, 'field_advanced_option' ), $this->advanced_settings_key, 'section_advanced', array( 'label_for' => 'big_ideas' ) );
-		
 		add_settings_section( 'section_advanced_submit', '', array( &$this, 'section_advanced_submit' ), $this->advanced_settings_key );
 	}
 	function add_admin_menus() {
@@ -226,49 +221,49 @@ class IAS_Plugin {
  			<div id="postbox-container-1" class="postbox-container">
 				<div id="normal-sortables" class="meta-box-sortables ui-sortable">
 				<?php
-						$options = get_option( 'ias_options' ); 
-						$feed = $options['feed_url_3'];
-						$host = False;
-						$content = True;
-						$images = True;
-						$column = 'first';
-						echo ias_panel_function( $feed, $host, $content, $images, $column ); ?>
+					$options = get_option( 'ias_options' ); 
+					$feed = $options['feed_url_3'];
+					$host = False;
+					$content = True;
+					$images = True;
+					$column = 'first';
+					echo ias_panel_function( $feed, $host, $content, $images, $column ); ?>
 				</div>		
 			</div>		
 			<div id="postbox-container-1" class="postbox-container">
 				<div id="normal-sortables" class="meta-box-sortables ui-sortable">
 				<?php
-						$options = get_option( 'ias_options' ); 
-						$feed = $options['feed_url_3'];
-						$host = False;
-						$content = True;
-						$images = True;
-						$column = 'second';
-						echo ias_panel_function( $feed, $host, $content, $images, $column ); ?>
+					$options = get_option( 'ias_options' ); 
+					$feed = $options['feed_url_3'];
+					$host = False;
+					$content = True;
+					$images = True;
+					$column = 'second';
+					echo ias_panel_function( $feed, $host, $content, $images, $column ); ?>
 				</div>
 			</div>
 			<div id="postbox-container-1" class="postbox-container">
 				<div id="normal-sortables" class="meta-box-sortables ui-sortable">
-					<?php
-						$options = get_option( 'ias_options' ); 
-						$feed = $options['feed_url_3'];
-						$host = False;
-						$content = True;
-						$images = True;
-						$column = 'third';
-						echo ias_panel_function( $feed, $host, $content, $images, $column );
-						
-						/*
-						libxml_use_internal_errors(True);
-						$doc = new DOMDocument;
-						$html = $doc->loadHTML('vregv');
-						$path = new DOMXPath($doc);
-						$nodelist = $path->query('//img');
-						$node = $nodelistb->item(0);
-						$value = $node->attributes->getNamedItem('src')->nodeValue;
-						echo "<img src=$value\n />";
-						*/
-					?>
+				<?php
+					$options = get_option( 'ias_options' ); 
+					$feed = $options['feed_url_3'];
+					$host = False;
+					$content = True;
+					$images = True;
+					$column = 'third';
+					echo ias_panel_function( $feed, $host, $content, $images, $column );
+					
+					/*
+					libxml_use_internal_errors(True);
+					$doc = new DOMDocument;
+					$html = $doc->loadHTML('vregv');
+					$path = new DOMXPath($doc);
+					$nodelist = $path->query('//img');
+					$node = $nodelistb->item(0);
+					$value = $node->attributes->getNamedItem('src')->nodeValue;
+					echo "<img src=$value\n />";
+					*/
+				?>
 				</div>		
 			</div>
 		</div>		
@@ -352,7 +347,6 @@ function ias_add_options_page() {
 	add_action( 'admin_print_styles-' . $page , 'ias_plugin_settings_style' );
 }
 
-
 /**
  * Define default option settings
  */
@@ -379,7 +373,6 @@ function ias_add_defaults() {
 		update_option( 'ias_options', $defaults );
 	}
 }
-
 
 /**
  * Delete options table entries ONLY when plugin deactivated AND deleted 
@@ -445,7 +438,4 @@ function ias_plugin_action_links( $links, $file ) {
 	}
 	return $links;
 }
-
-// Initialize the plugin
-//add_action( 'plugins_loaded', create_function( '', '$settings_ias_tabs_plugin = new Settings_IAS_Tabs_Plugin;' ) );
 ?>
