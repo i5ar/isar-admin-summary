@@ -12,3 +12,9 @@
 	text-decoration: initial;
 	display: block;
 }
+#postbox-container-1 .help {
+	cursor: help;
+}
+.js #postbox-container-1 .postbox .hndle {
+	cursor: default;
+}

@@ -155,17 +155,18 @@ function ias_panel_function( $feed, $host, $content, $images, $column ) {
 	}
 }
 /**
- * Add Dashboard styles
- */ 
+ * Add Styles
+ */
 function ias_style_function() {
+	global $_wp_admin_css_colors;
+	$user_admin_color = get_user_meta(get_current_user_id(), 'admin_color', true);
+	$color = $_wp_admin_css_colors[$user_admin_color]->colors;
 	$options = get_option( 'ias_options' );
-	$colour = isset( $options['feed_menu_colour'] ) ? $options['feed_menu_colour'] : '#0074a2';
+	$colour = isset( $options['feed_menu_colour'] ) ? $options['feed_menu_colour'] : $color[3];
 	// @source	http://codex.wordpress.org/Function_Reference/is_rtl
 	$x = is_rtl() ? 'right' : 'left';
 	echo '
 	<style type="text/css">
-	
-	
 		#ias_widget .rss-widget span.rss-date{margin-left:12px}
 		#ias_widget a.rsswidget{font-weight:400;}
 		#wp-admin-bar-feeds-item{cursor:pointer;}

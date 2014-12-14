@@ -142,18 +142,22 @@ function ias_render_form() { ?>
 													<input type="hidden" name="page_options" value="<?php echo $options['feed_menu']; ?>" />								
 												</td>
 											</tr>
-
+											
+											<?php 
+												global $_wp_admin_css_colors;
+												$user_admin_color = get_user_meta(get_current_user_id(), 'admin_color', true);
+												$color = $_wp_admin_css_colors[$user_admin_color]->colors;
+											?>
+											
 											<tr>
 												<th scope="row">
 													<label for="feed-menu-colour"><?php _e( 'Feed menu colour', 'isar-admin-summary' ); ?>:</label>
 												</th>
 												<td>
 												
-													<!--<input type="text" id='color-picker' value="#bada55" /> i5 picker -->
 												
-													<input name="ias_options[feed_menu_colour]" type="text" id='color-picker' class="code" placeholder="0074a2" value="<?php echo $options['feed_menu_colour']; ?>" />
+													<input name="ias_options[feed_menu_colour]" type="text" id='color-picker' class="code" placeholder="<?php echo $color[3] ?>" value="<?php echo $options['feed_menu_colour']; ?>" />
 													
-													<!--<input name="ias_options[feed_menu_colour]" type="text" id="ias-feed-menu-colour" class="code" placeholder="0074a2" value="<?php //echo $options['feed_menu_colour']; ?>" /> -->
 													<p class="description"><?php _e( 'Change the colour of the menu', 'isar-admin-summary' ); ?></p>
 													<input type="hidden" name="action" value="update" />
 													<input type="hidden" name="page_options" value="<?php echo $options['feed_menu_colour']; ?>" />								
@@ -195,10 +199,10 @@ function ias_render_form() { ?>
 							<span><?php _e( 'About the Author', 'isar-admin-summary' ); ?></span>
 						</h3>
 						<div class="inside">
-							<p><strong>Pierpaolo Rasicci Architetto AKA iSar</strong></p>
+							<p><strong>Pierpaolo Rasicci Architetto <span class="help" title="Also known as">AKA</span> iSar</strong></p>
 							<img class="author-image" src="http://www.gravatar.com/avatar/<?php echo md5( 'just@do.it' ); ?>" />
 							<p>
-								<?php echo __( 'I like running my blog and keeping it alive. I\'m not a constant publisher but having RSS, just a button from my post page, really helps as far as I\'ve got something to say. It also helps me to stay up-to-date since I spend more time around my website than reading newspaper.<br /> I hope you like it!<br /> I\'ll do what I can to keep it stable.' ); ?>
+								<?php echo __( 'I like running my blog and keeping it alive. I\'m not a constant publisher but having RSS, just a button from my post page, really helps as far as I\'ve got something to say. It also helps me to stay up-to-date since I spend more time around my website than reading newspaper.<br /> I hope you like it!<br /> I\'ll do what I can to keep it up to date.' ); ?>
 							</p>
 							<hr />
 								<?php echo __( 'Thanks to Piet Bos for his huge contribuition and all the supporters.' ); ?>
@@ -224,14 +228,6 @@ function ias_render_form() { ?>
 	</div><!-- #poststuff -->	
 </div>
 
-<?php // Pick Theme color
-	//$admin_css_file = wp_admin_css_uri('css/colors');		
-	//$color = get_user_meta(get_current_user_id(), 'admin_color', true);
-	//echo $admin_css_file;
-	//echo $color;
-	//echo get_user_option( 'admin_color', get_current_user_id() );
-?>
-
 <script type="text/javascript">
 jQuery("#isanchor").removeAttr("href");
 jQuery('#isanchor ').click( function() {
@@ -249,18 +245,11 @@ jQuery(document).ready(function() {
 
 <script>
 // Iris Color Picker
-jQuery(document).ready(function($){
+	jQuery(document).ready(function($){
     $('#color-picker').iris({
 		palettes: true,
 		width: 255
-	});
-	//$(element).iris('option', 'width', 500); // set the width to 500px. Because reasons.
-	
+	});	
 });
-
-
-
 </script>
-
-
 <?php }

@@ -69,10 +69,7 @@ class IAS_Plugin {
 		add_action( 'admin_init', array( &$this, 'register_advanced_settings' ) );	// Register advanced iSummary tabs settings
 		add_action( 'admin_menu', array( &$this, 'add_admin_menus' ) );				// Add iSummary menus
 		add_action( 'admin_init', array( &$this, 'my_plugin_admin_init' ) );		// Iris Color Picker
-	
 	}
-	
-	
 	
 	/**
 	 * Init plugin options to white list our options
@@ -181,6 +178,11 @@ class IAS_Plugin {
 			<div id="col-right">
 				<div class="col-wrap">
 					<div class="form-wrap">
+					
+					
+
+					
+					
 						<h3>
 							<span><?php _e( 'All Feeds', 'isar-admin-summary' ); ?></span>
 						</h3>
@@ -271,9 +273,9 @@ class IAS_Plugin {
 						*/
 					?>
 				</div>		
-			</div>		
+			</div>
 		</div>		
-								
+		
 		<?php
 	}
 	// Clipboard tab (Advanced)
@@ -338,7 +340,6 @@ $isar_ias_plugin = new IAS_Plugin();
 register_activation_hook( __FILE__, 'ias_add_defaults' ); 
 register_uninstall_hook( __FILE__, 'ias_delete_plugin_options' );
 
-
 // @source	http://codex.wordpress.org/Function_Reference/wp_enqueue_style
 add_action( 'admin_menu', 'ias_add_options_page' );
 function ias_add_options_page() {
@@ -354,6 +355,17 @@ function ias_add_options_page() {
 	add_action( 'admin_print_styles-' . $page , 'ias_plugin_settings_style' );
 }
 
+// @source https://developer.wordpress.org/reference/functions/admin_color_scheme_picker/
+global $pagenow;
+if ( $pagenow == 'settings-permalink.php' ) :
+	add_action( 'admin_notices', 'custom_admin_notice' );
+	function custom_admin_notice() {
+		global $_wp_admin_css_colors;
+		$user_admin_color = get_user_meta(get_current_user_id(), 'admin_color', true);
+		//var_dump($_wp_admin_css_colors[$user_admin_color]->colors);
+		$color = $_wp_admin_css_colors[$user_admin_color]->colors;
+	}
+endif;
 
 /**
  * Define default option settings
@@ -370,7 +382,7 @@ function ias_add_defaults() {
 			//'feed_contents'		=> 'yes',
 			'feed_images'		=> False,
 			'feed_menu'			=> True,	// Feed menu in admin bar
-			'feed_menu_colour'	=> '0074a2',// Feed menu in admin bar colour
+			'feed_menu_colour'	=> $color[3],// Feed menu in admin bar colour
 			'num_content_items'	=> '3',		// Number of posts per feed
 			'chk_def_options'	=> ''		// Check default option database
 		);
