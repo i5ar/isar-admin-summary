@@ -48,8 +48,8 @@ function ias_render_form() { ?>
 												</th>
 												<td>
 													<select name='ias_options[feed_images]'>
-														<option value='1' <?php selected( 1, $options['feed_images'] ); ?>>yes</option>
-														<option value='0' <?php selected( 0, $options['feed_images'] ); ?>>no</option>
+														<option value='yes' <?php selected( 'yes', $options['feed_images'] ); ?>>yes</option>
+														<option value='no' <?php selected( 'no', $options['feed_images'] ); ?>>no</option>
 													</select>
 													<input type="hidden" name="action" value="update" />
 													<input type="hidden" name="page_options" value="<?php echo $options['feed_images']; ?>" />								
@@ -134,8 +134,8 @@ function ias_render_form() { ?>
 												</th>
 												<td>
 													<select name='ias_options[feed_menu]'>
-														<option value='1' <?php selected( 1, $options['feed_menu'] ); ?>>yes</option>
-														<option value='0' <?php selected( 0, $options['feed_menu'] ); ?>>no</option>
+														<option value='yes' <?php selected( 'yes', $options['feed_menu'] ); ?>>yes</option>
+														<option value='no' <?php selected( 'no', $options['feed_menu'] ); ?>>no</option>
 													</select>
 													<p class="description"><?php _e( 'Enable the Feed menu in the admin bar', 'isar-admin-summary' ); ?></p>
 													<input type="hidden" name="action" value="update" />
@@ -145,7 +145,7 @@ function ias_render_form() { ?>
 											
 											<?php 
 												global $_wp_admin_css_colors;
-												$user_admin_color = get_user_meta(get_current_user_id(), 'admin_color', true);
+												$user_admin_color = get_user_meta(get_current_user_id(), 'admin_color', True);
 												$color = $_wp_admin_css_colors[$user_admin_color]->colors;
 											?>
 											

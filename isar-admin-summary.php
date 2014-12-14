@@ -177,12 +177,7 @@ class IAS_Plugin {
 		<div id="col-container" class="ias-container">
 			<div id="col-right">
 				<div class="col-wrap">
-					<div class="form-wrap">
-					
-					
-
-					
-					
+					<div class="form-wrap">					
 						<h3>
 							<span><?php _e( 'All Feeds', 'isar-admin-summary' ); ?></span>
 						</h3>
@@ -215,6 +210,8 @@ class IAS_Plugin {
 							$host = True;
 							$content = True;
 							$images = $options['feed_images'];
+							if( $images == 'yes' ){ $images = True; }
+							elseif( $images == 'no' ) { $images = False; }
 							echo ias_panel_function( $feed, $host, $content, $images, $column );
 						?>
 					</div>
@@ -262,7 +259,7 @@ class IAS_Plugin {
 						echo ias_panel_function( $feed, $host, $content, $images, $column );
 						
 						/*
-						libxml_use_internal_errors(true);
+						libxml_use_internal_errors(True);
 						$doc = new DOMDocument;
 						$html = $doc->loadHTML('vregv');
 						$path = new DOMXPath($doc);
@@ -355,22 +352,15 @@ function ias_add_options_page() {
 	add_action( 'admin_print_styles-' . $page , 'ias_plugin_settings_style' );
 }
 
-// @source https://developer.wordpress.org/reference/functions/admin_color_scheme_picker/
-global $pagenow;
-if ( $pagenow == 'settings-permalink.php' ) :
-	add_action( 'admin_notices', 'custom_admin_notice' );
-	function custom_admin_notice() {
-		global $_wp_admin_css_colors;
-		$user_admin_color = get_user_meta(get_current_user_id(), 'admin_color', true);
-		//var_dump($_wp_admin_css_colors[$user_admin_color]->colors);
-		$color = $_wp_admin_css_colors[$user_admin_color]->colors;
-	}
-endif;
 
 /**
  * Define default option settings
  */
 function ias_add_defaults() {
+	// @source https://developer.wordpress.org/reference/functions/admin_color_scheme_picker/
+	global $_wp_admin_css_colors;
+	$user_admin_color = get_user_meta(get_current_user_id(), 'admin_color', True);
+	$color = $_wp_admin_css_colors[$user_admin_color]->colors;
 	// @source http://codex.wordpress.org/Function_Reference/get_option
 	$tmp = get_option( 'ias_options' );
 	if ( ( $tmp['chk_def_options'] == '1' ) || ( ! is_array( $tmp ) ) ) {
@@ -379,9 +369,8 @@ function ias_add_defaults() {
 			'feed_url_1'		=> 'http://www.professionearchitetto.it/',
 			'feed_url_2'		=> 'http://www.architetto.info/',
 			'feed_url_3'		=> 'http://europaconcorsi.com/',
-			//'feed_contents'		=> 'yes',
-			'feed_images'		=> False,
-			'feed_menu'			=> True,	// Feed menu in admin bar
+			'feed_images'		=> 'no',
+			'feed_menu'			=> 'yes',	// Feed menu in admin bar
 			'feed_menu_colour'	=> $color[3],// Feed menu in admin bar colour
 			'num_content_items'	=> '3',		// Number of posts per feed
 			'chk_def_options'	=> ''		// Check default option database

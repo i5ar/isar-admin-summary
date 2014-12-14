@@ -7,7 +7,7 @@ function rss_toolbar_items($admin_bar){
 
 	$options = get_option( 'ias_options' );
 	$feed_menu = $options['feed_menu'];
-	if ($feed_menu == True):
+	if ($feed_menu == 'yes'):
 
 
 	$options = get_option( 'ias_options' ); 
@@ -159,7 +159,7 @@ function ias_panel_function( $feed, $host, $content, $images, $column ) {
  */
 function ias_style_function() {
 	global $_wp_admin_css_colors;
-	$user_admin_color = get_user_meta(get_current_user_id(), 'admin_color', true);
+	$user_admin_color = get_user_meta(get_current_user_id(), 'admin_color', True);
 	$color = $_wp_admin_css_colors[$user_admin_color]->colors;
 	$options = get_option( 'ias_options' );
 	$colour = isset( $options['feed_menu_colour'] ) ? $options['feed_menu_colour'] : $color[3];
