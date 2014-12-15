@@ -110,12 +110,14 @@ function ias_panel_function( $feed, $host, $content, $images, $column ) {
 				//$maxitems = 3;
 				$startitems = $maxitems*2+1;	// 7
 			} elseif ($column == 'first') { ?>
-			<h3 class="mytest">
-				<span><?php _e( 'Images Feed Contents', 'isar-admin-summary' );
-					echo ' - ';
-					echo parse_url($value)['host']; ?>
-				</span>
-			</h3>
+				<h3 class="mytest">
+					<span>
+					<?php _e( 'Images Feed Contents', 'isar-admin-summary' );
+						echo ' - ';
+						$parse_url = parse_url($value);
+						echo $parse_url['host']; ?>
+					</span>
+				</h3>
 			<?php			
 				//$startitems = 0;
 				//$maxitems = 3;
@@ -128,26 +130,25 @@ function ias_panel_function( $feed, $host, $content, $images, $column ) {
 				<h3>
 					<span>
 					<?php
-						$array = parse_url($value);
-						echo $array['host']; ?>
+						$parse_url = parse_url($value);
+						echo $parse_url['host']; ?>
 					</span>
 				</h3>
 			<?php } ?>
 				<ul>
 					<?php
 					// Loop through each feed item and display each item as a hyperlink.
-					foreach ( $rss_items as $item ) {
-					?>
-					<li class="ias-item">
-						<a class="ias-title" href="<?php echo esc_url( $item->get_permalink() ); ?>" target="_blank"><?php echo esc_attr( $item->get_title() ); ?></a>
-						<span class="ias-date"><?php echo date_i18n('F j, Y', $item->get_date('U')); ?></span>
-						<?php if ( $content == True && $images == True ) { ?>
-						<div><?php echo $item->get_content(); ?></div>
-						<?php } elseif ( $content == True && $images !== True ) { ?>
-						<div class="ias-hide"><?php echo $item->get_content(); ?></div>
-						<?php }
-						?>
-					</li>
+					foreach ( $rss_items as $item ) { ?>
+						<li class="ias-item">
+							<a class="ias-title" href="<?php echo esc_url( $item->get_permalink() ); ?>" target="_blank"><?php echo esc_attr( $item->get_title() ); ?></a>
+							<span class="ias-date"><?php echo date_i18n('F j, Y', $item->get_date('U')); ?></span>
+							<?php if ( $content == True && $images == True ) { ?>
+								<div><?php echo $item->get_content(); ?></div>
+							<?php } elseif ( $content == True && $images !== True ) { ?>
+								<div class="ias-hide"><?php echo $item->get_content(); ?></div>
+							<?php }
+							?>
+						</li>
 					<?php } ?>
 				</ul>
 		<?php
