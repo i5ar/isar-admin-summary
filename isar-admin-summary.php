@@ -2,10 +2,10 @@
 /**
  * Plugin Name: iSar Admin Summary
  * Plugin URI: https://github.com/i5ar/isar-admin-summary/
- * Description: The iSar Admin Summary shows the latest posts from one or more sites of your interest in the iSummary page of your admin panel.
+ * Description: The iSar Admin Summary also known as iSummary shows the latest posts from one or more sites of your interest in the admin panel. You can manage feeds to show within images or not in your iSummary admin page.
  * Version: 1.0.1
  * Author: Pierpaolo Rasicci
- * Author URI: http://
+ * Author URI: http://isarch.it/about-me/
  * Text Domain: isar-admin-summary
  * Domain Path: /languages/
  * License: GPL
@@ -33,7 +33,10 @@
 	You have the freedom to distribute copies of your modified versions to others. By doing this you can give the whole community a chance to benefit from your changes.
 	
 	Contributions:
-	Piet Bos	http://senlinonline.com/
+	Piet Bos		https://profiles.wordpress.org/senlin/
+	
+	Thanks:
+	Sven Hofmann	http://wordpress.stackexchange.com/users/32946/sven
 */
 /**
  * Prevent direct access to files
@@ -57,17 +60,18 @@ class IAS_Plugin {
 		// Set up an empty class for the global $isar_as object.
 		$isar_as = new stdClass;
 		
-		add_action( 'admin_init', array( &$this, 'init' ), 1 );						// Set the init
-		add_action( 'plugins_loaded', array( &$this, 'constants' ), 2 );			// Set the constants needed by the plugin
-		add_action( 'plugins_loaded', array( &$this, 'languages' ), 3 );			// Internationalize the text strings used
-		add_action( 'plugins_loaded', array( &$this, 'includes' ), 4 );				// Load the functions files
-		add_action( 'plugins_loaded', array( &$this, 'admin' ), 5 );				// Load the admin files
-		add_action( 'admin_init', array( &$this, 'load_settings' ) );				// Load iSummary tabs settings 
-		add_action( 'admin_init', array( &$this, 'register_general_settings' ) );	// Register general iSummary tabs settings
+		add_action( 'admin_init', array( &$this, 'init' ), 1 );							// Set the init
+		add_action( 'admin_init', array( &$this, 'load_settings' ) );					// Load iSummary tabs settings 
+		add_action( 'admin_init', array( &$this, 'register_general_settings' ) );		// Register general iSummary tabs settings
 		add_action( 'admin_init', array( &$this, 'register_general_img_settings' ) );	// Register advanced iSummary tabs settings
-		add_action( 'admin_init', array( &$this, 'register_advanced_settings' ) );	// Register advanced iSummary tabs settings
-		add_action( 'admin_menu', array( &$this, 'add_admin_menus' ) );				// Add iSummary menus
-		add_action( 'admin_init', array( &$this, 'my_plugin_admin_init' ) );		// Iris Color Picker
+		add_action( 'admin_init', array( &$this, 'register_advanced_settings' ) );		// Register advanced iSummary tabs settings
+		add_action( 'admin_menu', array( &$this, 'add_admin_menus' ) );					// Add iSummary menus
+		add_action( 'admin_init', array( &$this, 'add_iris_color_picker' ) );			// Iris Color Picker
+		add_action( 'plugins_loaded', array( &$this, 'constants' ), 2 );				// Set the constants needed by the plugin
+		add_action( 'plugins_loaded', array( &$this, 'languages' ), 3 );				// Internationalize the text strings used
+		add_action( 'plugins_loaded', array( &$this, 'includes' ), 4 );					// Load the functions files
+		add_action( 'plugins_loaded', array( &$this, 'admin' ), 5 );					// Load the admin files
+		
 	}
 	
 	/**
@@ -158,8 +162,8 @@ class IAS_Plugin {
 		add_action( 'admin_print_styles-' . $page , 'ias_plugin_settings_bis_style' );
 	}
 	// Iris Color Picker
-	function my_plugin_admin_init() {
-		wp_register_script( 'my-plugin-script', plugins_url( 'js/iris.min.js', __FILE__ ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), false, 1 );
+	function add_iris_color_picker() {
+		wp_register_script( 'iris-color-picker', plugins_url( 'js/iris.min.js', __FILE__ ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), false, 1 );
 	}
 	
 	/**
@@ -364,10 +368,10 @@ function ias_add_defaults() {
 			'feed_url_2'		=> 'http://www.architetto.info/',
 			'feed_url_3'		=> 'http://europaconcorsi.com/',
 			'feed_images'		=> 'no',
-			'feed_menu'			=> 'yes',	// Feed menu in admin bar
-			'feed_menu_colour'	=> $color[3],// Feed menu in admin bar colour
-			'num_content_items'	=> '3',		// Number of posts per feed
-			'chk_def_options'	=> ''		// Check default option database
+			'feed_menu'			=> 'yes',		// Feed menu in admin bar
+			'feed_menu_colour'	=> $color[3],	// Feed menu in admin bar colour
+			'num_content_items'	=> '3',			// Number of posts per feed
+			'chk_def_options'	=> ''			// Check default option database
 		);
 		// @source	http://codex.wordpress.org/Function_Reference/update_option
 		update_option( 'ias_options', $defaults );
@@ -393,7 +397,7 @@ function ias_plugin_settings_style() {
 		ISAR_IAS_VERSION					//	$ver
 	);
 	wp_enqueue_style( 'custom_ias_settings_css' );
-	wp_enqueue_script( 'my-plugin-script' );// Iris Color Picker
+	wp_enqueue_script( 'iris-color-picker' );// Iris Color Picker
 	//wp_enqueue_style( 'wp-color-picker' );	
 }
 
