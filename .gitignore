@@ -1,14 +1,3 @@
-#############
-## addons
-#############
-
 # Folders
 images/
 
-#Images
-*.jpg
-*.png
-*.xcf
-
-feed.jpg
-images/
