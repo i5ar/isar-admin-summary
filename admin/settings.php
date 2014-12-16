@@ -7,7 +7,7 @@
 function ias_render_form() { ?>
 
 <div class="wrap">
-		
+
 	<h2><?php _e( 'iSar Admin Summary Settings', 'isar-admin-summary' ); ?></h2>
 	
 	<div id="poststuff">
@@ -26,22 +26,22 @@ function ias_render_form() { ?>
 							<?php $options = get_option( 'ias_options' ); ?>
 							
 								<div class="form-wrap">
-									<p><?php _e( 'Below you can adjust the output of the Feeds. You can change the feed URLs and the amount of feed items to show.', 'isar-admin-summary' ); ?></p>
+									<p><?php _e('Below you can adjust the output of the Feeds','isar-admin-summary') ?>. <?php _e('You can change the feed','isar-admin-summary')?> <abbr title="Uniform Resource Locator">URL</abbr>s <?php _e( 'and the amount of feed items to show', 'isar-admin-summary'); ?>.</p>
 									<table class="form-table">
 										<tbody>
-																				
+																
 											<tr>
 												<th scope="row">
-													<label for="ias-feed-url"><?php _e( 'Main Feed URL General tab', 'isar-admin-summary' ); ?>:</label>
+													<label for="ias-feed-url"><?php _e('Main Feed URL General tab','isar-admin-summary'); ?>:</label>
 												</th>
 												<td>
 													<input name="ias_options[feed_url]" type="text" id="ias-feed-url" class="regular-text code" value="<?php echo $options['feed_url']; ?>" />
-													<p class="description"><?php _e( 'Choose your favorite summary site: The iSummary Page will show title, date and contents of this feed in the General tab. The Dashboard will also show the title and the date.', 'isar-admin-summary' ); ?></p>
+													<p class="description"><?php _e( 'Choose your favorite summary site','isar-admin-summary') ?>: <?php _e('The iSummary Page will show title, date and contents of this feed in the General tab','isar-admin-summary') ?>. <?php _e('The Dashboard will also show the title and the date', 'isar-admin-summary' ); ?>.</p>
 													<input type="hidden" name="action" value="update" />
 													<input type="hidden" name="page_options" value="<?php echo $options['feed_url']; ?>" />								
 												</td>
 											</tr>
-
+											
 											<tr>
 												<th scope="row">
 													<label for="ias-select"><?php _e( 'Show images in General tab', 'isar-admin-summary' ); ?>?</label>
@@ -127,7 +127,7 @@ function ias_render_form() { ?>
 													</select>
 												</td>
 											</tr>
-
+											
 											<tr>
 												<th scope="row">
 													<label for="ias-select"><?php _e( 'Enable Feeds menu', 'isar-admin-summary' ); ?>?</label>
@@ -153,9 +153,7 @@ function ias_render_form() { ?>
 												<th scope="row">
 													<label for="feed-menu-colour"><?php _e( 'Feed menu colour', 'isar-admin-summary' ); ?>:</label>
 												</th>
-												<td>
-												
-												
+												<td>												
 													<input name="ias_options[feed_menu_colour]" type="text" id='color-picker' class="code" placeholder="<?php echo $color[3] ?>" value="<?php echo $options['feed_menu_colour']; ?>" />
 													
 													<p class="description"><?php _e( 'Change the colour of the menu', 'isar-admin-summary' ); ?></p>
@@ -163,7 +161,6 @@ function ias_render_form() { ?>
 													<input type="hidden" name="page_options" value="<?php echo $options['feed_menu_colour']; ?>" />								
 												</td>
 											</tr>
-																	
 											
 											<tr>
 												<th scope="row">
@@ -175,7 +172,7 @@ function ias_render_form() { ?>
 													<p class="description"><?php _e( 'Only check this if you want to reset plugin settings upon Plugin reactivation', 'isar-admin-summary' ); ?></p>
 												</td>
 											</tr>
-										
+											
 										</tbody>
 									</table>
 									
@@ -199,10 +196,10 @@ function ias_render_form() { ?>
 							<span><?php _e( 'About the Author', 'isar-admin-summary' ); ?></span>
 						</h3>
 						<div class="inside">
-							<p><strong>Pierpaolo Rasicci Architetto <span class="help" title="Also known as">AKA</span> iSar</strong></p>
+							<p><strong>Pierpaolo Rasicci Architetto</strong> <abbr title="Also known as">AKA</abbr> <strong>iSar</strong></p>
 							<img class="author-image" src="http://www.gravatar.com/avatar/<?php echo md5( 'just@do.it' ); ?>" />
 							<p>
-								<?php echo __( 'I like running my blog and keeping it alive. I\'m not a constant publisher but having RSS, just a button from my post page, really helps as far as I\'ve got something to say. It also helps me to stay up-to-date since I spend more time around my website than reading newspaper.<br /> I hope you like it!<br /> I\'ll do what I can to keep it up to date.' ); ?>
+								<?php echo __( 'I like running my blog and keeping it alive. I\'m not a constant publisher but having <abbr title="Rich Site Summary">RSS</abbr>, just a button from my post page, really helps as far as I\'ve got something to say. It also helps me to stay up-to-date since I spend more time around my website than reading newspaper.<br /> I hope you like it!<br /> I\'ll do what I can to keep it up to date.' ); ?>
 							</p>
 							<hr />
 								<?php echo __( 'Thanks to Piet Bos for his huge contribuition and all the supporters.' ); ?>
@@ -213,7 +210,7 @@ function ias_render_form() { ?>
 									<li><a href="https://twitter.com/i5ar" target="_blank" title="Twitter"><span class="dashicons dashicons-twitter"></span> <?php _e( 'Twitter', 'isar-admin-summary' ); ?></a></li>
 									<input type="hidden" name="cmd" value="_s-xclick">
 									<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
-									<li><a id="isanchor" style="cursor:pointer" href="#" target="_blank" title="support"><span class="dashicons dashicons-heart"></span> <?php _e( 'Support', 'isar-admin-summary' ); ?></a></li>								
+									<li><a id="isanchor" style="cursor:pointer" href="#" target="_blank" title="support"><span class="dashicons dashicons-heart"></span> <?php _e( 'Support', 'isar-admin-summary' ); ?></a></li>
 									<input id="isinput" style="display:none" type="image" target="_blank" value="support" src="https://www.paypalobjects.com/it_IT/IT/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - Il metodo rapido, affidabile e innovativo per pagare e farsi pagare.">
 									<img style="display:none" alt="" border="0" src="https://www.paypalobjects.com/it_IT/i/scr/pixel.gif" width="1" height="1">
 									<li><a href="https://make.wordpress.org/polyglots/handbook/tools/poedit/" target="_blank" title="support"><span class="dashicons dashicons-star-filled"></span> <?php _e( 'Contribute', 'isar-admin-summary' ); ?></a><br /><i>Anyone can contribute with translations.</i></li>
@@ -225,35 +222,28 @@ function ias_render_form() { ?>
 			</div><!-- #postbox-container-1.postbox-container -->
 		</div><!-- .metabox-holder.columns-2 -->
 		<br class="clear">
-	</div><!-- #poststuff -->	
+	</div><!-- #poststuff -->
 </div>
 
 <script type="text/javascript">
+// Replace ugly Paypal Donate button with simple anchor
 jQuery("#isanchor").removeAttr("href");
 jQuery('#isanchor ').click( function() {
 	jQuery("#isinput").trigger("click");
 });
-// Toggle
+// Toggle postbox container
 jQuery(document).ready(function() {
-	//jQuery(".inside").hide();
 	jQuery(".handlediv").click(function() {
 		jQuery(".hndle").next(".inside").toggle();
 		jQuery(".postbox","#postbox-container-1").toggleClass("closed");
 	});
 });
-</script>
-
-<script>
 // Iris Color Picker
-	jQuery(document).ready(function($){
+jQuery(document).ready(function($){
     $('#color-picker').iris({
 		palettes: true,
 		width: 255
-	});	
+	});
 });
 </script>
 <?php }
-
-
-											
-											

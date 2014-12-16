@@ -12,6 +12,10 @@
 	text-decoration: initial;
 	display: block;
 }
-#postbox-container-1 .help {
-	cursor: help;
+#post-body-content abbr[title],
+#postbox-container-1 abbr[title],
+#post-body-content abbr[data-original-title],
+#postbox-container-1 abbr[data-original-title] {
+  cursor: help;
+  border-bottom: 1px dotted #999999;
 }
