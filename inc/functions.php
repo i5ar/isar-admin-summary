@@ -170,7 +170,6 @@ function ias_style_function() {
 	<style type="text/css">
 		#ias_widget .rss-widget span.rss-date{margin-left:12px}
 		#ias_widget a.rsswidget{font-weight:400;}
-		#wp-admin-bar-feeds-item{cursor:pointer;}
 		#wp-admin-bar-feeds-item .ab-item.ab-empty-item{background:' . $colour . ';}
 		#ias_widget.postbox h3,#ias_widget.postbox .rss-widget{text-align:'.$x.';}
 		#col-container.ias-container .form-wrap{text-align:'.$x.';}
