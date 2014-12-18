@@ -7,8 +7,6 @@ This plugin allow to manage Feeds inside the WordPress admin panel.
 
 ![alt text](http://bit.ly/1wlMTdM)
 
-![alt text](http://bit.ly/1Gv2tGQ)
-
 ### Installation
 
 Installation of a WordPress Plugin manually requires FTP familiarity and the awareness that you may put your site at risk if you install a WordPress Plugin incompatible with the current version or from an unreliable source.
