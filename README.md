@@ -5,6 +5,10 @@ Just another WordPress RSS plugin.
 
 This plugin allow to manage Feeds inside the WordPress admin panel.
 
+![alt text](http://bit.ly/1wlMTdM)
+
+![alt text](http://bit.ly/1Gv2tGQ)
+
 ### Installation
 
 Installation of a WordPress Plugin manually requires FTP familiarity and the awareness that you may put your site at risk if you install a WordPress Plugin incompatible with the current version or from an unreliable source.
@@ -51,7 +55,9 @@ WordPress v4.0.0
 - You have the freedom to redistribute copies of the original program so you can help your neighbor.
 - You have the freedom to distribute copies of your modified versions to others. By doing this you can give the whole community a chance to benefit from your changes.
 
-**Enjoy**
+*Non men che saver, dubbiar m'aggrata.*
+
+**Enjoy!**
 
 [GitHub]:https://github.com/i5ar/isar-admin-summary
 [GNU General Public License]:https://wordpress.org/about/license/
