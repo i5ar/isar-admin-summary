@@ -36,8 +36,6 @@ To install the development version either grab a tarball from the related [GitHu
 
 Then please read README.development for further instructions.
 
-*The development version may be unstable. Unless you are actively working with us, please use the latest stable tarball instead.*
-
 ### Compatibility
 
 WordPress v4.0.0
