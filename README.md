@@ -51,9 +51,9 @@ WordPress v4.0.0
 - You have the freedom to redistribute copies of the original program so you can help your neighbor.
 - You have the freedom to distribute copies of your modified versions to others. By doing this you can give the whole community a chance to benefit from your changes.
 
-*Non men che saver, dubbiar m'aggrata.*
+___
 
-**Enjoy!**
+*Non men che saver, dubbiar m'aggrata.*
 
 [GitHub]:https://github.com/i5ar/isar-admin-summary
 [GNU General Public License]:https://wordpress.org/about/license/
