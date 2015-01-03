@@ -8,10 +8,8 @@
 	box-shadow: none;
 	background: transparent;
 }
-#postbox-container-1 .postbox li a {
-	text-decoration: initial;
-	display: block;
-}
+#postbox-container-1 .postbox a { text-decoration: initial; }
+#postbox-container-1 .postbox li:last-child a { display: block; }
 #post-body-content abbr[title],
 #postbox-container-1 abbr[title],
 #post-body-content abbr[data-original-title],

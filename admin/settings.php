@@ -196,14 +196,17 @@ function ias_render_form() { ?>
 							<span><?php _e( 'About the Author', 'isar-admin-summary' ); ?></span>
 						</h3>
 						<div class="inside">
-							<p><strong>Pierpaolo Rasicci Architetto</strong> <abbr title="Also known as">AKA</abbr> <strong>iSar</strong></p>
-							<img class="author-image" src="http://www.gravatar.com/avatar/<?php echo md5( 'just@do.it' ); ?>" />
+							<p>Arch. <strong>Pierpaolo Rasicci</strong> aka <strong><a href="http://isarch.it/three.html/" target="_blank">iSar</a></strong> </p>
+							<img class="author-image" src="http://www.gravatar.com/avatar/<?php echo md5( 'i5ar@live.it' ); ?>" />
 							<p>
-								<?php echo __( 'I like running my blog and keeping it alive. I\'m not a constant publisher but having <abbr title="Rich Site Summary">RSS</abbr>, just a button from my post page, really helps as far as I\'ve got something to say. It also helps me to stay up-to-date since I spend more time around my website than reading newspaper.<br /> I hope you like it!<br /> I\'ll do what I can to keep it up to date.' ); ?>
+								<?php echo __( 'I like running my blog and keeping it alive. I\'m not a constant publisher but having <abbr title="Rich Site Summary">RSS</abbr>, just a button from my post page, really helps as far as I\'ve got something to say.
+                                It also helps me to stay up-to-date since I spend more time around my website than reading newspaper.<br />
+                                I hope you like it!<br /> I\'ll do what I can to keep it up to date.' ); ?>
 							</p>
-							<hr />
+                            <blockquote>
 								<?php echo __( 'Thanks to Piet Bos for his huge contribuition and all the supporters.' ); ?>
-							</p>
+                            </blockquote>
+                            </p>
 							<hr />
 							<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 								<ul>
@@ -213,7 +216,7 @@ function ias_render_form() { ?>
 									<li><a id="isanchor" style="cursor:pointer" href="#" target="_blank" title="support"><span class="dashicons dashicons-heart"></span> <?php _e( 'Support', 'isar-admin-summary' ); ?></a></li>
 									<input id="isinput" style="display:none" type="image" target="_blank" value="support" src="https://www.paypalobjects.com/it_IT/IT/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - Il metodo rapido, affidabile e innovativo per pagare e farsi pagare.">
 									<img style="display:none" alt="" border="0" src="https://www.paypalobjects.com/it_IT/i/scr/pixel.gif" width="1" height="1">
-									<li><a href="https://make.wordpress.org/polyglots/handbook/tools/poedit/" target="_blank" title="support"><span class="dashicons dashicons-star-filled"></span> <?php _e( 'Contribute', 'isar-admin-summary' ); ?></a><br /><i>Anyone can contribute with translations.</i></li>
+									<li><a href="https://make.wordpress.org/polyglots/handbook/tools/poedit/" target="_blank" title="support"><span class="dashicons dashicons-star-filled"></span> <?php _e( 'Contribute', 'isar-admin-summary' ); ?></a><br />Anyone can contribute with translations.</li>
 								</ul>
 							</form>
 						</div>
