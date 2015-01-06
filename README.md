@@ -28,14 +28,6 @@ To install a WordPress Plugin manually:
 - Test Right to Left
 - Color Picker API
 
-### Development
-
-To install the development version either grab a tarball from the related [GitHub] page or install Git and then run the following command:
-
-    $ git clone git://github.com/i5ar/isar-admin-summary.git
-
-Then please read README.development for further instructions.
-
 ### Compatibility
 
 WordPress v4.0.0
