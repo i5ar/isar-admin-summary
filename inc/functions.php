@@ -4,17 +4,16 @@
  */
 add_action( 'admin_bar_menu', 'rss_toolbar_items', 15);												
 function rss_toolbar_items($admin_bar){
-
 	$options = get_option( 'ias_options' );
 	$feed_menu = $options['feed_menu'];
 	if ($feed_menu == 'yes'):
-
-
-	$options = get_option( 'ias_options' ); 
-	$feedurl = $options['feed_url_1'];
-	$feedurl_1 = $options['feed_url_2'];
-	$feedurl_2 = $options['feed_url_3'];
-	$admin_bar->add_menu(
+		$options = get_option( 'ias_options' ); 
+		$feedurl = $options['feed_url'];
+		$feedurl_1 = $options['feed_url_1'];
+		$feedurl_2 = $options['feed_url_2'];
+		$feedurl_3 = $options['feed_url_3'];
+		$feedurl_images = $options['feed_url_images'];
+		$admin_bar->add_menu(
 		array(
 			'id'    => 'feeds-item',
 			'title' => 'Feeds',
@@ -23,25 +22,30 @@ function rss_toolbar_items($admin_bar){
 			),
 		)
 	);
-	$arr = array($feedurl, $feedurl_1, $feedurl_2);
-	foreach ($arr as $value) {
-		if( empty($value) ){
-			continue;
-		}
+	$arr = array($feedurl, $feedurl_1, $feedurl_2, $feedurl_3, $feedurl_images);
+	foreach ($arr as $key => $value) {
+		if( empty($value) ){ continue; }
+		// Get the previous value of the array
+		$previous_value = $arr[$key-1];
 		$array = parse_url($value);
+		$array_previous = parse_url($previous_value);
 		$host =  $array['host'];
-		$admin_bar->add_menu(
-			array(
-				'id'    => 'feed-sub-item-'.$i++,
-				'parent' => 'feeds-item',
-				'title' => $host,
-				'href'  => $value,
-				'meta'  => array(
+		$host_previous =  $array_previous['host'];
+		// Exclude the current value of the array if equal the previous value
+		if ($host !== $host_previous){
+			$admin_bar->add_menu(
+				array(
+					'id'    => 'feed-sub-item-'.$i++,
+					'parent' => 'feeds-item',
 					'title' => $host,
-					'target' => '_blank'
-				),
-			)
-		);
+					'href'  => $value,
+					'meta'  => array(
+						'title' => $host,
+						'target' => '_blank'
+					),
+				)
+			);
+		}
 	}
 	endif;
 }
@@ -50,21 +54,21 @@ function rss_toolbar_items($admin_bar){
  * Add Feed loops
  */ 
 function ias_setup_function() {
-	// @source	http://codex.wordpress.org/Function_Reference/add_meta_box
+	// @link	http://codex.wordpress.org/Function_Reference/add_meta_box
 	add_meta_box(
-		'ias_widget',			// $id
-		'iSummary Main Feeds',	// $title
-		'ias_widget_function',	// $callback
-		'dashboard',			// $post_type
-		'normal', 				// $context
-		'high'					// $priority
+		'ias_widget',					// $id
+		'iSummary Main Feed Headlines',	// $title
+		'ias_widget_function',			// $callback
+		'dashboard',					// $post_type
+		'normal', 						// $context
+		'high'							// $priority
 	);	
 }
 function ias_widget_function() {
 	$options = get_option( 'ias_options' ); 
 	$feedurl = $options['feed_url'];
 	$select = $options['num_content_items'];
-	// @source	http://codex.wordpress.org/Function_Reference/fetch_feed
+	// @link	http://codex.wordpress.org/Function_Reference/fetch_feed
 	$rss = fetch_feed( $feedurl );
 	if ( ! is_wp_error( $rss ) ) { // Checks that the object is created correctly
 		// Figure out how many total items there are.
@@ -96,7 +100,7 @@ function ias_panel_function( $feed, $host, $content, $images, $column ) {
 		}
 		$options = get_option( 'ias_options' );
 		$select = $options['num_content_items'];
-		// @source	http://codex.wordpress.org/Function_Reference/fetch_feed
+		// @link	http://codex.wordpress.org/Function_Reference/fetch_feed
 		$rss = fetch_feed( $value );
 		// Checks that the object is created correctly
 		if ( ! is_wp_error( $rss ) ) {
@@ -110,7 +114,7 @@ function ias_panel_function( $feed, $host, $content, $images, $column ) {
 				//$maxitems = 3;
 				$startitems = $maxitems*2+1;	// 7
 			} elseif ($column == 'first') { ?>
-				<h3 class="mytest">
+				<h3 class="">
 					<span>
 					<?php _e( 'Images Feed Contents', 'isar-admin-summary' );
 						echo ' - ';
@@ -149,6 +153,7 @@ function ias_panel_function( $feed, $host, $content, $images, $column ) {
 							<?php }
 							?>
 						</li>
+						<hr />
 					<?php } ?>
 				</ul>
 		<?php
@@ -164,7 +169,7 @@ function ias_style_function() {
 	$color = $_wp_admin_css_colors[$user_admin_color]->colors;
 	$options = get_option( 'ias_options' );
 	$colour = isset( $options['feed_menu_colour'] ) ? $options['feed_menu_colour'] : $color[3];
-	// @source	http://codex.wordpress.org/Function_Reference/is_rtl
+	// @link	http://codex.wordpress.org/Function_Reference/is_rtl
 	$x = is_rtl() ? 'right' : 'left';
 	echo '
 	<style type="text/css">

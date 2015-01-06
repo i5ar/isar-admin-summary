@@ -15,184 +15,191 @@ function ias_render_form() { ?>
 			<div id="post-body-content">
 				<div class="meta-box-sortables ui-sortable">
 					<div class="postbox">
-						<h3>
-							<span><?php _e( 'Main Content Header', 'isar-admin-summary' ); ?></span>
-						</h3>
-						<div class="inside">
-							<form method="post" action="options.php">
-							<?php // @source	http://codex.wordpress.org/Function_Reference/settings_fields ?>
-							<?php settings_fields( 'ias_plugin_options' ); ?>
-							<?php // @source	http://codex.wordpress.org/Function_Reference/get_option ?>
-							<?php $options = get_option( 'ias_options' ); ?>
-							
-								<div class="form-wrap">
-									<p><?php _e('Below you can adjust the output of the Feeds','isar-admin-summary') ?>. <?php _e('You can change the feed','isar-admin-summary')?> <abbr title="Uniform Resource Locator">URL</abbr>s <?php _e( 'and the amount of feed items to show', 'isar-admin-summary'); ?>.</p>
-									<table class="form-table">
-										<tbody>
-											<tr>
-												<th scope="row">
-													<label for="ias-feed-url"><?php _e('Main Feed URL General tab','isar-admin-summary'); ?>:</label>
-												</th>
-												<td>
-													<input name="ias_options[feed_url]" type="text" id="ias-feed-url" class="regular-text code" value="<?php echo $options['feed_url']; ?>" />
-													<p class="description"><?php _e( 'Choose your favorite summary site','isar-admin-summary') ?>: <?php _e('The iSummary Page will show title, date and contents of this feed in the General tab','isar-admin-summary') ?>. <?php _e('The Dashboard will also show the title and the date', 'isar-admin-summary' ); ?>.</p>
-													<input type="hidden" name="action" value="update" />
-													<input type="hidden" name="page_options" value="<?php echo $options['feed_url']; ?>" />								
-												</td>
-											</tr>
-
-											<tr>
-												<th scope="row">
-													<label for="ias-select"><?php _e( 'Show images in General tab', 'isar-admin-summary' ); ?>?</label>
-												</th>
-												<td>
-													<select name='ias_options[feed_images]'>
-														<option value='yes' <?php selected( 'yes', $options['feed_images'] ); ?>>yes</option>
-														<option value='no' <?php selected( 'no', $options['feed_images'] ); ?>>no</option>
-													</select>
-													<input type="hidden" name="action" value="update" />
-													<input type="hidden" name="page_options" value="<?php echo $options['feed_images']; ?>" />								
-												</td>
-											</tr>                                            
-											<tr>
-												<th scope="row">
-													<label for="ias-feed-url-1"><?php _e( 'Minor Feed URL 1', 'isar-admin-summary' ); ?>:</label>
-												</th>
-												<td>
-													<input name="ias_options[feed_url_1]" type="text" id="ias-feed-url-1" class="regular-text code" value="<?php echo $options['feed_url_1']; ?>" />
-													<p class="description"><?php _e( 'Change to a site of your choice', 'isar-admin-summary' ); ?></p>
-													<input type="hidden" name="action" value="update" />
-													<input type="hidden" name="page_options" value="<?php echo $options['feed_url_1']; ?>" />
-												</td>
-											</tr>
-											
-											<tr>
-												<th scope="row">
-													<label for="ias-feed-url-2"><?php _e( 'Minor Feed URL 2', 'isar-admin-summary' ); ?>:</label>
-												</th>
-												<td>
-													<input name="ias_options[feed_url_2]" type="text" id="ias-feed-url-2" class="regular-text code" value="<?php echo $options['feed_url_2']; ?>" />
-													<p class="description"><?php _e( 'Change to a site of your choice', 'isar-admin-summary' ); ?></p>
-													<input type="hidden" name="action" value="update" />
-													<input type="hidden" name="page_options" value="<?php echo $options['feed_url_2']; ?>" />				
-												</td>
-											</tr>
-											
-											<tr>
-												<th scope="row">
-													<label for="ias-feed-url-3"><?php _e( 'Minor Feed URL 3', 'isar-admin-summary' ); ?>:</label>
-												</th>
-												<td>
-													<input name="ias_options[feed_url_3]" type="text" id="ias-feed-url-3" class="regular-text code" value="<?php echo $options['feed_url_3']; ?>" />
-													<p class="description"><?php _e( 'Change to a site of your choice', 'isar-admin-summary' ); ?></p>
-													<input type="hidden" name="action" value="update" />
-													<input type="hidden" name="page_options" value="<?php echo $options['feed_url_3']; ?>" />
-												</td>
-											</tr>
-											
-											<tr>
-												<th scope="row">
-													<label for="ias-select"><?php _e( 'How many Feed Items to show in the Dashboard Feed Widget', 'isar-admin-summary' ); ?>?</label>
-												</th>
-												<td>
-													<select name='ias_options[num_content_items]'>
-														<option value='1' <?php selected( '1', $options['num_content_items'] ); ?>>1</option>
-														<option value='2' <?php selected( '2', $options['num_content_items'] ); ?>>2</option>
-														<option value='3' <?php selected( '3', $options['num_content_items'] ); ?>>3</option>
-														<option value='4' <?php selected( '4', $options['num_content_items'] ); ?>>4</option>
-														<option value='5' <?php selected( '5', $options['num_content_items'] ); ?>>5</option>
-														<option value='6' <?php selected( '6', $options['num_content_items'] ); ?>>6</option>
-														<option value='7' <?php selected( '7', $options['num_content_items'] ); ?>>7</option>
-														<option value='8' <?php selected( '8', $options['num_content_items'] ); ?>>8</option>
-														<option value='9' <?php selected( '9', $options['num_content_items'] ); ?>>9</option>
-													</select>
-													<input type="hidden" name="action" value="update" />
-													<input type="hidden" name="page_options" value="<?php echo $options['num_content_items']; ?>" />								
-												</td>
-											</tr>
-											
-											<tr>
-												<th scope="row">
-													<label for="ias-feed-url-images"><?php _e( 'Images tab Feed URL', 'isar-admin-summary' ); ?>:</label>
-												</th>
-												<td>
-													<input name="ias_options[feed_url_images]" type="text" id="ias-feed-url-images" class="regular-text code" value="<?php echo $options['feed_url_images']; ?>" />
-													<p class="description"><?php _e( 'Change to a site of your choice', 'isar-admin-summary' ); ?></p>
-													<input type="hidden" name="action" value="update" />
-													<input type="hidden" name="page_options" value="<?php echo $options['feed_url_images']; ?>" />								
-												</td>
-											</tr>
-											
-											<tr>
-												<th scope="row">
-													<label for="ias-select"><?php _e( 'The number of feed items in the Images tab is set to be three times the General tab choice.' ); ?></label>
-												</th>
-												<td>
-												<?php
-													$options = get_option( 'ias_options' ); 
-													$select = $options['num_content_items'];
-												?>
-													<select disabled>
-														<option value='<?php echo $select*3; ?>'><?php echo $select*3; ?></option>
-													</select>
-												</td>
-											</tr>
-											
-											<tr>
-												<th scope="row">
-													<label for="ias-select"><?php _e( 'Enable Feeds menu', 'isar-admin-summary' ); ?>?</label>
-												</th>
-												<td>
-													<select name='ias_options[feed_menu]'>
-														<option value='yes' <?php selected( 'yes', $options['feed_menu'] ); ?>>yes</option>
-														<option value='no' <?php selected( 'no', $options['feed_menu'] ); ?>>no</option>
-													</select>
-													<p class="description"><?php _e( 'Enable the Feed menu in the admin bar', 'isar-admin-summary' ); ?></p>
-													<input type="hidden" name="action" value="update" />
-													<input type="hidden" name="page_options" value="<?php echo $options['feed_menu']; ?>" />								
-												</td>
-											</tr>
-											
-											<?php 
-												global $_wp_admin_css_colors;
-												$user_admin_color = get_user_meta(get_current_user_id(), 'admin_color', True);
-												$color = $_wp_admin_css_colors[$user_admin_color]->colors;
-											?>
-											
-											<tr>
-												<th scope="row">
-													<label for="feed-menu-colour"><?php _e( 'Feed menu colour', 'isar-admin-summary' ); ?>:</label>
-												</th>
-												<td>												
-													<input name="ias_options[feed_menu_colour]" type="text" id='color-picker' class="code" placeholder="<?php echo $color[3] ?>" value="<?php echo $options['feed_menu_colour']; ?>" />
-													
-													<p class="description"><?php _e( 'Change the colour of the menu', 'isar-admin-summary' ); ?></p>
-													<input type="hidden" name="action" value="update" />
-													<input type="hidden" name="page_options" value="<?php echo $options['feed_menu_colour']; ?>" />								
-												</td>
-											</tr>
-											
-											<tr>
-												<th scope="row">
-													<label for="ias-db-chk"><?php _e( 'Database Options', 'isar-admin-summary' ); ?></label>
-												</th>
-												<td>
-													<input name="ias_options[chk_def_options]" type="checkbox" id="ias-db-chk" value="1" <?php if ( isset($options['chk_def_options'] ) ) { checked( '1', $options['chk_def_options'] ); } ?> />
-														<?php _e( 'Restore defaults upon plugin deactivation/reactivation', 'isar-admin-summary' ); ?>
-													<p class="description"><?php _e( 'Only check this if you want to reset plugin settings upon Plugin reactivation', 'isar-admin-summary' ); ?></p>
-												</td>
-											</tr>
-											
-										</tbody>
-									</table>
+						<form method="post" action="options.php">
+						<?php // @link	http://codex.wordpress.org/Function_Reference/settings_fields ?>
+						<?php settings_fields( 'ias_general_tab' ); ?>
+						<?php // @link	http://codex.wordpress.org/Function_Reference/get_option ?>
+						<?php $options = get_option( 'ias_options' ); ?>
+						
+							<p><?php _e('Below you can adjust the output of the Feeds','isar-admin-summary') ?>. <?php _e('You can change the feed','isar-admin-summary')?> <abbr title="Uniform Resource Locator">URL</abbr>s <?php _e( 'and the amount of feed items to show', 'isar-admin-summary'); ?>.</p>
+							<table class="form-table">
+								<tbody>
+									<tr>
+										<th scope="row">
+											<label for="ias-feed-url"><?php _e('Main Feed URL General Tab','isar-admin-summary'); ?>:</label>
+										</th>
+										<td>
+											<input name="ias_options[feed_url]" type="text" id="ias-feed-url" class="regular-text code" value="<?php echo $options['feed_url']; ?>" />
+											<a href="<?php echo admin_url('/admin.php?page=ias_general_tab'); ?>"><span alt="f135" class="dashicons dashicons-align-left"></span></a>
+											<p class="description">
+											<?php _e( 'Choose your favorite website','isar-admin-summary') ?>: <?php _e('These feed items will be displayed in the left column of the iSummary') ?>
+											<a href="<?php echo admin_url('/admin.php?page=ias_general_tab'); ?>"><span alt="f135" class="dashicons dashicons-rss"></span></a>
+											<?php _e('General Tab and in the Dashboard','isar-admin-summary') ?>
+											<a href="<?php echo admin_url(); ?>"><span alt="f226" class="dashicons dashicons-dashboard"></span></a>
+											<?php _e('page','isar-admin-summary') ?>.
+											</p>
+											<input type="hidden" name="action" value="update" />
+											<input type="hidden" name="page_options" value="<?php echo $options['feed_url']; ?>" />								
+										</td>
+									</tr>
 									
-									<p class="submit">
-										<input type="submit" class="button button-primary" value="<?php _e( 'Save Settings', 'isar-admin-summary' ) ?>" />
-									</p>
-								</div>
-								
-							</form>
-						</div><!-- .inside -->
+									<tr>
+										<th scope="row">
+											<label for="ias-select"><?php _e( 'Show images in General Tab', 'isar-admin-summary' ); ?>?</label>
+										</th>
+										<td>
+											<select name='ias_options[feed_images]'>
+												<option value='yes' <?php selected( 'yes', $options['feed_images'] ); ?>>yes</option>
+												<option value='no' <?php selected( 'no', $options['feed_images'] ); ?>>no</option>
+											</select>
+											<input type="hidden" name="action" value="update" />
+											<input type="hidden" name="page_options" value="<?php echo $options['feed_images']; ?>" />				
+										</td>
+									</tr>                                            
+									<tr>
+										<th scope="row">
+											<label for="ias-feed-url-1"><?php _e( 'Minor Feed URL 1', 'isar-admin-summary' ); ?>:</label>
+										</th>
+										<td>
+											<input name="ias_options[feed_url_1]" type="text" id="ias-feed-url-1" class="regular-text code" value="<?php echo $options['feed_url_1']; ?>" />
+											<a href="<?php echo admin_url('/admin.php?page=ias_general_tab'); ?>"><span alt="f136" class="dashicons dashicons-align-right"></span></a>
+											<p class="description">
+											<?php _e( 'Change to a website of your choice', 'isar-admin-summary' ); ?>: <?php _e( 'These feed items will be displayed in the right column of the iSummary General Tab', 'isar-admin-summary' ); ?>.
+											</p>
+											<input type="hidden" name="action" value="update" />
+											<input type="hidden" name="page_options" value="<?php echo $options['feed_url_1']; ?>" />
+										</td>
+									</tr>
+									
+									<tr>
+										<th scope="row">
+											<label for="ias-feed-url-2"><?php _e( 'Minor Feed URL 2', 'isar-admin-summary' ); ?>:</label>
+										</th>
+										<td>
+											<input name="ias_options[feed_url_2]" type="text" id="ias-feed-url-2" class="regular-text code" value="<?php echo $options['feed_url_2']; ?>" />
+											<a href="<?php echo admin_url('/admin.php?page=ias_general_tab'); ?>"><span alt="f136" class="dashicons dashicons-align-right"></span></a>													
+											<p class="description"><?php _e( 'Change to a website of your choice', 'isar-admin-summary' ); ?>: <?php _e( 'This feed will be displayed in the right column of the iSummary General Tab', 'isar-admin-summary' ); ?>.</p>
+											<input type="hidden" name="action" value="update" />
+											<input type="hidden" name="page_options" value="<?php echo $options['feed_url_2']; ?>" />				
+										</td>
+									</tr>
+									
+									<tr>
+										<th scope="row">
+											<label for="ias-feed-url-3"><?php _e( 'Minor Feed URL 3', 'isar-admin-summary' ); ?>:</label>
+										</th>
+										<td>
+											<input name="ias_options[feed_url_3]" type="text" id="ias-feed-url-3" class="regular-text code" value="<?php echo $options['feed_url_3']; ?>" />
+											<a href="<?php echo admin_url('/admin.php?page=ias_general_tab'); ?>"><span alt="f136" class="dashicons dashicons-align-right"></span></a>
+											<p class="description"><?php _e( 'Change to a website of your choice', 'isar-admin-summary' ); ?>: <?php _e( 'These feed items will be displayed in the right column of the iSummary General Tab', 'isar-admin-summary' ); ?>.</p>
+											<input type="hidden" name="action" value="update" />
+											<input type="hidden" name="page_options" value="<?php echo $options['feed_url_3']; ?>" />
+										</td>
+									</tr>
+									
+									<tr>
+										<th scope="row">
+											<label for="ias-select"><?php _e( 'Number of Feed Headlines', 'isar-admin-summary' ); ?>:</label>
+										</th>
+										<td>
+											<select name='ias_options[num_content_items]'>
+												<option value='1' <?php selected( '1', $options['num_content_items'] ); ?>>1</option>
+												<option value='2' <?php selected( '2', $options['num_content_items'] ); ?>>2</option>
+												<option value='3' <?php selected( '3', $options['num_content_items'] ); ?>>3</option>
+												<option value='4' <?php selected( '4', $options['num_content_items'] ); ?>>4</option>
+												<option value='5' <?php selected( '5', $options['num_content_items'] ); ?>>5</option>
+												<option value='6' <?php selected( '6', $options['num_content_items'] ); ?>>6</option>
+												<option value='7' <?php selected( '7', $options['num_content_items'] ); ?>>7</option>
+												<option value='8' <?php selected( '8', $options['num_content_items'] ); ?>>8</option>
+												<option value='9' <?php selected( '9', $options['num_content_items'] ); ?>>9</option>
+											</select>
+											<p class="description"><?php _e( 'Choose the number of Feed Headlines to show in the Dashboard Feed Widget', 'isar-admin-summary' ); ?>.</p>
+											<input type="hidden" name="action" value="update" />
+											<input type="hidden" name="page_options" value="<?php echo $options['num_content_items']; ?>" />								
+										</td>
+									</tr>
+									
+									<tr>
+										<th scope="row">
+											<label for="ias-feed-url-images"><?php _e( 'Images Feed URL', 'isar-admin-summary' ); ?>:</label>
+										</th>
+										<td>
+											<input name="ias_options[feed_url_images]" type="text" id="ias-feed-url-images" class="regular-text code" value="<?php echo $options['feed_url_images']; ?>" />
+											<a href="<?php echo admin_url('/admin.php?page=ias_general_tab&tab=ias_images_tab'); ?>"><span alt="f489" class="dashicons dashicons-schedule"></span></a>													
+											<p class="description"><?php _e( 'Change to a website of your choice', 'isar-admin-summary' ); ?>: <?php _e( 'This feed will be displayed in the iSummary Images Tab', 'isar-admin-summary' ); ?>.</p>
+											<input type="hidden" name="action" value="update" />
+											<input type="hidden" name="page_options" value="<?php echo $options['feed_url_images']; ?>" />								
+										</td>
+									</tr>
+									
+									<tr>
+										<th scope="row">
+											<label for="ias-select"><?php _e( 'Number of Feed Images' ); ?>:</label>
+										</th>
+										<td>
+										<?php
+											$options = get_option( 'ias_options' ); 
+											$select = $options['num_content_items'];
+										?>
+											<select disabled>
+												<option value='<?php echo $select*3; ?>'><?php echo $select*3; ?></option>
+											</select>
+											<p class="description"><?php _e( 'The amount of feed items in the Images Tab is set to be three times the number of Feed Headlines', 'isar-admin-summary' ); ?>.</p>
+										</td>
+									</tr>
+									
+									<tr>
+										<th scope="row">
+											<label for="ias-select"><?php _e( 'Enable Feeds Menu', 'isar-admin-summary' ); ?>?</label>
+										</th>
+										<td>
+											<select name='ias_options[feed_menu]'>
+												<option value='yes' <?php selected( 'yes', $options['feed_menu'] ); ?>>yes</option>
+												<option value='no' <?php selected( 'no', $options['feed_menu'] ); ?>>no</option>
+											</select>
+											<p class="description"><?php _e( 'Enable the Feed Menu in the admin bar', 'isar-admin-summary' ); ?>.</p>
+											<input type="hidden" name="action" value="update" />
+											<input type="hidden" name="page_options" value="<?php echo $options['feed_menu']; ?>" />								
+										</td>
+									</tr>
+									
+									<?php 
+										global $_wp_admin_css_colors;
+										$user_admin_color = get_user_meta(get_current_user_id(), 'admin_color', True);
+										$color = $_wp_admin_css_colors[$user_admin_color]->colors;
+									?>
+									
+									<tr>
+										<th scope="row">
+											<label for="feed-menu-colour"><?php _e( 'Feed Menu Colour', 'isar-admin-summary' ); ?>:</label>
+										</th>
+										<td>												
+											<input name="ias_options[feed_menu_colour]" type="text" id='color-picker' class="code" placeholder="<?php echo $color[3] ?>" value="<?php echo $options['feed_menu_colour']; ?>" />
+											<p class="description"><?php _e( 'Change the background colour of the Feed Menu', 'isar-admin-summary' ); ?>.</p>
+											<input type="hidden" name="action" value="update" />
+											<input type="hidden" name="page_options" value="<?php echo $options['feed_menu_colour']; ?>" />								
+										</td>
+									</tr>
+									
+									<tr>
+										<th scope="row">
+											<label for="ias-db-chk"><?php _e( 'Database Options', 'isar-admin-summary' ); ?>:</label>
+										</th>
+										<td>
+											<input name="ias_options[chk_def_options]" type="checkbox" id="ias-db-chk" value="1" <?php if ( isset($options['chk_def_options'] ) ) { checked( '1', $options['chk_def_options'] ); } ?> />
+												<?php _e( 'Restore defaults upon plugin deactivation/reactivation', 'isar-admin-summary' ); ?>
+											<p class="description"><?php _e( 'Only check this if you want to reset plugin settings upon Plugin reactivation', 'isar-admin-summary' ); ?>.</p>
+										</td>
+									</tr>
+									
+								</tbody>
+							</table>
+							
+							<p class="submit">
+								<input type="submit" class="button button-primary" value="<?php _e( 'Save Settings', 'isar-admin-summary' ) ?>" />
+							</p>
+							
+						</form>
 					</div><!-- .postbox -->
 				</div><!-- .meta-box-sortables.ui-sortable -->
 			</div><!-- post-body-content -->
@@ -210,7 +217,7 @@ function ias_render_form() { ?>
 							<p>
 								<?php echo __( 'I like running my blog and keeping it alive. I\'m not a constant publisher but having <abbr title="Rich Site Summary">RSS</abbr>, just a button from my post page, really helps as far as I\'ve got something to say.
                                 It also helps me to stay up-to-date since I spend more time around my website than reading newspaper.<br />
-                                I hope you like it!<br /> I\'ll do what I can to keep it up to date.' ); ?>
+                                I hope you like it!<br /> I\'ll do what I can to keep it updated and lovely styled.' ); ?>
 							</p>
                             <blockquote>
 								<?php echo __( 'Thanks to Piet Bos for his huge contribuition and all the supporters.' ); ?>

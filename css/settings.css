@@ -4,9 +4,13 @@
  
 #post-body-content .postbox {
 	border: none;
-	-webkit-box-shadow: none;
-	box-shadow: none;
 	background: transparent;
+	-webkit-box-shadow: none;
+			box-shadow: none;
+}
+#post-body-content .postbox a {
+	text-decoration: initial;
+	display: inline-block;
 }
 #postbox-container-1 .postbox a { text-decoration: initial; }
 #postbox-container-1 .postbox li:last-child a { display: block; }
@@ -14,6 +18,6 @@
 #postbox-container-1 abbr[title],
 #post-body-content abbr[data-original-title],
 #postbox-container-1 abbr[data-original-title] {
-  cursor: help;
-  border-bottom: 1px dotted #999999;
+	cursor: help;
+	border-bottom: 1px dotted #999999;
 }

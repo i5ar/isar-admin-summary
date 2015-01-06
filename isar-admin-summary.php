@@ -25,18 +25,12 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-	
-	Freedoms:
-	You have the freedom to run the program, for any purpose.
-	You have access to the source code, the freedom to study how the program works, and the freedom to change it to make it do what you wish.
-	You have the freedom to redistribute copies of the original program so you can help your neighbor.
-	You have the freedom to distribute copies of your modified versions to others. By doing this you can give the whole community a chance to benefit from your changes.
-	
+		
 	Contributions:
 	Piet Bos		https://profiles.wordpress.org/senlin/
 	
 	Thanks:
-	Sven Hofmann	http://wordpress.stackexchange.com/users/32946/sven
+	Sven Hofmann	http://wordpress.stackexchange.com/users/32946/sven/
 */
 /**
  * Prevent direct access to files
@@ -48,14 +42,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;	// Exit if accessed directly
  */
 class IAS_Plugin {
 	// For easier overriding we declared the iSummary keys here as well as our tabs array which is populated when registering settings
-	private $general_settings_key = 'ias_general_settings';					// Create a field in database option table
-	private $general_img_settings_key = 'ias_general_img_settings';			// Create a field in database option table
-	private $advanced_settings_key = 'ias_advanced_settings';				// Create a field in database option table
-	private $plugin_options_key = 'ias_plugin_options';
+	private $general_settings_key = 'ias_general_settings';
+	private $general_img_settings_key = 'ias_images_tab';
+	private $advanced_settings_key = 'ias_clipboard_tab';
+	private $plugin_options_key = 'ias_general_tab';
 	private $plugin_settings_tabs = array();
 	
 	function __construct() {
-		// @source	http://krisjordan.com/dynamic-properties-in-php-with-stdclass
+		// @link	http://krisjordan.com/dynamic-properties-in-php-with-stdclass
 		global $isar_as;
 		// Set up an empty class for the global $isar_as object.
 		$isar_as = new stdClass;
@@ -75,14 +69,14 @@ class IAS_Plugin {
 	}
 	
 	/**
-	 * Init plugin options to white list our options
-	 * @source	http://codex.wordpress.org/Function_Reference/register_setting
+	 * Create the default field in database option table
+	 * @link	http://codex.wordpress.org/Function_Reference/register_setting
 	 */
 	// The option name ias_options is registred inside the class and is hooked by many functions out of this class
 	function init() {
 		register_setting(
-			'ias_plugin_options',	//	$option_group
-			'ias_options', 			//	$option_name
+			'ias_general_tab',		//	$option_group
+			'ias_options', 			//	Create the default field $option_name in database option table
 			'ias_validate_options'	//	$sanitize_callback (optional)
 		);	
 	}
@@ -125,28 +119,28 @@ class IAS_Plugin {
 	// Registers the general settings via the Settings API, appends the setting to the tabs array of the object.
 	function register_general_settings() {
 		$this->plugin_settings_tabs[$this->general_settings_key] = 'General';
-		// @source	http://codex.wordpress.org/Function_Reference/register_setting
+		// @link	http://codex.wordpress.org/Function_Reference/register_setting
 		register_setting(
 			$this->general_settings_key,	//	$option_group
 			$this->general_settings_key		//	$option_name
 		);
-		add_settings_section( 'section_general', 'iSummary Flow', array( &$this, 'section_general_desc'), $this->general_settings_key );
+		add_settings_section( 'section_general', 'iSummary General Tab', array( &$this, 'section_general_desc'), $this->general_settings_key );
 	}
 	// Registers the general settings via the Settings API, appends the setting to the tabs array of the object.
 	function register_general_img_settings() {
 		$this->plugin_settings_tabs[$this->general_img_settings_key] = 'Images';
-		// @source	http://codex.wordpress.org/Function_Reference/register_setting
+		// @link	http://codex.wordpress.org/Function_Reference/register_setting
 		register_setting(
 			$this->general_img_settings_key,	//	$option_group
 			$this->general_img_settings_key		//	$option_name
 		);
-		add_settings_section( 'section_general_img', 'iSummary images', array( &$this, 'section_general_img_desc'), $this->general_img_settings_key );
+		add_settings_section( 'section_general_img', 'iSummary Images Tab', array( &$this, 'section_general_img_desc'), $this->general_img_settings_key );
 	}
 	// Registers the advanced settings and appends the key to the plugin settings tabs array.
 	function register_advanced_settings() {
 		$this->plugin_settings_tabs[$this->advanced_settings_key] = 'Clipboard ';
 		register_setting( $this->advanced_settings_key, $this->advanced_settings_key );
-		add_settings_section( 'section_advanced', 'Very Simple Clipboard', array( &$this, 'section_advanced_desc' ), $this->advanced_settings_key );
+		add_settings_section( 'section_advanced', 'iSummary Clipboard Tab', array( &$this, 'section_advanced_desc' ), $this->advanced_settings_key );
 		add_settings_field( 'advanced_option', 'Big ideas:', array( &$this, 'field_advanced_option' ), $this->advanced_settings_key, 'section_advanced', array( 'label_for' => 'big_ideas' ) );
 		add_settings_section( 'section_advanced_submit', '', array( &$this, 'section_advanced_submit' ), $this->advanced_settings_key );
 	}
@@ -178,9 +172,8 @@ class IAS_Plugin {
 				<div class="col-wrap">
 					<div class="form-wrap">					
 						<h3>
-							<span><?php _e( 'All Feeds', 'isar-admin-summary' ); ?></span>
+							<span><?php _e( 'Minor Feed Headlines', 'isar-admin-summary' ); ?></span>
 						</h3>
-							<p><i><?php _e( 'If the feeds not work properly it means they are not avaible', 'isar-admin-summary' ); ?></i></p>
 						<?php // All the feeds titles			
 							$options = get_option( 'ias_options' ); 
 							$feed = array($options['feed_url_1'],$options['feed_url_2'],$options['feed_url_3']);
@@ -200,7 +193,7 @@ class IAS_Plugin {
 			<div id="col-left">
 				<div class="col-wrap">
 					<div class="form-wrap">
-						<h3 class="mytest">
+						<h3 class="">
 							<span><?php _e( 'Main Feed Contents', 'isar-admin-summary' ); ?></span>
 						</h3>
 						<?php
@@ -257,7 +250,8 @@ class IAS_Plugin {
 					$column = 'third';
 					echo ias_panel_function( $feed, $host, $content, $images, $column );
 					
-					/*
+					/**
+					 * @todo	Get only images
 					libxml_use_internal_errors(True);
 					$doc = new DOMDocument;
 					$html = $doc->loadHTML('vregv');
@@ -336,10 +330,10 @@ $isar_ias_plugin = new IAS_Plugin();
 register_activation_hook( __FILE__, 'ias_add_defaults' ); 
 register_uninstall_hook( __FILE__, 'ias_delete_plugin_options' );
 
-// @source	http://codex.wordpress.org/Function_Reference/wp_enqueue_style
+// @link	http://codex.wordpress.org/Function_Reference/wp_enqueue_style
 add_action( 'admin_menu', 'ias_add_options_page' );
 function ias_add_options_page() {
-	// @source	http://codex.wordpress.org/Function_Reference/add_options_page
+	// @link	http://codex.wordpress.org/Function_Reference/add_options_page
 	$page = add_options_page(
 		__( 'iSar Admin Summary Settings' ),	//	$page_title
 		__( 'iSummary Settings' ),				//	$menu_title
@@ -355,26 +349,26 @@ function ias_add_options_page() {
  * Define default option settings
  */
 function ias_add_defaults() {
-	// @source https://developer.wordpress.org/reference/functions/admin_color_scheme_picker/
+	// @link https://developer.wordpress.org/reference/functions/admin_color_scheme_picker/
 	global $_wp_admin_css_colors;
 	$user_admin_color = get_user_meta(get_current_user_id(), 'admin_color', True);
 	$color = $_wp_admin_css_colors[$user_admin_color]->colors;
-	// @source http://codex.wordpress.org/Function_Reference/get_option
+	// @link http://codex.wordpress.org/Function_Reference/get_option
 	$tmp = get_option( 'ias_options' );
 	if ( ( $tmp['chk_def_options'] == '1' ) || ( ! is_array( $tmp ) ) ) {
 		$defaults = array(
-			'feed_url'			=> 'http://www.edilportale.com/',
-			'feed_url_1'		=> 'http://www.professionearchitetto.it/',
-			'feed_url_2'		=> 'http://www.architetto.info/',
-			'feed_url_3'		=> 'http://www.archiportale.com/',
-			'feed_url_images'	=> 'http://www.europaconcorsi.com/',
+			'feed_url'			=> 'http://isarch.it/en/feed/',
+			'feed_url_1'		=> 'http://isarch.it/category/architettura/feed/',
+			'feed_url_2'		=> 'http://isarch.it/category/applicazione/feed/',
+			'feed_url_3'		=> 'http://isarch.it/category/normativa/feed/',
+			'feed_url_images'	=> 'http://isarch.it/category/picture/feed/',
 			'feed_images'		=> 'no',
 			'feed_menu'			=> 'yes',		// Feed menu in admin bar
 			'feed_menu_colour'	=> $color[3],	// Feed menu in admin bar colour
 			'num_content_items'	=> '3',			// Number of posts per feed
 			'chk_def_options'	=> ''			// Check default option database
 		);
-		// @source	http://codex.wordpress.org/Function_Reference/update_option
+		// @link	http://codex.wordpress.org/Function_Reference/update_option
 		update_option( 'ias_options', $defaults );
 	}
 }
@@ -390,7 +384,7 @@ function ias_delete_plugin_options() {
  * Register and enqueue the settings stylesheet
  */
 function ias_plugin_settings_style() {
-	// @source	http://codex.wordpress.org/Function_Reference/wp_register_style
+	// @link	http://codex.wordpress.org/Function_Reference/wp_register_style
 	wp_register_style(
 		'custom_ias_settings_css',			//	$handle
 		ISAR_IAS_URI . 'css/settings.css',	//	$src
@@ -406,7 +400,7 @@ function ias_plugin_settings_style() {
  * Register and enqueue the settings stylesheet
  */
 function ias_plugin_settings_bis_style() {
-	// @source	http://codex.wordpress.org/Function_Reference/wp_register_style
+	// @link	http://codex.wordpress.org/Function_Reference/wp_register_style
 	wp_register_style(
 		'custom_ias_css',					//	$handle
 		ISAR_IAS_URI . 'css/style.css',		//	$src
@@ -423,7 +417,7 @@ add_filter( 'plugin_action_links', 'ias_plugin_action_links', 10, 2 );
 add_action( 'wp_dashboard_setup', 'ias_setup_function' );				// Register the new dashboard widget
 /**
  * Sanitize and validate input. Accepts an array, return a sanitized array.
- * @source	http://codex.wordpress.org/Function_Reference/wp_filter_nohtml_kses
+ * @link	http://codex.wordpress.org/Function_Reference/wp_filter_nohtml_kses
  */
 function ias_validate_options( $input ) {
 	$input['feed_url'] =  wp_filter_nohtml_kses( $input['feed_url'] );
