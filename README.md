@@ -1,9 +1,9 @@
 isar-admin-summary
 ==================
 
-Just another WordPress RSS plugin.
+Flexible Rich Site Summary WordPress plugin for the administration panel.
 
-This plugin allow to manage Feeds inside the WordPress admin panel.
+This plugin allows to manage Feeds in the WordPress Admin.
 
 ![alt text](http://bit.ly/1wlMTdM)
 
@@ -25,8 +25,8 @@ To install a WordPress Plugin manually:
 
 ### Todo
 
-- Test Right to Left
-- Color Picker API
+- Right to Left test;
+- Social Networks features.
 
 ### Compatibility
 
@@ -35,13 +35,6 @@ WordPress v4.0.0
 ### License
 
 [GNU General Public License]
-
-### Freedoms
-
-- You have the freedom to run the program, for any purpose.
-- You have access to the source code, the freedom to study how the program works, and the freedom to change it to make it do what you wish.
-- You have the freedom to redistribute copies of the original program so you can help your neighbor.
-- You have the freedom to distribute copies of your modified versions to others. By doing this you can give the whole community a chance to benefit from your changes.
 
 ___
 

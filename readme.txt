@@ -2,7 +2,7 @@
 Tags: feeds
 Requires at least: 3.0.1
 Tested up to: 4.1
-Stable tag: 1.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,9 +28,14 @@ To install a WordPress Plugin manually:
 
 == Frequently Asked Questions ==
 
-= Can I change my feeds =
+= Can I change my feeds? =
 
 You can change your feeds URLs.
+
+= How many websites can I insert? =
+
+You can choose from one up to five websites.
+These feed contents will be displayed in the iSummary page and some of them in the Dashbord.
 
 == Screenshots ==
 
@@ -38,5 +43,9 @@ You can change your feeds URLs.
 
 == Changelog ==
 
-= 1.1 =
+= 1.0.2 =
+* Admin Menu bug fix.
+* Style update.
+
+= 1.0.1 =
 * Color Picker API.
