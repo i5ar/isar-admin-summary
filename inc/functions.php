@@ -11,9 +11,9 @@ function rss_toolbar_items($admin_bar){
 
 
 	$options = get_option( 'ias_options' ); 
-	$feedurl = $options['feed_url'];
-	$feedurl_1 = $options['feed_url_1'];
-	$feedurl_2 = $options['feed_url_2'];
+	$feedurl = $options['feed_url_1'];
+	$feedurl_1 = $options['feed_url_2'];
+	$feedurl_2 = $options['feed_url_3'];
 	$admin_bar->add_menu(
 		array(
 			'id'    => 'feeds-item',

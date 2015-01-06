@@ -29,7 +29,6 @@ function ias_render_form() { ?>
 									<p><?php _e('Below you can adjust the output of the Feeds','isar-admin-summary') ?>. <?php _e('You can change the feed','isar-admin-summary')?> <abbr title="Uniform Resource Locator">URL</abbr>s <?php _e( 'and the amount of feed items to show', 'isar-admin-summary'); ?>.</p>
 									<table class="form-table">
 										<tbody>
-																
 											<tr>
 												<th scope="row">
 													<label for="ias-feed-url"><?php _e('Main Feed URL General tab','isar-admin-summary'); ?>:</label>
@@ -41,7 +40,7 @@ function ias_render_form() { ?>
 													<input type="hidden" name="page_options" value="<?php echo $options['feed_url']; ?>" />								
 												</td>
 											</tr>
-											
+
 											<tr>
 												<th scope="row">
 													<label for="ias-select"><?php _e( 'Show images in General tab', 'isar-admin-summary' ); ?>?</label>
@@ -54,8 +53,7 @@ function ias_render_form() { ?>
 													<input type="hidden" name="action" value="update" />
 													<input type="hidden" name="page_options" value="<?php echo $options['feed_images']; ?>" />								
 												</td>
-											</tr>											
-											
+											</tr>                                            
 											<tr>
 												<th scope="row">
 													<label for="ias-feed-url-1"><?php _e( 'Minor Feed URL 1', 'isar-admin-summary' ); ?>:</label>
@@ -64,7 +62,7 @@ function ias_render_form() { ?>
 													<input name="ias_options[feed_url_1]" type="text" id="ias-feed-url-1" class="regular-text code" value="<?php echo $options['feed_url_1']; ?>" />
 													<p class="description"><?php _e( 'Change to a site of your choice', 'isar-admin-summary' ); ?></p>
 													<input type="hidden" name="action" value="update" />
-													<input type="hidden" name="page_options" value="<?php echo $options['feed_url_1']; ?>" />								
+													<input type="hidden" name="page_options" value="<?php echo $options['feed_url_1']; ?>" />
 												</td>
 											</tr>
 											
@@ -76,7 +74,19 @@ function ias_render_form() { ?>
 													<input name="ias_options[feed_url_2]" type="text" id="ias-feed-url-2" class="regular-text code" value="<?php echo $options['feed_url_2']; ?>" />
 													<p class="description"><?php _e( 'Change to a site of your choice', 'isar-admin-summary' ); ?></p>
 													<input type="hidden" name="action" value="update" />
-													<input type="hidden" name="page_options" value="<?php echo $options['feed_url_2']; ?>" />								
+													<input type="hidden" name="page_options" value="<?php echo $options['feed_url_2']; ?>" />				
+												</td>
+											</tr>
+											
+											<tr>
+												<th scope="row">
+													<label for="ias-feed-url-3"><?php _e( 'Minor Feed URL 3', 'isar-admin-summary' ); ?>:</label>
+												</th>
+												<td>
+													<input name="ias_options[feed_url_3]" type="text" id="ias-feed-url-3" class="regular-text code" value="<?php echo $options['feed_url_3']; ?>" />
+													<p class="description"><?php _e( 'Change to a site of your choice', 'isar-admin-summary' ); ?></p>
+													<input type="hidden" name="action" value="update" />
+													<input type="hidden" name="page_options" value="<?php echo $options['feed_url_3']; ?>" />
 												</td>
 											</tr>
 											
@@ -103,13 +113,13 @@ function ias_render_form() { ?>
 											
 											<tr>
 												<th scope="row">
-													<label for="ias-feed-url-3"><?php _e( 'Images tab Feed URL', 'isar-admin-summary' ); ?>:</label>
+													<label for="ias-feed-url-images"><?php _e( 'Images tab Feed URL', 'isar-admin-summary' ); ?>:</label>
 												</th>
 												<td>
-													<input name="ias_options[feed_url_3]" type="text" id="ias-feed-url-3" class="regular-text code" value="<?php echo $options['feed_url_3']; ?>" />
+													<input name="ias_options[feed_url_images]" type="text" id="ias-feed-url-images" class="regular-text code" value="<?php echo $options['feed_url_images']; ?>" />
 													<p class="description"><?php _e( 'Change to a site of your choice', 'isar-admin-summary' ); ?></p>
 													<input type="hidden" name="action" value="update" />
-													<input type="hidden" name="page_options" value="<?php echo $options['feed_url_3']; ?>" />								
+													<input type="hidden" name="page_options" value="<?php echo $options['feed_url_images']; ?>" />								
 												</td>
 											</tr>
 											
@@ -196,8 +206,7 @@ function ias_render_form() { ?>
 							<span><?php _e( 'About the Author', 'isar-admin-summary' ); ?></span>
 						</h3>
 						<div class="inside">
-							<p>Arch. <strong>Pierpaolo Rasicci</strong> aka <strong><a href="http://isarch.it/three.html/" target="_blank">iSar</a></strong> </p>
-							<img class="author-image" src="http://www.gravatar.com/avatar/<?php echo md5( 'i5ar@live.it' ); ?>" />
+							<p>Arch. <strong>Pierpaolo Rasicci</strong> aka <strong>iSar</strong> </p>
 							<p>
 								<?php echo __( 'I like running my blog and keeping it alive. I\'m not a constant publisher but having <abbr title="Rich Site Summary">RSS</abbr>, just a button from my post page, really helps as far as I\'ve got something to say.
                                 It also helps me to stay up-to-date since I spend more time around my website than reading newspaper.<br />

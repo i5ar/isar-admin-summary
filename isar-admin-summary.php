@@ -5,7 +5,7 @@
  * Description: The iSar Admin Summary also known as iSummary shows the latest posts from one or more sites of your interest in the iSummary pages of your admin panel. You can manage feeds to show within images or not, the number of posts to show and even a supplementary menu in your admin menu bar.
  * Version: 1.0.1
  * Author: Pierpaolo Rasicci
- * Author URI: http://isarch.it/about-me/
+ * Author URI: http://isarch.it/three.html
  * Text Domain: isar-admin-summary
  * Domain Path: /languages/
  * License: GPL
@@ -183,7 +183,7 @@ class IAS_Plugin {
 							<p><i><?php _e( 'If the feeds not work properly it means they are not avaible', 'isar-admin-summary' ); ?></i></p>
 						<?php // All the feeds titles			
 							$options = get_option( 'ias_options' ); 
-							$feed = array($options['feed_url'],$options['feed_url_1'],$options['feed_url_2']);
+							$feed = array($options['feed_url_1'],$options['feed_url_2'],$options['feed_url_3']);
 							$host = True;
 							$content = False;
 							$images = False;
@@ -226,7 +226,7 @@ class IAS_Plugin {
 				<div id="normal-sortables" class="meta-box-sortables ui-sortable">
 				<?php
 					$options = get_option( 'ias_options' ); 
-					$feed = $options['feed_url_3'];
+					$feed = $options['feed_url_images'];
 					$host = False;
 					$content = True;
 					$images = True;
@@ -238,7 +238,7 @@ class IAS_Plugin {
 				<div id="normal-sortables" class="meta-box-sortables ui-sortable">
 				<?php
 					$options = get_option( 'ias_options' ); 
-					$feed = $options['feed_url_3'];
+					$feed = $options['feed_url_images'];
 					$host = False;
 					$content = True;
 					$images = True;
@@ -250,7 +250,7 @@ class IAS_Plugin {
 				<div id="normal-sortables" class="meta-box-sortables ui-sortable">
 				<?php
 					$options = get_option( 'ias_options' ); 
-					$feed = $options['feed_url_3'];
+					$feed = $options['feed_url_images'];
 					$host = False;
 					$content = True;
 					$images = True;
@@ -366,7 +366,8 @@ function ias_add_defaults() {
 			'feed_url'			=> 'http://www.edilportale.com/',
 			'feed_url_1'		=> 'http://www.professionearchitetto.it/',
 			'feed_url_2'		=> 'http://www.architetto.info/',
-			'feed_url_3'		=> 'http://europaconcorsi.com/',
+			'feed_url_3'		=> 'http://www.archiportale.com/',
+			'feed_url_images'	=> 'http://www.europaconcorsi.com/',
 			'feed_images'		=> 'no',
 			'feed_menu'			=> 'yes',		// Feed menu in admin bar
 			'feed_menu_colour'	=> $color[3],	// Feed menu in admin bar colour
@@ -428,6 +429,8 @@ function ias_validate_options( $input ) {
 	$input['feed_url'] =  wp_filter_nohtml_kses( $input['feed_url'] );
 	$input['feed_url_1'] =  wp_filter_nohtml_kses( $input['feed_url_1'] );
 	$input['feed_url_2'] =  wp_filter_nohtml_kses( $input['feed_url_2'] );
+	$input['feed_url_3'] =  wp_filter_nohtml_kses( $input['feed_url_3'] );
+	$input['feed_url_images'] =  wp_filter_nohtml_kses( $input['feed_url_images'] );
 	$input['feed_menu_colour'] =  wp_filter_nohtml_kses( $input['feed_menu_colour'] );
 	return $input;
 }
