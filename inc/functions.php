@@ -31,14 +31,16 @@ function rss_toolbar_items($admin_bar){
 		$array_previous = parse_url($previous_value);
 		$host =  $array['host'];
 		$host_previous =  $array_previous['host'];
+		// Remove World Wide Web
+		$domain = preg_replace('/^www\./', '', $array['host']);
 		// Exclude the current value of the array if equal the previous value
 		if ($host !== $host_previous){
 			$admin_bar->add_menu(
 				array(
 					'id'    => 'feed-sub-item-'.$i++,
 					'parent' => 'feeds-item',
-					'title' => $host,
-					'href'  => $value,
+					'title' => $domain,
+					'href'  => $host, // $value
 					'meta'  => array(
 						'title' => $host,
 						'target' => '_blank'
@@ -49,9 +51,8 @@ function rss_toolbar_items($admin_bar){
 	}
 	endif;
 }
-
 /**
- * Add Feed loops
+ * Add Feed loops in the Dashboard
  */ 
 function ias_setup_function() {
 	// @link	http://codex.wordpress.org/Function_Reference/add_meta_box
@@ -93,6 +94,9 @@ function ias_widget_function() {
 	</div>			
 <?php }
 }
+/**
+ * Add Feed loops in the Tabs
+ */ 
 function ias_panel_function( $feed, $host, $content, $images, $column ) {
 	foreach ( (array) $feed as $value ) {	
 		if( empty( $value ) ){

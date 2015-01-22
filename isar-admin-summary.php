@@ -3,7 +3,7 @@
  * Plugin Name: iSar Admin Summary
  * Plugin URI: https://github.com/i5ar/isar-admin-summary/
  * Description: The iSar Admin Summary also known as iSummary shows the latest posts from one or more sites of your interest in the iSummary pages of your admin panel. You can manage feeds to show within images or not, the number of posts to show and even a supplementary menu in your admin menu bar.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Pierpaolo Rasicci
  * Author URI: http://isarch.it/three.html
  * Text Domain: isar-admin-summary
@@ -16,16 +16,16 @@
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
     published by the Free Software Foundation.
-
+	
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-
+	
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-		
+	
 	Contributions:
 	Piet Bos		https://profiles.wordpress.org/senlin/
 	
@@ -65,9 +65,7 @@ class IAS_Plugin {
 		add_action( 'plugins_loaded', array( &$this, 'languages' ), 3 );				// Internationalize the text strings used
 		add_action( 'plugins_loaded', array( &$this, 'includes' ), 4 );					// Load the functions files
 		add_action( 'plugins_loaded', array( &$this, 'admin' ), 5 );					// Load the admin files
-		
 	}
-	
 	/**
 	 * Create the default field in database option table
 	 * @link	http://codex.wordpress.org/Function_Reference/register_setting
@@ -146,7 +144,7 @@ class IAS_Plugin {
 	}
 	function add_admin_menus() {
 		$page = add_menu_page(
-			__( 'iSummary Settings' ),				// $page_title
+			__( 'iSar Admin Summary' ),				// $page_title
 			__( 'iSummary' ),						// $menu_title
 			'manage_options',						// $capability
 			$this->plugin_options_key,				// $menu_slug
@@ -155,6 +153,7 @@ class IAS_Plugin {
 		);
 		add_action( 'admin_print_styles-' . $page , 'ias_plugin_settings_bis_style' );
 	}
+	
 	// Iris Color Picker
 	function add_iris_color_picker() {
 		wp_register_script( 'iris-color-picker', plugins_url( 'js/iris.min.js', __FILE__ ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), false, 1 );
@@ -325,6 +324,18 @@ class IAS_Plugin {
 	 */
 }
 $isar_ias_plugin = new IAS_Plugin();
+
+/**
+ * Register sub-menu
+ *
+ * @since	v1.0.3
+ * @link	http://codex.wordpress.org/Function_Reference/add_submenu_page
+ */
+add_action( 'admin_menu', 'register_ias_submenu' );		// Register sub-menu
+function register_ias_submenu() {
+	add_submenu_page( 'ias_general_tab', 'iSummary Images Tab', 'iSummary Images', 'manage_options', 'ias_general_tab&tab=ias_images_tab', 'section_general_img_desc' );
+	add_submenu_page( 'ias_general_tab', 'iSummary Clipboard Tab', 'iSummary Clipboard', 'manage_options', 'ias_general_tab&tab=ias_clipboard_tab', 'field_advanced_option' );
+}
 
 // Register activation/deactivation hooks
 register_activation_hook( __FILE__, 'ias_add_defaults' ); 
