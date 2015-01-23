@@ -330,12 +330,12 @@ $isar_ias_plugin = new IAS_Plugin();
  *
  * @since	v1.0.3
  * @link	http://codex.wordpress.org/Function_Reference/add_submenu_page
- */
 add_action( 'admin_menu', 'register_ias_submenu' );		// Register sub-menu
 function register_ias_submenu() {
 	add_submenu_page( 'ias_general_tab', 'iSummary Images Tab', 'iSummary Images', 'manage_options', 'ias_general_tab&tab=ias_images_tab', 'section_general_img_desc' );
 	add_submenu_page( 'ias_general_tab', 'iSummary Clipboard Tab', 'iSummary Clipboard', 'manage_options', 'ias_general_tab&tab=ias_clipboard_tab', 'field_advanced_option' );
 }
+ */
 
 // Register activation/deactivation hooks
 register_activation_hook( __FILE__, 'ias_add_defaults' ); 
