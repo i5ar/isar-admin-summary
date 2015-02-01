@@ -28,6 +28,7 @@
 	
 	Contributions:
 	Piet Bos		https://profiles.wordpress.org/senlin/
+	David Gwyer		https://profiles.wordpress.org/dgwyer/
 	
 	Thanks:
 	Sven Hofmann	http://wordpress.stackexchange.com/users/32946/sven/
@@ -68,17 +69,17 @@ class IAS_Plugin {
 	}
 	/**
 	 * Create the default field in database option table
-	 * @link	http://codex.wordpress.org/Function_Reference/register_setting
+	 * The option name ias_options is registred inside the class and is hooked by many functions out of this class
 	 */
-	// The option name ias_options is registred inside the class and is hooked by many functions out of this class
 	function init() {
+	// @link	http://codex.wordpress.org/Function_Reference/register_setting
 		register_setting(
-			'ias_general_tab',		//	$option_group
-			'ias_options', 			//	Create the default field $option_name in database option table
-			'ias_validate_options'	//	$sanitize_callback (optional)
+			'ias_general_tab',		// $option_group
+			'ias_options', 			// Create the default field $option_name in database option table
+			'ias_validate_options'	// $sanitize_callback (optional)
 		);	
 	}
-
+	
 	/**
 	 * Defines constants used by the plugin.
 	 */
@@ -119,8 +120,8 @@ class IAS_Plugin {
 		$this->plugin_settings_tabs[$this->general_settings_key] = 'General';
 		// @link	http://codex.wordpress.org/Function_Reference/register_setting
 		register_setting(
-			$this->general_settings_key,	//	$option_group
-			$this->general_settings_key		//	$option_name
+			$this->general_settings_key,		// $option_group
+			$this->general_settings_key			// $option_name
 		);
 		add_settings_section( 'section_general', 'iSummary General Tab', array( &$this, 'section_general_desc'), $this->general_settings_key );
 	}
@@ -129,8 +130,8 @@ class IAS_Plugin {
 		$this->plugin_settings_tabs[$this->general_img_settings_key] = 'Images';
 		// @link	http://codex.wordpress.org/Function_Reference/register_setting
 		register_setting(
-			$this->general_img_settings_key,	//	$option_group
-			$this->general_img_settings_key		//	$option_name
+			$this->general_img_settings_key,	// $option_group
+			$this->general_img_settings_key		// $option_name
 		);
 		add_settings_section( 'section_general_img', 'iSummary Images Tab', array( &$this, 'section_general_img_desc'), $this->general_img_settings_key );
 	}
@@ -164,7 +165,7 @@ class IAS_Plugin {
 	 * for their respective sections, used as callbacks
 	 * with add_settings_section
 	 */
-	 // First tab (General)
+	 // General tab
 	function section_general_desc() { ?>
 		<div id="col-container" class="ias-container">
 			<div id="col-right">
@@ -248,18 +249,6 @@ class IAS_Plugin {
 					$images = True;
 					$column = 'third';
 					echo ias_panel_function( $feed, $host, $content, $images, $column );
-					
-					/**
-					 * @todo	Get only images
-					libxml_use_internal_errors(True);
-					$doc = new DOMDocument;
-					$html = $doc->loadHTML('vregv');
-					$path = new DOMXPath($doc);
-					$nodelist = $path->query('//img');
-					$node = $nodelistb->item(0);
-					$value = $node->attributes->getNamedItem('src')->nodeValue;
-					echo "<img src=$value\n />";
-					*/
 				?>
 				</div>		
 			</div>
@@ -267,7 +256,7 @@ class IAS_Plugin {
 		
 		<?php
 	}
-	// Clipboard tab (Advanced)
+	// Clipboard tab
 	function section_advanced_desc() {
 		echo $this->advanced_settings['advanced_option'];
 		echo '<div class="clearfix"><br /></div><hr />';
@@ -281,8 +270,8 @@ class IAS_Plugin {
 	}
 	// Advanced Option section callback.
 	function section_advanced_submit() {
-		echo '<i>'.__( 'I do not mean to destroy your big dreams but the text area above is just a placeholder and may not be available in future releases', 'isar-admin-summary' ).'.</i><br />';
-		echo '<i>'.__('I reserved this tab for handy tools and future improvements. Reversing your <span title="Rich Site Summary">RSS</span> reading into a ready post publishing with social features will be done in a minute. Plaese, keep this plugin updated, I will definitly do something cool here' ).'!</i>';
+		echo '<i>'.__( 'I do not mean to destroy your big dreams but the text area above is just a placeholder and may not be available in future releases.', 'isar-admin-summary' ).'</i><br />';
+		echo '<i>'.__('I reserved this tab for handy tools and future improvements. Reversing your <span title="Rich Site Summary">RSS</span> reading into a ready post publishing with social features will be done in a minute. Plaese, keep this plugin updated, I will definitly do something cool here!', 'isar-admin-summary' ).'</i>';
 		submit_button();
 	}
 	// Plugin Options page rendering goes here, checks for active tab and replaces key with the related settings key. Uses the plugin_options_tabs method to render the tabs.
@@ -307,50 +296,30 @@ class IAS_Plugin {
 	 */
 	function plugin_options_tabs() {
 		$current_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $this->general_settings_key;
-
 		screen_icon();
-		echo '
-		<h2 class="nav-tab-wrapper">';
+		echo '<h2 class="nav-tab-wrapper">';
 		foreach ( $this->plugin_settings_tabs as $tab_key => $tab_caption ) {
 			$active = $current_tab == $tab_key ? 'nav-tab-active' : '';
-			echo '
-			<a class="nav-tab ' . $active . '" href="?page=' . $this->plugin_options_key . '&tab=' . $tab_key . '">' . $tab_caption . '</a>';	
+			echo '<a class="nav-tab ' . $active . '" href="?page=' . $this->plugin_options_key . '&tab=' . $tab_key . '">' . $tab_caption . '</a>';	
 		}
-		echo '
-		</h2>';
+		echo '</h2>';
 	}
-	/**
-	 * End iSummary functions
-	 */
 }
 $isar_ias_plugin = new IAS_Plugin();
-
-/**
- * Register sub-menu
- *
- * @since	v1.0.3
- * @link	http://codex.wordpress.org/Function_Reference/add_submenu_page
-add_action( 'admin_menu', 'register_ias_submenu' );		// Register sub-menu
-function register_ias_submenu() {
-	add_submenu_page( 'ias_general_tab', 'iSummary Images Tab', 'iSummary Images', 'manage_options', 'ias_general_tab&tab=ias_images_tab', 'section_general_img_desc' );
-	add_submenu_page( 'ias_general_tab', 'iSummary Clipboard Tab', 'iSummary Clipboard', 'manage_options', 'ias_general_tab&tab=ias_clipboard_tab', 'field_advanced_option' );
-}
- */
 
 // Register activation/deactivation hooks
 register_activation_hook( __FILE__, 'ias_add_defaults' ); 
 register_uninstall_hook( __FILE__, 'ias_delete_plugin_options' );
 
-// @link	http://codex.wordpress.org/Function_Reference/wp_enqueue_style
 add_action( 'admin_menu', 'ias_add_options_page' );
 function ias_add_options_page() {
-	// @link	http://codex.wordpress.org/Function_Reference/add_options_page
+	// @link	http://codex.wordpress.org/Function_Reference/wp_enqueue_style
 	$page = add_options_page(
-		__( 'iSar Admin Summary Settings' ),	//	$page_title
-		__( 'iSummary Settings' ),				//	$menu_title
-		'manage_options',						//	$capability
-		__FILE__,								//	$menu_slug
-		'ias_render_form'						//	$function
+		__( 'iSar Admin Summary Settings' ),	// $page_title
+		__( 'iSummary Settings' ),				// $menu_title
+		'manage_options',						// $capability
+		__FILE__,								// $menu_slug
+		'ias_render_form'						// $function
 	);
 	// Use the page suffix to compose the page and register an action executed when plugin's options page is loaded
 	add_action( 'admin_print_styles-' . $page , 'ias_plugin_settings_style' );
@@ -360,11 +329,11 @@ function ias_add_options_page() {
  * Define default option settings
  */
 function ias_add_defaults() {
-	// @link https://developer.wordpress.org/reference/functions/admin_color_scheme_picker/
+	// @link	https://developer.wordpress.org/reference/functions/admin_color_scheme_picker/
 	global $_wp_admin_css_colors;
 	$user_admin_color = get_user_meta(get_current_user_id(), 'admin_color', True);
 	$color = $_wp_admin_css_colors[$user_admin_color]->colors;
-	// @link http://codex.wordpress.org/Function_Reference/get_option
+	// @link	http://codex.wordpress.org/Function_Reference/get_option
 	$tmp = get_option( 'ias_options' );
 	if ( ( $tmp['chk_def_options'] == '1' ) || ( ! is_array( $tmp ) ) ) {
 		$defaults = array(
@@ -385,7 +354,7 @@ function ias_add_defaults() {
 }
 
 /**
- * Delete options table entries ONLY when plugin deactivated AND deleted 
+ * Delete options table entries only when the plugin is deleted
  */
 function ias_delete_plugin_options() {
 	delete_option( 'ias_options' );
@@ -397,13 +366,14 @@ function ias_delete_plugin_options() {
 function ias_plugin_settings_style() {
 	// @link	http://codex.wordpress.org/Function_Reference/wp_register_style
 	wp_register_style(
-		'custom_ias_settings_css',			//	$handle
-		ISAR_IAS_URI . 'css/settings.css',	//	$src
-		false,								//	$deps
-		ISAR_IAS_VERSION					//	$ver
+		'custom_ias_settings_css',				// $handle
+		ISAR_IAS_URI . 'css/settings.css',		// $src
+		false,									// $deps
+		ISAR_IAS_VERSION						// $ver
 	);
 	wp_enqueue_style( 'custom_ias_settings_css' );
-	wp_enqueue_script( 'iris-color-picker' );// Iris Color Picker
+	// Iris Color Picker
+	wp_enqueue_script( 'iris-color-picker' );
 	//wp_enqueue_style( 'wp-color-picker' );	
 }
 
@@ -425,7 +395,7 @@ function ias_plugin_settings_bis_style() {
  * Set-up Action and Filter Hooks
  */
 add_filter( 'plugin_action_links', 'ias_plugin_action_links', 10, 2 );
-add_action( 'wp_dashboard_setup', 'ias_setup_function' );				// Register the new dashboard widget
+add_action( 'wp_dashboard_setup', 'ias_setup_function' );	// Register the new dashboard widget
 /**
  * Sanitize and validate input. Accepts an array, return a sanitized array.
  * @link	http://codex.wordpress.org/Function_Reference/wp_filter_nohtml_kses
@@ -441,12 +411,12 @@ function ias_validate_options( $input ) {
 }
 
 /**
- * Display a Settings link on the main Plugins page
+ * Display a Settings link on the Plugins page
  */
 function ias_plugin_action_links( $links, $file ) {
 	if ( $file == plugin_basename( __FILE__ ) ) {
 		$ias_links = '<a href="' . get_admin_url() . 'options-general.php?page=isar-admin-summary/isar-admin-summary.php">' . __( 'Settings', 'isar-admin-summary' ) . '</a>';
-		array_unshift( $links, $ias_links );	// make the 'Settings' link appear first
+		array_unshift( $links, $ias_links );	// Make Settings link appear first
 	}
 	return $links;
 }

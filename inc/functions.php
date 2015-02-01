@@ -111,20 +111,26 @@ function ias_panel_function( $feed, $host, $content, $images, $column ) {
 			// Figure out how many total items there are
 			$maxitems = $rss->get_item_quantity( $select );
 			// Calculating the start and the extreme utmost value for each column
-			if ( $column == 'second' ) {
+			if ( $column == 'second' ) { ?>
+				<h3>
+					<?php _e( 'Feed Images', 'isar-admin-summary' ); ?>
+				</h3>
+			<?php
 				//$maxitems = 3;
 				$startitems = $maxitems+1;		// 4
-			} elseif ( $column == 'third' ) {
+			} elseif ( $column == 'third' ) { ?>
+				<h3>
+					<?php _e( 'Feed Images', 'isar-admin-summary' ); ?>
+				</h3>
+			<?php
 				//$maxitems = 3;
 				$startitems = $maxitems*2+1;	// 7
 			} elseif ($column == 'first') { ?>
-				<h3 class="">
-					<span>
-					<?php _e( 'Images Feed Contents', 'isar-admin-summary' );
-						echo ' - ';
-						$parse_url = parse_url($value);
-						echo $parse_url['host']; ?>
-					</span>
+				<h3>
+					<?php _e( 'Feed Images', 'isar-admin-summary' );
+						//echo ' - ';
+						//$parse_url = parse_url($value);
+						//echo $parse_url['host']; ?>
 				</h3>
 			<?php			
 				//$startitems = 0;
