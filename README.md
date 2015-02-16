@@ -3,7 +3,7 @@ isar-admin-summary
 
 Flexible Rich Site Summary WordPress plugin for the administration panel.
 
-This plugin allows to manage Feeds in the WordPress Admin.
+iSummary, short for iSar Admin Summary, allows you to manage Feeds in the WordPress Admin.
 
 ![alt text](http://bit.ly/1wlMTdM)
 
