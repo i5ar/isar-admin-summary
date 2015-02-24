@@ -15,9 +15,13 @@ $RECYCLE.BIN/
 # Mac crap
 .DS_Store
 
+
 #############
-## Images
+## Plugin files
 #############
 
-# Image folder
+# Images
 images/
+
+# Translations
+languages/*.mo
