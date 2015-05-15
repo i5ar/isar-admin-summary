@@ -1,4 +1,4 @@
-isar-admin-summary
+iSar Admin Summary
 ==================
 
 Flexible Rich Site Summary WordPress plugin for the administration panel.
