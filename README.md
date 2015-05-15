@@ -5,7 +5,7 @@ Flexible Rich Site Summary WordPress plugin for the administration panel.
 
 iSummary, short for iSar Admin Summary, allows you to manage Feeds in the WordPress Admin.
 
-![alt text](http://bit.ly/1wlMTdM)
+![alt text](https://github.com/i5ar/isar-admin-summary/blob/master/images/screen.jpg)
 
 ### Installation
 
@@ -20,8 +20,6 @@ To install a WordPress Plugin manually:
 - With your FTP program, upload the Plugin folder to the wp-content/plugins folder in your WordPress directory online.
 - Go to Plugins screen and find the newly uploaded Plugin in the list.
 - Click Activate Plugin to activate it.
-
-![alt text](http://codex.wordpress.org/images/3/3a/plugins.png)
 
 ### Todo
 
