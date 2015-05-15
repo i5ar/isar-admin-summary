@@ -17,11 +17,8 @@ $RECYCLE.BIN/
 
 
 #############
-## Plugin files
+## Custom
 #############
-
-# Images
-images/
 
 # Translations
 languages/*.mo
