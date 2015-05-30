@@ -2,7 +2,7 @@
 /**
  * Plugin Name: iSar Admin Summary
  * Plugin URI: https://github.com/i5ar/isar-admin-summary
- * Description: The iSar Admin Summary also known as iSummary shows the latest posts from one or more sites of your interest in the iSummary pages of your admin panel. You can manage feeds to show within images or not, the number of posts to show and even a supplementary menu in your admin menu bar.
+ * Description: iSar Admin Summary also known as iSummary shows the latest posts from one or more sites of your interest in the iSummary pages of your admin panel. You can manage feeds to show within images or not, the number of posts to show and even a supplementary menu in your admin menu bar.
  * Version: 1.0.4
  * Author: Pierpaolo Rasicci
  * Author URI: http://three.isarch.it
@@ -36,12 +36,12 @@
 /**
  * Prevent direct access to files
  */
-if ( ! defined( 'ABSPATH' ) ) exit;	// Exit if accessed directly
+if ( ! defined( 'ABSPATH' )) exit;	// Exit if accessed directly
 
 /**
  * Rewrite of the plugin
  */
-class IAS_Plugin {
+class iSarAdminSummary {
 	// For easier overriding we declared the iSummary keys here as well as our tabs array which is populated when registering settings
 	private $general_settings_key = 'ias_general_settings';
 	private $general_img_settings_key = 'ias_images_tab';
@@ -56,16 +56,16 @@ class IAS_Plugin {
 		$isar_as = new stdClass;
 		
 		add_action( 'admin_init', array( &$this, 'init' ), 1 );							// Set the init
-		add_action( 'admin_init', array( &$this, 'load_settings' ) );					// Load iSummary tabs settings 
-		add_action( 'admin_init', array( &$this, 'register_general_settings' ) );		// Register general iSummary tabs settings
-		add_action( 'admin_init', array( &$this, 'register_general_img_settings' ) );	// Register advanced iSummary tabs settings
-		add_action( 'admin_init', array( &$this, 'register_advanced_settings' ) );		// Register advanced iSummary tabs settings
-		add_action( 'admin_menu', array( &$this, 'add_admin_menus' ) );					// Add iSummary menus
-		add_action( 'admin_init', array( &$this, 'add_iris_color_picker' ) );			// Iris Color Picker
-		add_action( 'plugins_loaded', array( &$this, 'constants' ), 2 );				// Set the constants needed by the plugin
-		add_action( 'plugins_loaded', array( &$this, 'languages' ), 3 );				// Internationalize the text strings used
-		add_action( 'plugins_loaded', array( &$this, 'includes' ), 4 );					// Load the functions files
-		add_action( 'plugins_loaded', array( &$this, 'admin' ), 5 );					// Load the admin files
+		add_action( 'admin_init', array( &$this, 'load_settings' ));					// Load iSummary tabs settings 
+		add_action( 'admin_init', array( &$this, 'register_general_settings' ));		// Register general iSummary tabs settings
+		add_action( 'admin_init', array( &$this, 'register_general_img_settings' ));	// Register advanced iSummary tabs settings
+		add_action( 'admin_init', array( &$this, 'register_advanced_settings' ));		// Register advanced iSummary tabs settings
+		add_action( 'admin_menu', array( &$this, 'add_admin_menus' ));					// Add iSummary menus
+		add_action( 'admin_init', array( &$this, 'add_iris_color_picker' ));			// Iris Color Picker
+		add_action( 'plugins_loaded', array( &$this, 'ias_constants' ), 2 );				// Set the constants needed by the plugin
+		add_action( 'plugins_loaded', array( &$this, 'ias_languages' ), 3 );				// Internationalize the text strings used
+		add_action( 'plugins_loaded', array( &$this, 'ias_includes' ), 4 );					// Load the functions files
+		add_action( 'plugins_loaded', array( &$this, 'ias_admin' ), 5 );					// Load the admin files
 	}
 	/**
 	 * Create the default field in database option table
@@ -81,27 +81,27 @@ class IAS_Plugin {
 	}
 	
 	/**
-	 * Defines constants used by the plugin.
+	 * Defines constants used by the plugin
 	 */
-	function constants() {
-		define( 'ISAR_IAS_VERSION', '2014.07.27' );									// Set the version number of the plugin
-		define( 'ISAR_IAS_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );	// Set constant path to the plugin directory
-		define( 'ISAR_IAS_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );	// Set constant path to the plugin URL
-		define( 'ISAR_IAS_INCLUDES', ISAR_IAS_DIR . trailingslashit( 'inc' ) );		// Set the constant path to the inc directory
-		define( 'ISAR_IAS_ADMIN', ISAR_IAS_DIR . trailingslashit( 'admin' ) );		// Set the constant path to the admin directory
+	function ias_constants() {
+		define( 'IAS_VERSION', '2014.07.27' );									// Set the version number of the plugin
+		define( 'IAS_DIR', trailingslashit( plugin_dir_path( __FILE__ )));		// Set constant path to the plugin directory
+		define( 'IAS_URI', trailingslashit( plugin_dir_url( __FILE__ )));		// Set constant path to the plugin URL
+		define( 'IAS_INCLUDES', IAS_DIR . trailingslashit( 'inc' ));		// Set the constant path to the inc directory
+		define( 'IAS_ADMIN', IAS_DIR . trailingslashit( 'admin' ));		// Set the constant path to the admin directory
 	}
 	// Loads the translation file
-	function languages() {
-		load_plugin_textdomain( 'isar-admin-summary', false, basename( dirname( __FILE__ ) ) . '/languages/' );
+	function ias_languages() {
+		load_plugin_textdomain( 'isar-admin-summary', false, basename( dirname( __FILE__ )) . '/languages/' );
 	}
 	// Loads the initial files needed by the plugin
-	function includes() {
-		require_once( ISAR_IAS_INCLUDES . 'functions.php' );	// Load the plugin functions file
+	function ias_includes() {
+		require_once( IAS_INCLUDES . 'functions.php' );	// Load the plugin functions file
 	}
 	// Loads the admin functions and files only if in the WordPress admin
-	function admin() {
-		if ( is_admin() ) {
-			require_once( ISAR_IAS_ADMIN . 'settings.php' );	// Load the main admin file
+	function ias_admin() {
+		if ( is_admin()) {
+			require_once( IAS_ADMIN . 'settings.php' );	// Load the main admin file
 		}
 	}
 	
@@ -140,7 +140,7 @@ class IAS_Plugin {
 		$this->plugin_settings_tabs[$this->advanced_settings_key] = 'Clipboard ';
 		register_setting( $this->advanced_settings_key, $this->advanced_settings_key );
 		add_settings_section( 'section_advanced', 'iSummary Clipboard Tab', array( &$this, 'section_advanced_desc' ), $this->advanced_settings_key );
-		add_settings_field( 'advanced_option', 'Big ideas:', array( &$this, 'field_advanced_option' ), $this->advanced_settings_key, 'section_advanced', array( 'label_for' => 'big_ideas' ) );
+		add_settings_field( 'advanced_option', 'Big ideas:', array( &$this, 'field_advanced_option' ), $this->advanced_settings_key, 'section_advanced', array( 'label_for' => 'big_ideas' ));
 		add_settings_section( 'section_advanced_submit', '', array( &$this, 'section_advanced_submit' ), $this->advanced_settings_key );
 	}
 	function add_admin_menus() {
@@ -305,7 +305,7 @@ class IAS_Plugin {
 		echo '</h2>';
 	}
 }
-$isar_ias_plugin = new IAS_Plugin();
+$isar_admin_summary = new iSarAdminSummary();
 
 // Register activation/deactivation hooks
 register_activation_hook( __FILE__, 'ias_add_defaults' ); 
@@ -335,7 +335,7 @@ function ias_add_defaults() {
 	$color = $_wp_admin_css_colors[$user_admin_color]->colors;
 	// @link	http://codex.wordpress.org/Function_Reference/get_option
 	$tmp = get_option( 'ias_options' );
-	if ( ( $tmp['chk_def_options'] == '1' ) || ( ! is_array( $tmp ) ) ) {
+	if ( ( $tmp['chk_def_options'] == '1' ) || ( ! is_array( $tmp ))) {
 		$defaults = array(
 			'feed_url'			=> 'http://isarch.it/en/feed/',
 			'feed_url_1'		=> 'http://isarch.it/en/press/',
@@ -366,10 +366,10 @@ function ias_delete_plugin_options() {
 function ias_plugin_settings_style() {
 	// @link	http://codex.wordpress.org/Function_Reference/wp_register_style
 	wp_register_style(
-		'custom_ias_settings_css',				// $handle
-		ISAR_IAS_URI . 'css/settings.css',		// $src
-		false,									// $deps
-		ISAR_IAS_VERSION						// $ver
+		'custom_ias_settings_css',			// $handle
+		IAS_URI . 'css/settings.css',		// $src
+		false,								// $deps
+		IAS_VERSION							// $ver
 	);
 	wp_enqueue_style( 'custom_ias_settings_css' );
 	// Iris Color Picker
@@ -383,10 +383,10 @@ function ias_plugin_settings_style() {
 function ias_plugin_settings_bis_style() {
 	// @link	http://codex.wordpress.org/Function_Reference/wp_register_style
 	wp_register_style(
-		'custom_ias_css',					//	$handle
-		ISAR_IAS_URI . 'css/style.css',		//	$src
-		false,								//	$deps
-		ISAR_IAS_VERSION					//	$ver
+		'custom_ias_css',			//	$handle
+		IAS_URI . 'css/style.css',	//	$src
+		false,						//	$deps
+		IAS_VERSION					//	$ver
 	);
 	wp_enqueue_style( 'custom_ias_css' );
 }
@@ -414,7 +414,7 @@ function ias_validate_options( $input ) {
  * Display a Settings link on the Plugins page
  */
 function ias_plugin_action_links( $links, $file ) {
-	if ( $file == plugin_basename( __FILE__ ) ) {
+	if ( $file == plugin_basename( __FILE__ )) {
 		$ias_links = '<a href="' . get_admin_url() . 'options-general.php?page=isar-admin-summary/isar-admin-summary.php">' . __( 'Settings', 'isar-admin-summary' ) . '</a>';
 		array_unshift( $links, $ias_links );	// Make Settings link appear first
 	}

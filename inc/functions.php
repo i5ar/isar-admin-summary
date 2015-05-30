@@ -24,7 +24,7 @@ function rss_toolbar_items($admin_bar){
 	);
 	$arr = array($feedurl, $feedurl_1, $feedurl_2, $feedurl_3, $feedurl_images);
 	foreach ($arr as $key => $value) {
-		if( empty($value) ){ continue; }
+		if( empty($value)) { continue; }
 		// Get the previous value of the array
 		$previous_value = $arr[$key-1];
 		$array = parse_url($value);
@@ -71,13 +71,13 @@ function ias_widget_function() {
 	$select = $options['num_content_items'];
 	// @link	http://codex.wordpress.org/Function_Reference/fetch_feed
 	$rss = fetch_feed( $feedurl );
-	if ( ! is_wp_error( $rss ) ) { // Checks that the object is created correctly
+	if ( ! is_wp_error( $rss )) { // Checks that the object is created correctly
 		// Figure out how many total items there are.
 		$maxitems = $rss->get_item_quantity( $select );
 		// Build an array of all the items, starting with element 0 (first element).
 		$rss_items = $rss->get_items( 0, $maxitems );
 	}
-	if ( ! empty( $maxitems ) ) { ?>
+	if ( ! empty( $maxitems )) { ?>
 	<div class="rss-widget">
 		<ul>
 			<?php
@@ -85,8 +85,8 @@ function ias_widget_function() {
 			foreach ( $rss_items as $item ) { 
 			?>
 				<li>
-					<a class="rsswidget" href="<?php echo esc_url( $item->get_permalink() ); ?>" target="_blank">
-						<?php echo esc_attr( $item->get_title() ); ?></a>
+					<a class="rsswidget" href="<?php echo esc_url( $item->get_permalink()); ?>" target="_blank">
+						<?php echo esc_attr( $item->get_title()); ?></a>
 					<span class="rss-date"><?php echo date_i18n('F j, Y', $item->get_date('U')); ?></span>
 				</li>
 			<?php } ?>
@@ -99,7 +99,7 @@ function ias_widget_function() {
  */ 
 function ias_panel_function( $feed, $host, $content, $images, $column ) {
 	foreach ( (array) $feed as $value ) {	
-		if( empty( $value ) ){
+		if( empty( $value )) {
 			return;
 		}
 		$options = get_option( 'ias_options' );
@@ -107,7 +107,7 @@ function ias_panel_function( $feed, $host, $content, $images, $column ) {
 		// @link	http://codex.wordpress.org/Function_Reference/fetch_feed
 		$rss = fetch_feed( $value );
 		// Checks that the object is created correctly
-		if ( ! is_wp_error( $rss ) ) {
+		if ( ! is_wp_error( $rss )) {
 			// Figure out how many total items there are
 			$maxitems = $rss->get_item_quantity( $select );
 			// Calculating the start and the extreme utmost value for each column
@@ -132,7 +132,7 @@ function ias_panel_function( $feed, $host, $content, $images, $column ) {
 			// Build an array of all the items, starting with element 0
 			$rss_items = $rss->get_items( $startitems, $maxitems );
 			}
-			if ( ! empty( $maxitems ) ) { ?>
+			if ( ! empty( $maxitems )) { ?>
 			<?php if ( $host == True ) { ?>
 				<h3>
 					<span>
@@ -147,7 +147,7 @@ function ias_panel_function( $feed, $host, $content, $images, $column ) {
 					// Loop through each feed item and display each item as a hyperlink.
 					foreach ( $rss_items as $item ) { ?>
 						<li class="ias-item">
-							<a class="ias-title" href="<?php echo esc_url( $item->get_permalink() ); ?>" target="_blank"><?php echo esc_attr( $item->get_title() ); ?></a>
+							<a class="ias-title" href="<?php echo esc_url( $item->get_permalink()); ?>" target="_blank"><?php echo esc_attr( $item->get_title()); ?></a>
 							<span class="ias-date"><?php echo date_i18n('F j, Y', $item->get_date('U')); ?></span>
 							<?php if ( $content == True && $images == True ) { ?>
 								<div><?php echo $item->get_content(); ?></div>

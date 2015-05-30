@@ -186,7 +186,7 @@ function ias_render_form() { ?>
 											<label for="ias-db-chk"><?php _e( 'Database Options', 'isar-admin-summary' ); ?>:</label>
 										</th>
 										<td>
-											<input name="ias_options[chk_def_options]" type="checkbox" id="ias-db-chk" value="1" <?php if ( isset($options['chk_def_options'] ) ) { checked( '1', $options['chk_def_options'] ); } ?> />
+											<input name="ias_options[chk_def_options]" type="checkbox" id="ias-db-chk" value="1" <?php if ( isset($options['chk_def_options'] )) { checked( '1', $options['chk_def_options'] ); } ?> />
 												<?php _e( 'Restore defaults upon plugin deactivation/reactivation', 'isar-admin-summary' ); ?>
 											<p class="description"><?php _e( 'Only check this if you want to reset plugin settings upon Plugin reactivation', 'isar-admin-summary' ); ?>.</p>
 										</td>
