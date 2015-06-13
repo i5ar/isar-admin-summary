@@ -28,7 +28,7 @@ To install a WordPress Plugin manually:
 
 ### Compatibility
 
-WordPress v4.0.0
+WordPress v4.2.2
 
 ### License
 
