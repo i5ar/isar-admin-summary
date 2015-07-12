@@ -5,7 +5,7 @@
  * Description: iSar Admin Summary also known as iSummary shows the latest posts from one or more sites of your interest in the iSummary pages of your admin panel. You can manage feeds to show within images or not, the number of posts to show and even a supplementary menu in your admin menu bar.
  * Version: 1.0.4
  * Author: Pierpaolo Rasicci
- * Author URI: http://three.isarch.it
+ * Author URI: http://c.isarch.it
  * Text Domain: isar-admin-summary
  * Domain Path: /languages/
  * License: GPL
