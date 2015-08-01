@@ -99,7 +99,7 @@ function ias_widget_function() {
  */ 
 function ias_panel_function( $feed, $host, $content, $images, $column ) {
 	foreach ( (array) $feed as $value ) {	
-		if( empty( $value )) {
+		if( empty( $value ) ) {
 			return;
 		}
 		$options = get_option( 'ias_options' );
@@ -138,7 +138,8 @@ function ias_panel_function( $feed, $host, $content, $images, $column ) {
 					<span>
 					<?php
 						$parse_url = parse_url($value);
-						echo $parse_url['host']; ?>
+						//echo $parse_url['host'];
+						echo preg_replace('#^https?://#', '', $value); ?>
 					</span>
 				</h3>
 			<?php } ?>

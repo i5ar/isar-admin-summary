@@ -338,10 +338,10 @@ function ias_add_defaults() {
 	if ( ( $tmp['chk_def_options'] == '1' ) || ( ! is_array( $tmp ))) {
 		$defaults = array(
 			'feed_url'			=> 'http://isarch.it/en/feed/',
-			'feed_url_1'		=> 'http://isarch.it/en/press/',
-			'feed_url_2'		=> 'http://isarch.it/en/agenda/',
-			'feed_url_3'		=> 'http://isarch.it/en/freebies/',
-			'feed_url_images'	=> 'http://isarch.it/category/picture/',
+			'feed_url_1'		=> 'http://isarch.it/en/feed/',
+			'feed_url_2'		=> 'http://isarch.it/en/news/feed/',
+			'feed_url_3'		=> 'http://isarch.it/en/freebies/feed/',
+			'feed_url_images'	=> 'http://isarch.it/category/picture/feed/',
 			'feed_images'		=> 'no',
 			'feed_menu'			=> 'yes',		// Feed menu in admin bar
 			'feed_menu_colour'	=> $color[3],	// Feed menu in admin bar colour
