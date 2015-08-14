@@ -14,17 +14,15 @@ This plugin allow to manage Feeds inside the WordPress admin panel.
 
 == Installation ==
 
-Installation of a WordPress Plugin manually requires FTP familiarity and the awareness that you may put your site at risk if you install a WordPress Plugin incompatible with the current version or from an unreliable source.
+Be aware that you may put your site at risk if you install a WordPress plugin
+incompatible with the current version.
 
 Backup your site completely before proceeding.
 
 To install a WordPress Plugin manually:
 
-1. Download your WordPress Plugin to your desktop.
-2. If downloaded as a zip archive, extract the Plugin folder to your desktop.
-3. With your FTP program, upload the Plugin folder to the wp-content/plugins folder in your WordPress directory online.
-4. Go to Plugins screen and find the newly uploaded Plugin in the list.
-5. Click Activate Plugin to activate it.
+1. Extract the plugin folder to the `wp-content/plugins` directory;
+2. Go to the plugins page and activate the newly uploaded plugin;
 
 == Frequently Asked Questions ==
 

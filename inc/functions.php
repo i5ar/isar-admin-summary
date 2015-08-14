@@ -2,7 +2,7 @@
 /**
  * Add a drop-down menu & link that opens in a new window 
  */
-add_action( 'admin_bar_menu', 'rss_toolbar_items', 15);												
+add_action( 'admin_bar_menu', 'rss_toolbar_items', 15);
 function rss_toolbar_items($admin_bar){
 	$options = get_option( 'ias_options' );
 	$feed_menu = $options['feed_menu'];

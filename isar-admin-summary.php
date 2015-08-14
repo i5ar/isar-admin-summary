@@ -5,13 +5,13 @@
  * Description: iSar Admin Summary also known as iSummary shows the latest posts from one or more sites of your interest in the iSummary pages of your admin panel. You can manage feeds to show within images or not, the number of posts to show and even a supplementary menu in your admin menu bar.
  * Version: 1.0.4
  * Author: Pierpaolo Rasicci
- * Author URI: http://c.isarch.it
+ * Author URI: https://github.com/i5ar/
  * Text Domain: isar-admin-summary
  * Domain Path: /languages/
  * License: GPL
  */
  
-/*  Copyright 2014 iSar (email: i5ar at live.it)
+/*  Copyright 2014 iSar
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -27,10 +27,11 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 	
 	Contributions:
-	Piet Bos		https://profiles.wordpress.org/senlin/
-	David Gwyer		https://profiles.wordpress.org/dgwyer/
 	
 	Thanks:
+	Piet Bos		https://profiles.wordpress.org/senlin/
+	David Gwyer		https://profiles.wordpress.org/dgwyer/
+
 	Sven Hofmann	http://wordpress.stackexchange.com/users/32946/sven/
 */
 /**
